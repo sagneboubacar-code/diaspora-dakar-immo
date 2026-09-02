@@ -1,0 +1,18 @@
+/node_modules
+/.next/
+/out/
+.env*.local
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# Médias sources fournis par l'agence (WhatsApp, photos brutes). Ils sont
+# déjà copiés, renommés et redimensionnés dans public/ — les versionner
+# doublerait la taille du dépôt (~113 Mo) sans rien apporter au site.
+/BIEN 1/
+/bien 2/
+/bien 3/
+/bien 4/
+/chantier 3/
+/IMAGES DIASPORA/
+/*.jpeg
