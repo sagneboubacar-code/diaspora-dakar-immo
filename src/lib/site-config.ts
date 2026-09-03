@@ -4,7 +4,10 @@ export const SITE = {
   name: "Diaspora Dakar Immo",
   signature: "2DKR Immo & Construction",
   slogan: "Votre confiance, notre plus grande réussite.",
-  url: "https://www.diasporadakarimmo.sn",
+  // Provisoire : URL Vercel en attendant l'achat du domaine
+  // diasporadakarimmo.sn. Sert de base aux métadonnées SEO, au sitemap et
+  // au robots.txt — à mettre à jour le jour où le domaine est branché.
+  url: "https://diaspora-dakar-immo.vercel.app",
   address: "Villa 197, Cité Gadaye, Guédiawaye – Dakar, Sénégal",
   email: "dakardiaspora2@gmail.com",
   phones: [
