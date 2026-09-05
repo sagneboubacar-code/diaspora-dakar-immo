@@ -11,13 +11,16 @@ import { getPublishedProperties } from "@/lib/data/properties";
 import { REALISATIONS } from "@/lib/data/realisations";
 import { TESTIMONIALS } from "@/lib/data/testimonials";
 
-// Les trois étapes du MÊME chantier (villa de la photo du Hero), pour que
-// l'affirmation « nous l'avons construite » soit prouvée par l'image de fond
-// elle-même plutôt qu'affirmée. Photos réelles fournies par l'agence.
+// Les quatre étapes de l'accompagnement, illustrées par des photos réelles de
+// l'agence. Les étapes 02 à 04 sont le MÊME chantier (villa de la photo
+// finale) ; l'étape 01 vient d'un autre terrain, faute de photo du terrain
+// d'origine de cette villa — la légende parle donc du parcours proposé, sans
+// prétendre qu'il s'agit d'un seul et même projet de bout en bout.
 const HERO_PHASES = [
-  { n: "01", label: "Gros œuvre", photo: "/realisations/chantier-1/photo-06.jpg" },
-  { n: "02", label: "Finitions", photo: "/realisations/chantier-1/photo-08.jpg" },
-  { n: "03", label: "Livrée", photo: "/hero-villa.jpg" },
+  { n: "01", label: "Achat de terrain", photo: "/biens/terrain-kounoune-2/photo-01.jpg" },
+  { n: "02", label: "Gros œuvres", photo: "/realisations/chantier-1/photo-06.jpg" },
+  { n: "03", label: "Finitions", photo: "/realisations/chantier-1/photo-08.jpg" },
+  { n: "04", label: "Clés en mains", photo: "/hero-villa.jpg" },
 ];
 
 const DIASPORA_STEPS = [
@@ -95,8 +98,10 @@ export default function HomePage() {
           // droit, un lien collé au bord droit passerait dessous.
           <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 pr-16 sm:pr-20">
             <p className="text-sm font-semibold text-white sm:text-base">
-              Cette villa, nous l&apos;avons construite.{" "}
-              <span className="font-normal text-white/55">Du gros œuvre à la remise des clés.</span>
+              De l&apos;achat du terrain à la remise des clés.{" "}
+              <span className="font-normal text-white/55">
+                Chaque étape suivie par notre équipe sur place.
+              </span>
             </p>
             <Link
               href="/realisations"

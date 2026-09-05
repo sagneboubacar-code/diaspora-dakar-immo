@@ -9,14 +9,14 @@ export interface HeroPhase {
 }
 
 // Durée d'affichage de chaque étape. Assez longue pour lire le titre et
-// comprendre l'étape en cours, assez courte pour voir la villa finie sans
-// attendre.
-const CYCLE_MS = 4500;
+// comprendre l'étape en cours, assez courte pour atteindre la dernière étape
+// sans faire attendre le visiteur.
+const CYCLE_MS = 3500;
 
-// Le fond du Hero défile à travers les étapes réelles d'un même chantier
-// (gros œuvre → finitions → villa livrée) : le visiteur voit la maison se
-// construire au lieu de lire qu'elle l'a été. Les étapes sont aussi
-// cliquables pour revenir sur l'une d'elles.
+// Le fond du Hero défile à travers les étapes du parcours (achat du terrain →
+// gros œuvres → finitions → clés en mains), illustrées par des chantiers
+// réels : le visiteur voit la maison se construire au lieu de lire qu'elle
+// l'a été. Les étapes sont aussi cliquables pour revenir sur l'une d'elles.
 export function HeroShowcase({
   phases,
   caption,
@@ -79,7 +79,7 @@ export function HeroShowcase({
         <div className="container-site py-5 sm:py-6">
           {caption}
 
-          <ol className="mt-4 grid grid-cols-3 gap-2 sm:gap-4">
+          <ol className="mt-4 grid grid-cols-2 gap-x-3 gap-y-3 sm:grid-cols-4 sm:gap-4">
             {phases.map((phase, i) => {
               const isActive = i === active;
               return (
