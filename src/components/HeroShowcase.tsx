@@ -6,6 +6,8 @@ export interface HeroPhase {
   n: string;
   label: string;
   photo: string;
+  /** Durée d'affichage de cette étape. Par défaut : CYCLE_MS. */
+  durationMs?: number;
 }
 
 // Durée d'affichage de chaque étape. Assez longue pour lire le titre et
@@ -44,12 +46,14 @@ export function HeroShowcase({
     return () => query.removeEventListener("change", sync);
   }, [phases.length]);
 
+  const currentMs = phases[active]?.durationMs ?? CYCLE_MS;
+
   useEffect(() => {
     if (reduced) return;
     // Chaîné sur `active` : un clic manuel relance aussi le compte à rebours.
-    const id = setTimeout(() => setActive((current) => (current + 1) % phases.length), CYCLE_MS);
+    const id = setTimeout(() => setActive((current) => (current + 1) % phases.length), currentMs);
     return () => clearTimeout(id);
-  }, [active, reduced, phases.length]);
+  }, [active, reduced, phases.length, currentMs]);
 
   return (
     <section className="relative flex min-h-[82vh] flex-col justify-end overflow-hidden bg-ink sm:min-h-[92vh]">
@@ -100,7 +104,7 @@ export function HeroShowcase({
                           style={{
                             animation: reduced
                               ? undefined
-                              : `hero-progress ${CYCLE_MS}ms linear forwards`,
+                              : `hero-progress ${currentMs}ms linear forwards`,
                             transform: reduced ? "scaleX(1)" : undefined,
                           }}
                         />

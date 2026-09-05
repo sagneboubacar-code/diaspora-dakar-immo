@@ -16,11 +16,14 @@ import { TESTIMONIALS } from "@/lib/data/testimonials";
 // finale) ; l'étape 01 vient d'un autre terrain, faute de photo du terrain
 // d'origine de cette villa — la légende parle donc du parcours proposé, sans
 // prétendre qu'il s'agit d'un seul et même projet de bout en bout.
+// Les deux premières étapes défilent plus vite : ce sont les moins
+// vendeuses, l'objectif est d'arriver rapidement à la villa livrée, qui
+// reste elle affichée plus longtemps.
 const HERO_PHASES = [
-  { n: "01", label: "Achat de terrain", photo: "/biens/terrain-kounoune-2/photo-01.jpg" },
-  { n: "02", label: "Gros œuvres", photo: "/realisations/chantier-1/photo-06.jpg" },
+  { n: "01", label: "Achat de terrain", photo: "/biens/terrain-kounoune-2/photo-01.jpg", durationMs: 2200 },
+  { n: "02", label: "Gros œuvres", photo: "/realisations/chantier-1/photo-06.jpg", durationMs: 2200 },
   { n: "03", label: "Finitions", photo: "/realisations/chantier-1/photo-08.jpg" },
-  { n: "04", label: "Clés en mains", photo: "/hero-villa.jpg" },
+  { n: "04", label: "Clés en mains", photo: "/hero-villa.jpg", durationMs: 5000 },
 ];
 
 const DIASPORA_STEPS = [
