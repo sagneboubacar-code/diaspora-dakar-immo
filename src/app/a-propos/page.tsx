@@ -5,7 +5,7 @@ import { SITE } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "À propos — Diaspora Dakar Immo / 2DKR Immo & Construction",
   description:
-    "18 ans d'expérience du terrain au Sénégal : découvrez l'histoire, la mission et les valeurs de Diaspora Dakar Immo (2DKR Immo & Construction).",
+    "18 ans d'expérience et de nombreux projets réalisés au Sénégal : découvrez l'histoire, la mission et les valeurs de Diaspora Dakar Immo (2DKR Immo & Construction).",
 };
 
 const VALUES = ["Confiance", "Transparence", "Professionnalisme", "Réactivité", "Satisfaction"];
@@ -20,12 +20,21 @@ export default function AboutPage() {
           subtitle={SITE.slogan}
         />
 
-        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        {/* Deux colonnes jusqu'à 1024 px : au tiers de largeur, « De nombreux »
+            ne tient pas sur une ligne. La dernière carte prend toute la largeur
+            plutôt que de rester orpheline. */}
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div className="rounded-2xl border border-ink/10 bg-sand p-8">
             <p className="font-display text-3xl font-bold text-primary">{SITE.experienceYears}+</p>
             <p className="mt-1 text-sm font-medium text-graytext">Années d&apos;expérience</p>
           </div>
           <div className="rounded-2xl border border-ink/10 bg-sand p-8">
+            <p className="font-display text-3xl font-bold text-primary">
+              {SITE.projectsClaim.value}
+            </p>
+            <p className="mt-1 text-sm font-medium text-graytext">{SITE.projectsClaim.label}</p>
+          </div>
+          <div className="rounded-2xl border border-ink/10 bg-sand p-8 sm:col-span-2 lg:col-span-1">
             <p className="font-display text-3xl font-bold text-primary">100%</p>
             <p className="mt-1 text-sm font-medium text-graytext">Titres fonciers contrôlés</p>
           </div>

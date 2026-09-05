@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { SITE } from "@/lib/site-config";
 
-// Uniquement des éléments vérifiables : pas de nombre de chantiers avancé
-// tant que l'agence n'a pas communiqué de chiffre exact.
+// Aucun nombre de chantiers n'est avancé tant que l'agence n'a pas communiqué
+// de chiffre exact : le volume est dit en toutes lettres plutôt que chiffré.
 const STATS = [
   { value: `${SITE.experienceYears}+`, label: "Années d'expérience" },
+  { value: SITE.projectsClaim.value, label: SITE.projectsClaim.label, wording: true },
   { value: "100%", label: "Titres fonciers contrôlés", explainable: true },
 ];
 
@@ -14,13 +15,29 @@ export function KeyStats() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-2">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {STATS.map((stat) => (
         <div
           key={stat.label}
-          className="rounded-2xl border border-ink/10 bg-white p-8 text-center shadow-card"
+          className={`rounded-2xl border border-ink/10 bg-white p-8 text-center shadow-card ${
+            // Trois cartes sur deux colonnes : la dernière prend toute la
+            // largeur plutôt que de rester orpheline à côté d'un vide.
+            stat.explainable ? "sm:col-span-2 lg:col-span-1" : ""
+          }`}
         >
-          <p className="font-display text-4xl font-bold text-primary sm:text-5xl">{stat.value}</p>
+          {/* Une formulation ne peut pas être composée comme un chiffre : « De
+              nombreux » garde une taille fixe pour tenir sur une ligne, même à
+              1024 px où la carte est la plus étroite. La hauteur du bloc garde
+              les libellés des trois cartes alignés entre eux. */}
+          <div className="flex h-9 items-end justify-center lg:h-12">
+            <p
+              className={`font-display font-bold leading-none text-primary ${
+                stat.wording ? "text-3xl" : "text-4xl lg:text-5xl"
+              }`}
+            >
+              {stat.value}
+            </p>
+          </div>
           <p className="mt-2 text-sm font-medium text-graytext">{stat.label}</p>
           {stat.explainable && (
             <>

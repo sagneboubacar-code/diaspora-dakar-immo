@@ -137,7 +137,8 @@ export default function HomePage() {
         </div>
 
         <p className="mt-6 text-sm font-medium tracking-wide text-white/60 sm:mt-8">
-          {SITE.experienceYears} ans d&apos;expérience · Titres fonciers contrôlés · Accompagnement de A à Z
+          {SITE.experienceYears} ans d&apos;expérience · {SITE.projectsClaim.sentence} · Titres fonciers
+          contrôlés
         </p>
       </HeroShowcase>
 

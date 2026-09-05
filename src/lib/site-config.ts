@@ -15,6 +15,13 @@ export const SITE = {
     { label: "33 845 80 80", href: "tel:+221338458080", whatsapp: "221338458080" },
   ],
   experienceYears: 18,
+  // Le nombre exact de chantiers livrés n'est pas connu : le volume est dit
+  // en toutes lettres plutôt qu'avancé sous forme de chiffre invérifiable.
+  projectsClaim: {
+    value: "De nombreux",
+    label: "Projets réalisés au Sénégal",
+    sentence: "De nombreux projets réalisés au Sénégal",
+  },
   // Positionnement de l'agence, à utiliser tel quel : c'est la promesse
   // centrale vis-à-vis de la diaspora.
   positioning: "Vous êtes loin. Nous sommes sur le terrain.",
