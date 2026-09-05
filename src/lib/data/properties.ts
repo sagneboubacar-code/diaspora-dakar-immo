@@ -46,7 +46,6 @@ export const PROPERTIES: Property[] = [
     photos: [
       "/biens/terrain-gadaye-1ere-position/photo-01.jpg",
       "/biens/terrain-gadaye-1ere-position/photo-02.jpg",
-      "/biens/terrain-gadaye-1ere-position/photo-03.jpg",
     ],
   },
   {
@@ -63,7 +62,7 @@ export const PROPERTIES: Property[] = [
     description:
       "Terrain de 150 m² situé au rond-point Gadaye, face à la VDN et face à la mer, en 3è position.",
     features: ["Face à la VDN", "Face à la mer", "3è position", "150 m²"],
-    photos: [],
+    photos: ["/biens/terrain-gadaye-3eme-position/photo-01.jpg"],
   },
   {
     slug: "terrain-kounoune-2-manian-seck",
