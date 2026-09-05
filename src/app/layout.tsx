@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.name}`,
   },
   description:
-    "Diaspora Dakar Immo (2DKR Immo & Construction) accompagne les Sénégalais au pays et à l'étranger : recherche de terrain, construction, achat immobilier et gestion locative à Dakar et partout au Sénégal. 18 ans d'expérience, plus de 150 chantiers réalisés.",
+    "Diaspora Dakar Immo (2DKR Immo & Construction) accompagne les Sénégalais au pays et à l'étranger : recherche de terrain, construction, achat immobilier et gestion locative à Dakar et partout au Sénégal. 18 ans d'expérience, une équipe présente sur le terrain.",
   keywords: [
     "agence immobilière Dakar",
     "immobilier Dakar",

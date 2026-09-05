@@ -3,9 +3,10 @@
 import { useState } from "react";
 import { SITE } from "@/lib/site-config";
 
+// Uniquement des éléments vérifiables : pas de nombre de chantiers avancé
+// tant que l'agence n'a pas communiqué de chiffre exact.
 const STATS = [
   { value: `${SITE.experienceYears}+`, label: "Années d'expérience" },
-  { value: `${SITE.projectsCompleted}+`, label: "Chantiers réalisés" },
   { value: "100%", label: "Titres fonciers contrôlés", explainable: true },
 ];
 
@@ -13,7 +14,7 @@ export function KeyStats() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-2">
       {STATS.map((stat) => (
         <div
           key={stat.label}

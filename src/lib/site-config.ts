@@ -15,7 +15,9 @@ export const SITE = {
     { label: "33 845 80 80", href: "tel:+221338458080", whatsapp: "221338458080" },
   ],
   experienceYears: 18,
-  projectsCompleted: 150,
+  // Positionnement de l'agence, à utiliser tel quel : c'est la promesse
+  // centrale vis-à-vis de la diaspora.
+  positioning: "Vous êtes loin. Nous sommes sur le terrain.",
 } as const;
 
 const DEFAULT_WHATSAPP = SITE.phones[0].whatsapp;

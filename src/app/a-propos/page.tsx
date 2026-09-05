@@ -5,7 +5,7 @@ import { SITE } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "À propos — Diaspora Dakar Immo / 2DKR Immo & Construction",
   description:
-    "18 ans d'expérience et plus de 150 chantiers réalisés : découvrez l'histoire, la mission et les valeurs de Diaspora Dakar Immo (2DKR Immo & Construction).",
+    "18 ans d'expérience du terrain au Sénégal : découvrez l'histoire, la mission et les valeurs de Diaspora Dakar Immo (2DKR Immo & Construction).",
 };
 
 const VALUES = ["Confiance", "Transparence", "Professionnalisme", "Réactivité", "Satisfaction"];
@@ -26,8 +26,8 @@ export default function AboutPage() {
             <p className="mt-1 text-sm font-medium text-graytext">Années d&apos;expérience</p>
           </div>
           <div className="rounded-2xl border border-ink/10 bg-sand p-8">
-            <p className="font-display text-3xl font-bold text-primary">{SITE.projectsCompleted}+</p>
-            <p className="mt-1 text-sm font-medium text-graytext">Chantiers réalisés</p>
+            <p className="font-display text-3xl font-bold text-primary">100%</p>
+            <p className="mt-1 text-sm font-medium text-graytext">Titres fonciers contrôlés</p>
           </div>
         </div>
 

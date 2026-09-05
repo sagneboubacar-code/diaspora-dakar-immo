@@ -134,8 +134,7 @@ export default function HomePage() {
         </div>
 
         <p className="mt-6 text-sm font-medium tracking-wide text-white/60 sm:mt-8">
-          {SITE.experienceYears} ans d&apos;expérience · +{SITE.projectsCompleted} chantiers · Titres
-          fonciers contrôlés
+          {SITE.experienceYears} ans d&apos;expérience · Titres fonciers contrôlés · Accompagnement de A à Z
         </p>
       </HeroShowcase>
 
@@ -145,7 +144,7 @@ export default function HomePage() {
           <Reveal>
             <SectionHeading
               eyebrow="Diaspora"
-              title="🇸🇳 Votre projet au Sénégal, notre équipe sur place."
+              title={SITE.positioning}
               subtitle="Investir à distance ne devrait pas être une source d'inquiétude. Pendant que vous êtes à Paris, Bruxelles, Montréal, New York ou ailleurs, notre équipe est présente au Sénégal pour suivre votre projet."
             />
           </Reveal>
