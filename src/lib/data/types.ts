@@ -44,8 +44,12 @@ export interface Partner {
 
 export interface Testimonial {
   name: string;
-  country: string;
-  quote: string;
+  country: string; // ville et/ou pays de résidence du client
+  flag?: string; // drapeau du pays, affiché à côté du nom
+  location?: string; // lieu du projet réalisé
+  headline?: string; // phrase-titre du témoignage, mise en avant
+  project?: string; // nature de l'accompagnement (terrain, construction...)
+  quote: string[]; // paragraphes du témoignage, dans l'ordre
   photo?: string;
   videoUrl?: string;
 }

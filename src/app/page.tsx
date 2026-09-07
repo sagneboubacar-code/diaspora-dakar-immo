@@ -10,6 +10,7 @@ import { SITE, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
 import { getPublishedProperties } from "@/lib/data/properties";
 import { REALISATIONS } from "@/lib/data/realisations";
 import { TESTIMONIALS } from "@/lib/data/testimonials";
+import { Testimonials } from "@/components/Testimonials";
 
 // Les quatre étapes de l'accompagnement, illustrées par des photos réelles de
 // l'agence. Les étapes 02 à 04 sont le MÊME chantier (villa de la photo
@@ -311,16 +312,9 @@ export default function HomePage() {
                 description="Des clients au Sénégal, en France et au Canada partagent déjà leur expérience avec nous — leurs témoignages seront publiés ici."
               />
             ) : (
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-                {TESTIMONIALS.slice(0, 3).map((t) => (
-                  <div key={t.name} className="rounded-2xl border border-ink/10 bg-white p-6 shadow-card">
-                    <p className="text-sm leading-relaxed text-graytext">&laquo; {t.quote} &raquo;</p>
-                    <p className="mt-4 font-display text-sm font-semibold text-ink">
-                      {t.name} <span className="font-normal text-graytext">— {t.country}</span>
-                    </p>
-                  </div>
-                ))}
-              </div>
+              <Reveal>
+                <Testimonials items={TESTIMONIALS.slice(0, 4)} />
+              </Reveal>
             )}
           </div>
         </div>
