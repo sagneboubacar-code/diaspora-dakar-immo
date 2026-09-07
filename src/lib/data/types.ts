@@ -55,7 +55,8 @@ export interface Testimonial {
   flag?: string; // drapeau du pays, affiché à côté du nom
   badge?: string; // « Client diaspora », « Client au Sénégal »...
   headline?: string; // phrase-titre du témoignage, mise en avant
-  projects?: TestimonialProject[]; // projets accompagnés, dans l'ordre
+  projects?: TestimonialProject[]; // projets ou services confiés, dans l'ordre
+  projectsLabel?: string; // « Service », « Chantier »... par défaut « Projet »
   quote: string[]; // paragraphes du témoignage, dans l'ordre
   photo?: string;
   videoUrl?: string;

@@ -9,13 +9,31 @@ function initials(name: string) {
     .join("");
 }
 
-// Un témoignage seul occupe toute la largeur : dans une grille il resterait
-// orphelin à côté d'une colonne vide. À partir de deux, grille classique.
+// Le nombre de colonnes suit le nombre de témoignages, pour qu'aucun ne
+// reste orphelin sur sa ligne : un seul prend toute la largeur, deux se
+// partagent la ligne, trois et plus passent en trois colonnes.
+//
+// Tant que la grille n'a pas assez de place, elle reste sur une colonne
+// bornée à max-w-3xl : ces témoignages sont longs, et une colonne trop
+// étroite (206 px à 1024 px en trois colonnes) comme une ligne pleine
+// largeur sont aussi pénibles à lire l'une que l'autre.
+const GRID = {
+  2: "lg:max-w-none lg:grid-cols-2",
+  3: "xl:max-w-none xl:grid-cols-3",
+} as const;
+
 export function Testimonials({ items }: { items: Testimonial[] }) {
   const featured = items.length === 1;
+  const columns = items.length === 2 ? GRID[2] : GRID[3];
 
   return (
-    <div className={featured ? "mx-auto max-w-3xl" : "grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2"}>
+    <div
+      className={
+        featured
+          ? "mx-auto max-w-3xl"
+          : `mx-auto grid max-w-3xl grid-cols-1 items-stretch gap-6 ${columns}`
+      }
+    >
       {items.map((testimonial) => (
         <TestimonialCard key={testimonial.name} testimonial={testimonial} featured={featured} />
       ))}
@@ -27,7 +45,9 @@ function TestimonialCard({ testimonial: t, featured }: { testimonial: Testimonia
   const last = t.quote.length - 1;
 
   return (
-    <figure className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white p-7 shadow-card sm:p-10">
+    <figure className={`relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-card ${
+        featured ? "p-7 sm:p-10" : "p-6 sm:p-8"
+      }`}>
       {/* Guillemet décoratif : purement graphique, masqué aux lecteurs d'écran */}
       <span
         aria-hidden
@@ -36,9 +56,17 @@ function TestimonialCard({ testimonial: t, featured }: { testimonial: Testimonia
         &rdquo;
       </span>
 
+      {t.badge && (
+        <p className="relative inline-flex self-start rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold text-primary">
+          {t.badge}
+        </p>
+      )}
+
       {t.headline && (
         <p
           className={`relative text-balance font-display font-semibold text-ink ${
+            t.badge ? "mt-4" : ""
+          } ${
             featured ? "text-xl sm:text-2xl" : "text-lg"
           }`}
         >
@@ -62,7 +90,9 @@ function TestimonialCard({ testimonial: t, featured }: { testimonial: Testimonia
         {t.projects && t.projects.length > 0 && (
           <div className="rounded-2xl bg-sand p-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-primary">
-              {t.projects.length > 1 ? `${t.projects.length} projets confiés` : "Projet"}
+              {t.projects.length > 1
+                ? `${t.projects.length} projets confiés`
+                : t.projectsLabel ?? "Projet"}
             </p>
             <ol className="mt-3 space-y-3 text-xs leading-relaxed text-graytext">
               {t.projects.map((project, i) => (
@@ -97,11 +127,6 @@ function TestimonialCard({ testimonial: t, featured }: { testimonial: Testimonia
             </p>
             <p className="text-xs text-graytext">{t.country}</p>
           </div>
-          {t.badge && (
-            <span className="ml-auto shrink-0 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold text-primary">
-              {t.badge}
-            </span>
-          )}
         </figcaption>
       </div>
     </figure>

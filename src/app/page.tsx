@@ -313,7 +313,7 @@ export default function HomePage() {
               />
             ) : (
               <Reveal>
-                <Testimonials items={TESTIMONIALS.slice(0, 4)} />
+                <Testimonials items={TESTIMONIALS.slice(0, 3)} />
               </Reveal>
             )}
           </div>

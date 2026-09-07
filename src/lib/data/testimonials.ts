@@ -42,4 +42,22 @@ export const TESTIMONIALS: Testimonial[] = [
       "Je n'ai pas été déçu, car ce deuxième projet a également été réalisé à distance.",
     ],
   },
+  {
+    name: "Pape Djibril Diop",
+    country: "New York, États-Unis",
+    flag: "🇺🇸",
+    badge: "Propriétaire bailleur",
+    headline: "Une gestion transparente et un suivi efficace, même à distance",
+    projectsLabel: "Service",
+    projects: [
+      { title: "Gestion locative de 3 appartements (immeuble R+3)", location: "Cambérène, Dakar" },
+    ],
+    quote: [
+      "Mon projet était de confier la gestion locative de plusieurs appartements situés dans mon immeuble R+3 au Sénégal. Diaspora Dakar Immo gère actuellement la location de trois de mes appartements.",
+      "Mes principales inquiétudes concernaient surtout la transparence, la fiabilité de la gestion et le suivi à distance. Je voulais être sûr que les loyers seraient bien versés, que les éventuels problèmes seraient signalés rapidement et que l'immeuble serait correctement suivi.",
+      "J'ai choisi de leur faire confiance parce qu'ils ont été honnêtes et transparents avec moi dès le début. Jusqu'à présent, je n'ai pas eu de problème particulier avec eux, ce qui a renforcé ma confiance.",
+      "Le suivi à distance se passe bien. Les paiements sont généralement effectués automatiquement sur mon compte et je vérifie chaque mois que tout est en ordre. Lorsqu'il y a un problème dans l'immeuble, je suis informé. Lorsque je demande au responsable de s'occuper d'une situation, il le fait et revient vers moi avec un suivi.",
+      "Je dirais à toute personne qui souhaite investir ou faire gérer un bien au Sénégal qu'il est important de travailler avec une équipe sérieuse, transparente et disponible. Mon expérience avec Diaspora Dakar Immo a été positive jusqu'à présent, et je suis satisfait de leur gestion et de leur suivi.",
+    ],
+  },
 ];
