@@ -26,7 +26,7 @@ export const TESTIMONIALS: Testimonial[] = [
     ],
   },
   {
-    name: "Amary Dieng",
+    name: "M. Dieng",
     country: "Bordeaux, France",
     flag: "🇫🇷",
     badge: "Client diaspora",

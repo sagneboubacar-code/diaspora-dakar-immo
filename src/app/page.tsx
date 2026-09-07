@@ -299,7 +299,7 @@ export default function HomePage() {
       </section>
 
       {/* 16. TÉMOIGNAGES */}
-      <section className="bg-sand py-20 sm:py-24">
+      <section id="temoignages" className="scroll-mt-24 bg-sand py-20 sm:py-24">
         <div className="container-site">
           <Reveal>
             <SectionHeading eyebrow="Preuves" title="Ils nous ont fait confiance" align="center" />

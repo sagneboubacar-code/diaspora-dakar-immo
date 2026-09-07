@@ -1,9 +1,15 @@
 import type { Testimonial } from "@/lib/data/types";
 
+// « M. Dieng » doit donner « D », pas « MD » : la civilité n'est pas un
+// prénom. Les clients qui préfèrent rester discrets sont publiés sous cette
+// forme, il faut donc que l'initiale reste juste.
+const HONORIFICS = new Set(["m.", "mme", "mlle", "dr", "pr"]);
+
 function initials(name: string) {
   return name
     .split(/\s+/)
     .filter(Boolean)
+    .filter((part) => !HONORIFICS.has(part.toLowerCase()))
     .slice(0, 2)
     .map((part) => part[0]?.toUpperCase() ?? "")
     .join("");
