@@ -304,19 +304,23 @@ export default function HomePage() {
           <Reveal>
             <SectionHeading eyebrow="Preuves" title="Ils nous ont fait confiance" align="center" />
           </Reveal>
+        </div>
 
-          <div className="mt-12">
-            {TESTIMONIALS.length === 0 ? (
+        {/* Le ruban défile hors du conteneur, sur toute la largeur de l'écran :
+            les cartes doivent pouvoir entrer et sortir par les bords. */}
+        <div className="mt-12">
+          {TESTIMONIALS.length === 0 ? (
+            <div className="container-site">
               <EmptyState
                 title="Les témoignages de nos clients arrivent bientôt."
                 description="Des clients au Sénégal, en France et au Canada partagent déjà leur expérience avec nous — leurs témoignages seront publiés ici."
               />
-            ) : (
-              <Reveal>
-                <Testimonials items={TESTIMONIALS.slice(0, 3)} />
-              </Reveal>
-            )}
-          </div>
+            </div>
+          ) : (
+            <Reveal>
+              <Testimonials items={TESTIMONIALS} />
+            </Reveal>
+          )}
         </div>
       </section>
 

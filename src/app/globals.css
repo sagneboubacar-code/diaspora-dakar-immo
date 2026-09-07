@@ -43,3 +43,33 @@ h1, h2, h3, h4 {
     scroll-behavior: auto !important;
   }
 }
+
+/* Ruban des témoignages : la piste contient deux fois la même liste et se
+   décale d'exactement une moitié, ce qui reboucle sans saut visible. Les
+   cartes portent une marge à droite plutôt qu'un `gap` : avec un gap, la
+   moitié de la piste ne vaut pas un nombre entier de cartes et le raccord
+   se voit. */
+@keyframes testimonials-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.testimonials-track {
+  animation-name: testimonials-marquee;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Sans mouvement, le ruban reste immobile mais reste parcourable à la main. */
+@media (prefers-reduced-motion: reduce) {
+  .testimonials-track {
+    animation: none;
+  }
+  .testimonials-viewport {
+    overflow-x: auto;
+  }
+}
