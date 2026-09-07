@@ -42,13 +42,20 @@ export interface Partner {
   realisations: string[]; // chemins vers /public/partenaires/...
 }
 
+// Un même client peut avoir confié plusieurs projets à l'agence — c'est en
+// soi un argument, donc ils sont listés séparément plutôt que fondus en un.
+export interface TestimonialProject {
+  title: string;
+  location?: string;
+}
+
 export interface Testimonial {
   name: string;
   country: string; // ville et/ou pays de résidence du client
   flag?: string; // drapeau du pays, affiché à côté du nom
-  location?: string; // lieu du projet réalisé
+  badge?: string; // « Client diaspora », « Client au Sénégal »...
   headline?: string; // phrase-titre du témoignage, mise en avant
-  project?: string; // nature de l'accompagnement (terrain, construction...)
+  projects?: TestimonialProject[]; // projets accompagnés, dans l'ordre
   quote: string[]; // paragraphes du témoignage, dans l'ordre
   photo?: string;
   videoUrl?: string;

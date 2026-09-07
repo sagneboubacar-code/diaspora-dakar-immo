@@ -10,12 +10,12 @@ function initials(name: string) {
 }
 
 // Un témoignage seul occupe toute la largeur : dans une grille il resterait
-// orphelin à côté de deux colonnes vides. À partir de deux, grille classique.
+// orphelin à côté d'une colonne vide. À partir de deux, grille classique.
 export function Testimonials({ items }: { items: Testimonial[] }) {
   const featured = items.length === 1;
 
   return (
-    <div className={featured ? "mx-auto max-w-3xl" : "grid grid-cols-1 gap-6 lg:grid-cols-2"}>
+    <div className={featured ? "mx-auto max-w-3xl" : "grid grid-cols-1 items-stretch gap-6 lg:grid-cols-2"}>
       {items.map((testimonial) => (
         <TestimonialCard key={testimonial.name} testimonial={testimonial} featured={featured} />
       ))}
@@ -27,7 +27,7 @@ function TestimonialCard({ testimonial: t, featured }: { testimonial: Testimonia
   const last = t.quote.length - 1;
 
   return (
-    <figure className="relative overflow-hidden rounded-3xl border border-ink/10 bg-white p-7 shadow-card sm:p-10">
+    <figure className="relative flex h-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white p-7 shadow-card sm:p-10">
       {/* Guillemet décoratif : purement graphique, masqué aux lecteurs d'écran */}
       <span
         aria-hidden
@@ -38,7 +38,7 @@ function TestimonialCard({ testimonial: t, featured }: { testimonial: Testimonia
 
       {t.headline && (
         <p
-          className={`relative font-display font-semibold text-balance text-ink ${
+          className={`relative text-balance font-display font-semibold text-ink ${
             featured ? "text-xl sm:text-2xl" : "text-lg"
           }`}
         >
@@ -56,39 +56,54 @@ function TestimonialCard({ testimonial: t, featured }: { testimonial: Testimonia
         ))}
       </blockquote>
 
-      <figcaption className="relative mt-7 flex items-center gap-4 border-t border-ink/10 pt-6">
-        {t.photo ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={t.photo} alt={t.name} className="h-12 w-12 shrink-0 rounded-full object-cover" />
-        ) : (
-          <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary/10 font-display text-sm font-bold text-primary">
-            {initials(t.name)}
-          </span>
+      {/* mt-auto : quand deux cartes de longueurs différentes sont côte à côte,
+          leurs lignes de signature restent alignées, comme au bas d'une lettre. */}
+      <div className="relative mt-auto pt-7">
+        {t.projects && t.projects.length > 0 && (
+          <div className="rounded-2xl bg-sand p-5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary">
+              {t.projects.length > 1 ? `${t.projects.length} projets confiés` : "Projet"}
+            </p>
+            <ol className="mt-3 space-y-3 text-xs leading-relaxed text-graytext">
+              {t.projects.map((project, i) => (
+                <li key={project.title} className="flex gap-2.5">
+                  {t.projects!.length > 1 && (
+                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-white font-display text-[10px] font-bold text-primary">
+                      {i + 1}
+                    </span>
+                  )}
+                  <span>
+                    <span className="font-medium text-ink">{project.title}</span>
+                    {project.location && <span className="block">📍 {project.location}</span>}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
         )}
-        <div className="min-w-0">
-          <p className="font-display text-sm font-semibold text-ink">
-            {t.name} {t.flag && <span aria-hidden>{t.flag}</span>}
-          </p>
-          <p className="text-xs text-graytext">{t.country}</p>
-        </div>
-      </figcaption>
 
-      {(t.project || t.location) && (
-        <dl className="relative mt-5 grid gap-4 rounded-2xl bg-sand p-5 text-xs sm:grid-cols-2">
-          {t.project && (
-            <div>
-              <dt className="font-semibold uppercase tracking-wide text-primary">Projet</dt>
-              <dd className="mt-1 leading-relaxed text-graytext">{t.project}</dd>
-            </div>
+        <figcaption className="mt-6 flex items-center gap-4 border-t border-ink/10 pt-6">
+          {t.photo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={t.photo} alt={t.name} className="h-12 w-12 shrink-0 rounded-full object-cover" />
+          ) : (
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-primary/10 font-display text-sm font-bold text-primary">
+              {initials(t.name)}
+            </span>
           )}
-          {t.location && (
-            <div>
-              <dt className="font-semibold uppercase tracking-wide text-primary">Lieu</dt>
-              <dd className="mt-1 leading-relaxed text-graytext">📍 {t.location}</dd>
-            </div>
+          <div className="min-w-0">
+            <p className="font-display text-sm font-semibold text-ink">
+              {t.name} {t.flag && <span aria-hidden>{t.flag}</span>}
+            </p>
+            <p className="text-xs text-graytext">{t.country}</p>
+          </div>
+          {t.badge && (
+            <span className="ml-auto shrink-0 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold text-primary">
+              {t.badge}
+            </span>
           )}
-        </dl>
-      )}
+        </figcaption>
+      </div>
     </figure>
   );
 }
