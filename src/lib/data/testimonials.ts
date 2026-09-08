@@ -60,4 +60,24 @@ export const TESTIMONIALS: Testimonial[] = [
       "Je dirais à toute personne qui souhaite investir ou faire gérer un bien au Sénégal qu'il est important de travailler avec une équipe sérieuse, transparente et disponible. Mon expérience avec Diaspora Dakar Immo a été positive jusqu'à présent, et je suis satisfait de leur gestion et de leur suivi.",
     ],
   },
+  {
+    name: "Kaba Cissé",
+    country: "Paris 14e, France",
+    flag: "🇫🇷",
+    badge: "Client diaspora",
+    headline: "Un suivi à distance étape par étape",
+    projects: [
+      {
+        title: "Construction d'une maison familiale à plusieurs étages",
+        location: "Cité Gadaye, Guédiawaye",
+      },
+    ],
+    quote: [
+      "Notre projet était de construire une maison familiale avec plusieurs étages, puisque nous avons une famille nombreuse, Al Hamdulilah.",
+      "Franchement, pour être honnête, nous n'étions pas particulièrement inquiets, car nous avons été directement rassurés par Diaspora Dakar Immo et nous avons mis ce projet entre les mains de Dieu.",
+      "C'est une connaissance à Dakar qui nous a mis en contact avec Diaspora Dakar Immo et qui nous en a dit beaucoup de bien.",
+      "Le suivi s'est fait à distance lorsque nous étions en France. Nous recevions régulièrement des vidéos du chantier, avec l'avancement étape par étape. Nous étions également au Sénégal une à deux fois par an pendant plusieurs mois, ce qui nous permettait de voir l'avancement du projet directement sur place.",
+      "À quelqu'un qui hésite encore, je lui dirais : “Let's go, vas-y ! Tu n'auras pas de regret, Insh'Allah.” Le Sénégal est un très beau pays et avec Diaspora Dakar Immo, tout est encore plus beau.",
+    ],
+  },
 ];
