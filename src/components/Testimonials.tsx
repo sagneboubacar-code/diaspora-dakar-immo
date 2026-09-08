@@ -82,9 +82,12 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
         onTouchStart={() => setTouched(true)}
       >
         {/* Toutes les cartes occupent la même cellule de grille : la hauteur
-            du bloc est celle du témoignage le plus long, donc la page ne
-            saute pas d'un témoignage à l'autre. */}
-        <div className="relative order-2 grid lg:order-1">
+            du bloc est celle du témoignage le plus long, donc la page ne saute
+            pas d'un témoignage à l'autre. Les cartes gardent en revanche leur
+            hauteur propre : étirées, elles laissaient un grand blanc entre la
+            citation et la signature. Ce qui reste sous les plus courtes est du
+            fond de section, pas du vide dans la carte. */}
+        <div className="relative order-2 grid items-start lg:order-1">
           {items.map((t, i) => (
             <div
               key={t.name}
@@ -93,7 +96,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
                 i === active ? "opacity-100" : "pointer-events-none opacity-0"
               }`}
             >
-              <article className="flex h-full flex-col rounded-3xl border border-ink/10 bg-white p-7 shadow-card sm:p-10">
+              <article className="rounded-3xl border border-ink/10 bg-white p-7 shadow-card sm:p-10">
                 <TestimonialBody testimonial={t} />
               </article>
             </div>
@@ -228,10 +231,7 @@ function TestimonialBody({ testimonial: t }: { testimonial: Testimonial }) {
         ))}
       </blockquote>
 
-      {/* mt-auto : la carte occupant toute la hauteur du bloc, projets et
-          signature restent collés en bas, quelle que soit la longueur du
-          témoignage. */}
-      <div className="mt-auto pt-7">
+      <div className="mt-7">
         {label && t.projects && (
           <div className="rounded-2xl bg-sand p-5">
             <p className="text-xs font-semibold uppercase tracking-wide text-primary">{label}</p>
