@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Testimonial } from "@/lib/data/types";
 
 // « M. Dieng » doit donner « D », pas « MD » : la civilité n'est pas un
@@ -28,6 +28,10 @@ function projectsLabel(t: Testimonial) {
 // défilement d'un survol ou d'une pression, et les commandes restent à portée.
 const SLIDE_MS = 10000;
 
+// Au-delà de ce déplacement, le doigt faisait défiler la page : ce n'est pas
+// une pression sur le carrousel.
+const TAP_TOLERANCE_PX = 10;
+
 export function Testimonials({ items }: { items: Testimonial[] }) {
   const [active, setActive] = useState(0);
   // Trois signaux distincts plutôt qu'un seul booléen : sortir la souris ne
@@ -35,6 +39,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const [touched, setTouched] = useState(false);
+  const touchOrigin = useRef<{ x: number; y: number } | null>(null);
   const [reduced, setReduced] = useState(false);
   const held = hovered || focused || touched;
 
@@ -77,9 +82,24 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
         onMouseLeave={() => setHovered(false)}
         onFocusCapture={() => setFocused(true)}
         onBlurCapture={() => setFocused(false)}
-        // Au doigt il n'y a ni survol ni focus à relâcher : une fois que le
-        // visiteur a touché le bloc, il garde la main.
-        onTouchStart={() => setTouched(true)}
+        // Au doigt il n'y a ni survol ni focus à relâcher : c'est une pression
+        // franche qui donne la main au visiteur, et elle la lui laisse. Un
+        // simple défilement de la page part aussi d'un toucher sur le bloc —
+        // le prendre pour une pression arrêtait le carrousel pour de bon.
+        onTouchStart={(e) => {
+          const touch = e.touches[0];
+          touchOrigin.current = touch ? { x: touch.clientX, y: touch.clientY } : null;
+        }}
+        onTouchEnd={(e) => {
+          const origin = touchOrigin.current;
+          const touch = e.changedTouches[0];
+          touchOrigin.current = null;
+          if (!origin || !touch) return;
+          const moved =
+            Math.abs(touch.clientX - origin.x) > TAP_TOLERANCE_PX ||
+            Math.abs(touch.clientY - origin.y) > TAP_TOLERANCE_PX;
+          if (!moved) setTouched(true);
+        }}
       >
         {/* Toutes les cartes occupent la même cellule de grille : la hauteur
             du bloc est celle du témoignage le plus long, donc la page ne saute
