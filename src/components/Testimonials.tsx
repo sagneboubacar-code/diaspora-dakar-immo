@@ -23,10 +23,10 @@ function projectsLabel(t: Testimonial) {
   return t.projects.length > 1 ? `${t.projects.length} projets confiés` : t.projectsLabel ?? "Projet";
 }
 
-// Durée d'affichage d'un témoignage avant de passer au suivant. Le plus long
-// fait environ 200 mots : en dessous d'une vingtaine de secondes, le visiteur
-// qui commence à lire se fait emporter en cours de route.
-const SLIDE_MS = 25000;
+// Durée d'affichage d'un témoignage avant de passer au suivant. Court par
+// rapport au temps de lecture, mais assumé : qui veut lire arrête le
+// défilement d'un survol ou d'une pression, et les commandes restent à portée.
+const SLIDE_MS = 10000;
 
 export function Testimonials({ items }: { items: Testimonial[] }) {
   const [active, setActive] = useState(0);
@@ -67,7 +67,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
   return (
     <div className="container-site">
       <div
-        className="mx-auto flex max-w-3xl flex-col"
+        className="mx-auto max-w-3xl"
         role="group"
         aria-label="Témoignages de nos clients"
         // Personne ne doit se faire emporter en cours de lecture : le
@@ -87,7 +87,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
             hauteur propre : étirées, elles laissaient un grand blanc entre la
             citation et la signature. Ce qui reste sous les plus courtes est du
             fond de section, pas du vide dans la carte. */}
-        <div className="relative order-2 grid items-start lg:order-1">
+        <div className="relative grid items-start">
           {items.map((t, i) => (
             <div
               key={t.name}
@@ -104,32 +104,20 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
 
           {items.length > 1 && (
             <>
-              <Arrow
-                direction="previous"
-                onClick={() => go(-1)}
-                className="absolute -left-16 top-1/2 hidden -translate-y-1/2 lg:grid"
-              />
-              <Arrow
-                direction="next"
-                onClick={() => go(1)}
-                className="absolute -right-16 top-1/2 hidden -translate-y-1/2 lg:grid"
-              />
+              <SideArrow direction="previous" onClick={() => go(-1)} />
+              <SideArrow direction="next" onClick={() => go(1)} />
             </>
           )}
         </div>
 
-        {/* Sur mobile les commandes passent AVANT la carte : un témoignage
-            fait plus de 1400 px de haut sur un téléphone, les flèches placées
-            en dessous seraient hors de vue. Sur grand écran elles reprennent
-            leur place sous la carte, où les flèches latérales les doublent. */}
         {items.length > 1 && (
-          <div className="order-1 mb-8 lg:order-2 lg:mb-0">
+          <div>
             {/* Barre de progression : elle rend la durée d'affichage visible. La
                 `key` la remet à zéro à chaque témoignage, et la pause la fige
                 où elle en est plutôt que de la remplir d'un coup. Inutile
                 quand le défilement automatique est désactivé. */}
             {rotating && (
-              <div className="h-0.5 overflow-hidden rounded-full bg-ink/10 lg:mt-6">
+              <div className="mt-6 h-0.5 overflow-hidden rounded-full bg-ink/10">
                 <div
                   key={active}
                   className="h-full origin-left bg-primary"
@@ -141,9 +129,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
               </div>
             )}
 
-            <div className="mt-5 flex items-center justify-center gap-4">
-              <Arrow direction="previous" onClick={() => go(-1)} className="grid lg:hidden" />
-
+            <div className="mt-5 flex items-center justify-center">
               <ol className="flex items-center gap-2">
                 {items.map((t, i) => (
                   <li key={t.name}>
@@ -159,8 +145,6 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
                   </li>
                 ))}
               </ol>
-
-              <Arrow direction="next" onClick={() => go(1)} className="grid lg:hidden" />
             </div>
 
             <p className="mt-4 text-center text-xs text-graytext">
@@ -169,6 +153,26 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
           </div>
         )}
       </div>
+    </div>
+  );
+}
+
+// Les flèches longent toute la hauteur de la carte et restent collées au
+// milieu de l'écran : sur un téléphone, un témoignage fait plus de 1400 px de
+// haut, une flèche centrée sur la carte serait hors de vue la plupart du
+// temps. Sur mobile elles mordent sur la marge intérieure de la carte, jamais
+// sur le texte ; sur grand écran elles se placent à l'extérieur.
+function SideArrow({ direction, onClick }: { direction: "previous" | "next"; onClick: () => void }) {
+  const previous = direction === "previous";
+  return (
+    <div
+      className={`pointer-events-none absolute inset-y-0 z-10 ${previous ? "-left-4 lg:-left-16" : "-right-4 lg:-right-16"}`}
+    >
+      <Arrow
+        direction={direction}
+        onClick={onClick}
+        className="pointer-events-auto sticky top-[calc(50vh-22px)] grid"
+      />
     </div>
   );
 }
@@ -188,9 +192,9 @@ function Arrow({
       type="button"
       onClick={onClick}
       aria-label={previous ? "Témoignage précédent" : "Témoignage suivant"}
-      className={`h-11 w-11 shrink-0 place-items-center rounded-full border border-ink/10 bg-white text-ink shadow-card transition-colors hover:border-primary hover:bg-primary hover:text-white ${className}`}
+      className={`h-11 w-11 shrink-0 place-items-center rounded-full border border-primary/30 bg-white text-primary shadow-lg transition-colors hover:border-primary hover:bg-primary hover:text-white ${className}`}
     >
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden className="h-5 w-5">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden className="h-6 w-6">
         <path
           d={previous ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"}
           stroke="currentColor"
