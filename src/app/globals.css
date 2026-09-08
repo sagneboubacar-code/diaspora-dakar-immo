@@ -24,9 +24,10 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Barre de progression de l'étape active du Hero — remontée à zéro à chaque
-   changement d'étape via une `key` React. */
-@keyframes hero-progress {
+/* Barre de progression d'un élément qui s'affiche pendant une durée donnée :
+   les étapes du Hero et les témoignages du carrousel. Remontée à zéro à chaque
+   changement via une `key` React. */
+@keyframes progress-fill {
   from {
     transform: scaleX(0);
   }
@@ -41,35 +42,5 @@ h1, h2, h3, h4 {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
-  }
-}
-
-/* Ruban des témoignages : la piste contient deux fois la même liste et se
-   décale d'exactement une moitié, ce qui reboucle sans saut visible. Les
-   cartes portent une marge à droite plutôt qu'un `gap` : avec un gap, la
-   moitié de la piste ne vaut pas un nombre entier de cartes et le raccord
-   se voit. */
-@keyframes testimonials-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.testimonials-track {
-  animation-name: testimonials-marquee;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-}
-
-/* Sans mouvement, le ruban reste immobile mais reste parcourable à la main. */
-@media (prefers-reduced-motion: reduce) {
-  .testimonials-track {
-    animation: none;
-  }
-  .testimonials-viewport {
-    overflow-x: auto;
   }
 }

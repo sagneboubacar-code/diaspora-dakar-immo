@@ -104,7 +104,7 @@ export function HeroShowcase({
                           style={{
                             animation: reduced
                               ? undefined
-                              : `hero-progress ${currentMs}ms linear forwards`,
+                              : `progress-fill ${currentMs}ms linear forwards`,
                             transform: reduced ? "scaleX(1)" : undefined,
                           }}
                         />

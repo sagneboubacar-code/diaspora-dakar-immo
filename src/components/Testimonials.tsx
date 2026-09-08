@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Testimonial } from "@/lib/data/types";
 
 // « M. Dieng » doit donner « D », pas « MD » : la civilité n'est pas un
@@ -23,192 +23,183 @@ function projectsLabel(t: Testimonial) {
   return t.projects.length > 1 ? `${t.projects.length} projets confiés` : t.projectsLabel ?? "Projet";
 }
 
-// Durée d'un tour complet : proportionnelle au nombre de témoignages, pour que
-// la vitesse de défilement reste la même quel qu'en soit le nombre.
-const SECONDS_PER_CARD = 14;
+// Durée d'affichage d'un témoignage avant de passer au suivant. Le plus long
+// fait environ 200 mots : en dessous d'une vingtaine de secondes, le visiteur
+// qui commence à lire se fait emporter en cours de route.
+const SLIDE_MS = 25000;
 
 export function Testimonials({ items }: { items: Testimonial[] }) {
-  const [reading, setReading] = useState<Testimonial | null>(null);
+  const [active, setActive] = useState(0);
+  // Trois signaux distincts plutôt qu'un seul booléen : sortir la souris ne
+  // doit pas relancer le défilement si la flèche garde le focus clavier.
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [touched, setTouched] = useState(false);
+  const [reduced, setReduced] = useState(false);
+  const held = hovered || focused || touched;
 
-  // Un seul témoignage ne peut pas défiler : il s'affiche en pleine largeur.
-  if (items.length < 2) {
-    return (
-      <div className="container-site">
-        <div className="mx-auto max-w-3xl">
-          {items.map((t) => (
-            <article key={t.name} className="rounded-3xl border border-ink/10 bg-white p-7 shadow-card sm:p-10">
-              <TestimonialBody testimonial={t} />
-            </article>
-          ))}
-        </div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const apply = () => setReduced(query.matches);
+    apply();
+    query.addEventListener("change", apply);
+    return () => query.removeEventListener("change", apply);
+  }, []);
 
-  return (
-    <>
-      <Marquee items={items} paused={reading !== null} onRead={setReading} />
-      {reading && <TestimonialModal testimonial={reading} onClose={() => setReading(null)} />}
-    </>
+  const go = useCallback(
+    (step: number) => setActive((current) => (current + step + items.length) % items.length),
+    [items.length]
   );
-}
 
-function Marquee({
-  items,
-  paused,
-  onRead,
-}: {
-  items: Testimonial[];
-  paused: boolean;
-  onRead: (t: Testimonial) => void;
-}) {
-  const [held, setHeld] = useState(false);
-  const loop = [...items, ...items];
+  // Le minuteur est relancé à chaque changement d'index : passer au suivant à
+  // la main redonne bien dix secondes pleines, sans saut immédiat.
+  useEffect(() => {
+    if (reduced || held || items.length < 2) return;
+    const id = setTimeout(() => go(1), SLIDE_MS);
+    return () => clearTimeout(id);
+  }, [active, held, reduced, items.length, go]);
+
+  if (items.length === 0) return null;
+
+  const current = items[active];
+  const rotating = items.length > 1 && !reduced;
 
   return (
-    <div
-      className="testimonials-viewport relative overflow-hidden"
-      onMouseEnter={() => setHeld(true)}
-      onMouseLeave={() => setHeld(false)}
-      onFocusCapture={() => setHeld(true)}
-      onBlurCapture={() => setHeld(false)}
-      // Au doigt, il n'y a pas de survol : une pression met le ruban en pause,
-      // la suivante le relance.
-      onTouchStart={() => setHeld((v) => !v)}
-    >
-      <ul
-        // Aucun padding horizontal ici : la piste doit mesurer exactement
-        // deux fois la largeur d'une série pour que le -50% reboucle pile.
-        className="testimonials-track flex w-max"
-        style={{
-          animationDuration: `${items.length * SECONDS_PER_CARD}s`,
-          animationPlayState: paused || held ? "paused" : "running",
-        }}
+    <div className="container-site">
+      <div
+        className="mx-auto flex max-w-3xl flex-col"
+        role="group"
+        aria-label="Témoignages de nos clients"
+        // Personne ne doit se faire emporter en cours de lecture : le
+        // défilement s'arrête dès que le visiteur s'intéresse au bloc, à la
+        // souris, au clavier ou au doigt.
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        onFocusCapture={() => setFocused(true)}
+        onBlurCapture={() => setFocused(false)}
+        // Au doigt il n'y a ni survol ni focus à relâcher : une fois que le
+        // visiteur a touché le bloc, il garde la main.
+        onTouchStart={() => setTouched(true)}
       >
-        {loop.map((t, i) => {
-          const duplicate = i >= items.length;
-          return (
-            <li
-              key={`${t.name}-${i}`}
-              // La seconde moitié n'existe que pour le raccord visuel : elle
-              // est retirée de l'arbre d'accessibilité pour ne pas faire lire
-              // deux fois les mêmes témoignages.
-              aria-hidden={duplicate}
-              className="mr-6 w-[300px] shrink-0 sm:w-[360px]"
+        {/* Toutes les cartes occupent la même cellule de grille : la hauteur
+            du bloc est celle du témoignage le plus long, donc la page ne
+            saute pas d'un témoignage à l'autre. */}
+        <div className="relative order-2 grid lg:order-1">
+          {items.map((t, i) => (
+            <div
+              key={t.name}
+              aria-hidden={i !== active}
+              className={`col-start-1 row-start-1 transition-opacity duration-500 motion-reduce:transition-none ${
+                i === active ? "opacity-100" : "pointer-events-none opacity-0"
+              }`}
             >
-              <MarqueeCard testimonial={t} onRead={() => onRead(t)} duplicate={duplicate} />
-            </li>
-          );
-        })}
-      </ul>
+              <article className="flex h-full flex-col rounded-3xl border border-ink/10 bg-white p-7 shadow-card sm:p-10">
+                <TestimonialBody testimonial={t} />
+              </article>
+            </div>
+          ))}
 
-      {/* Fondus sur les bords : les cartes semblent entrer et sortir du ruban
-          au lieu d'être coupées net. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-sand to-transparent sm:w-24"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-sand to-transparent sm:w-24"
-      />
-    </div>
-  );
-}
+          {items.length > 1 && (
+            <>
+              <Arrow
+                direction="previous"
+                onClick={() => go(-1)}
+                className="absolute -left-16 top-1/2 hidden -translate-y-1/2 lg:grid"
+              />
+              <Arrow
+                direction="next"
+                onClick={() => go(1)}
+                className="absolute -right-16 top-1/2 hidden -translate-y-1/2 lg:grid"
+              />
+            </>
+          )}
+        </div>
 
-function MarqueeCard({
-  testimonial: t,
-  onRead,
-  duplicate,
-}: {
-  testimonial: Testimonial;
-  onRead: () => void;
-  duplicate: boolean;
-}) {
-  const label = projectsLabel(t);
+        {/* Sur mobile les commandes passent AVANT la carte : un témoignage
+            fait plus de 1400 px de haut sur un téléphone, les flèches placées
+            en dessous seraient hors de vue. Sur grand écran elles reprennent
+            leur place sous la carte, où les flèches latérales les doublent. */}
+        {items.length > 1 && (
+          <div className="order-1 mb-8 lg:order-2 lg:mb-0">
+            {/* Barre de progression : elle rend la durée d'affichage visible. La
+                `key` la remet à zéro à chaque témoignage, et la pause la fige
+                où elle en est plutôt que de la remplir d'un coup. Inutile
+                quand le défilement automatique est désactivé. */}
+            {rotating && (
+              <div className="h-0.5 overflow-hidden rounded-full bg-ink/10 lg:mt-6">
+                <div
+                  key={active}
+                  className="h-full origin-left bg-primary"
+                  style={{
+                    animation: `progress-fill ${SLIDE_MS}ms linear forwards`,
+                    animationPlayState: held ? "paused" : "running",
+                  }}
+                />
+              </div>
+            )}
 
-  return (
-    <article className="flex h-full flex-col rounded-3xl border border-ink/10 bg-white p-6 text-left shadow-card">
-      {t.badge && (
-        <p className="inline-flex self-start rounded-full bg-primary/10 px-3 py-1 text-[11px] font-semibold text-primary">
-          {t.badge}
-        </p>
-      )}
+            <div className="mt-5 flex items-center justify-center gap-4">
+              <Arrow direction="previous" onClick={() => go(-1)} className="grid lg:hidden" />
 
-      {t.headline && (
-        <p className="mt-4 text-balance font-display text-base font-semibold leading-snug text-ink">
-          {t.headline}
-        </p>
-      )}
+              <ol className="flex items-center gap-2">
+                {items.map((t, i) => (
+                  <li key={t.name}>
+                    <button
+                      type="button"
+                      onClick={() => setActive(i)}
+                      aria-label={`Témoignage de ${t.name}`}
+                      aria-current={i === active}
+                      className={`h-2 rounded-full transition-all ${
+                        i === active ? "w-6 bg-primary" : "w-2 bg-ink/20 hover:bg-ink/40"
+                      }`}
+                    />
+                  </li>
+                ))}
+              </ol>
 
-      <p className="mt-4 line-clamp-5 border-l-2 border-primary/30 pl-4 text-sm leading-relaxed text-graytext">
-        &laquo;&nbsp;{t.quote[0]}
-      </p>
+              <Arrow direction="next" onClick={() => go(1)} className="grid lg:hidden" />
+            </div>
 
-      <button
-        type="button"
-        onClick={onRead}
-        // Les cartes du raccord ne sont pas atteignables au clavier : ce sont
-        // les mêmes témoignages, déjà présents une fois.
-        tabIndex={duplicate ? -1 : undefined}
-        className="mt-3 self-start text-xs font-semibold uppercase tracking-wide text-primary underline decoration-primary/40 underline-offset-4 hover:text-primary-dark"
-      >
-        Lire le témoignage
-      </button>
-
-      <div className="mt-auto pt-6">
-        {label && t.projects && (
-          <div className="rounded-2xl bg-sand p-4">
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-primary">{label}</p>
-            <p className="mt-1.5 text-xs leading-relaxed text-graytext">
-              <span className="font-medium text-ink">{t.projects[0].title}</span>
-              {t.projects[0].location && <span className="block">📍 {t.projects[0].location}</span>}
+            <p className="mt-4 text-center text-xs text-graytext">
+              {active + 1} / {items.length} — {current.name}
             </p>
           </div>
         )}
-        <Signature testimonial={t} />
-      </div>
-    </article>
-  );
-}
-
-function TestimonialModal({ testimonial: t, onClose }: { testimonial: Testimonial; onClose: () => void }) {
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    document.addEventListener("keydown", onKey);
-    return () => document.removeEventListener("keydown", onKey);
-  }, [onClose]);
-
-  return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
-      onClick={onClose}
-    >
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label={`Témoignage de ${t.name}`}
-        onClick={(e) => e.stopPropagation()}
-        className="relative max-h-[85vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-primary/20 bg-white p-6 shadow-2xl sm:p-8"
-      >
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Fermer le témoignage"
-          className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-full bg-gray-100 text-gray-600 transition-colors hover:bg-gray-200"
-        >
-          ✕
-        </button>
-        <TestimonialBody testimonial={t} />
       </div>
     </div>
   );
 }
 
-// Témoignage complet : utilisé dans la fenêtre de lecture, et quand il n'y a
-// qu'un seul témoignage à afficher.
+function Arrow({
+  direction,
+  onClick,
+  className = "",
+}: {
+  direction: "previous" | "next";
+  onClick: () => void;
+  className?: string;
+}) {
+  const previous = direction === "previous";
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={previous ? "Témoignage précédent" : "Témoignage suivant"}
+      className={`h-11 w-11 shrink-0 place-items-center rounded-full border border-ink/10 bg-white text-ink shadow-card transition-colors hover:border-primary hover:bg-primary hover:text-white ${className}`}
+    >
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden className="h-5 w-5">
+        <path
+          d={previous ? "M15 5l-7 7 7 7" : "M9 5l7 7-7 7"}
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
+  );
+}
+
 function TestimonialBody({ testimonial: t }: { testimonial: Testimonial }) {
   const last = t.quote.length - 1;
   const label = projectsLabel(t);
@@ -222,7 +213,7 @@ function TestimonialBody({ testimonial: t }: { testimonial: Testimonial }) {
       )}
 
       {t.headline && (
-        <p className="mt-4 max-w-[90%] text-balance font-display text-xl font-semibold text-ink sm:text-2xl">
+        <p className="mt-4 text-balance font-display text-xl font-semibold text-ink sm:text-2xl">
           {t.headline}
         </p>
       )}
@@ -237,28 +228,33 @@ function TestimonialBody({ testimonial: t }: { testimonial: Testimonial }) {
         ))}
       </blockquote>
 
-      {label && t.projects && (
-        <div className="mt-7 rounded-2xl bg-sand p-5">
-          <p className="text-xs font-semibold uppercase tracking-wide text-primary">{label}</p>
-          <ol className="mt-3 space-y-3 text-xs leading-relaxed text-graytext">
-            {t.projects.map((project, i) => (
-              <li key={project.title} className="flex gap-2.5">
-                {t.projects!.length > 1 && (
-                  <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-white font-display text-[10px] font-bold text-primary">
-                    {i + 1}
+      {/* mt-auto : la carte occupant toute la hauteur du bloc, projets et
+          signature restent collés en bas, quelle que soit la longueur du
+          témoignage. */}
+      <div className="mt-auto pt-7">
+        {label && t.projects && (
+          <div className="rounded-2xl bg-sand p-5">
+            <p className="text-xs font-semibold uppercase tracking-wide text-primary">{label}</p>
+            <ol className="mt-3 space-y-3 text-xs leading-relaxed text-graytext">
+              {t.projects.map((project, i) => (
+                <li key={project.title} className="flex gap-2.5">
+                  {t.projects!.length > 1 && (
+                    <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-white font-display text-[10px] font-bold text-primary">
+                      {i + 1}
+                    </span>
+                  )}
+                  <span>
+                    <span className="font-medium text-ink">{project.title}</span>
+                    {project.location && <span className="block">📍 {project.location}</span>}
                   </span>
-                )}
-                <span>
-                  <span className="font-medium text-ink">{project.title}</span>
-                  {project.location && <span className="block">📍 {project.location}</span>}
-                </span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      )}
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
 
-      <Signature testimonial={t} />
+        <Signature testimonial={t} />
+      </div>
     </>
   );
 }

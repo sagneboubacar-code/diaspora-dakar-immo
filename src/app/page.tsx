@@ -306,8 +306,6 @@ export default function HomePage() {
           </Reveal>
         </div>
 
-        {/* Le ruban défile hors du conteneur, sur toute la largeur de l'écran :
-            les cartes doivent pouvoir entrer et sortir par les bords. */}
         <div className="mt-12">
           {TESTIMONIALS.length === 0 ? (
             <div className="container-site">
