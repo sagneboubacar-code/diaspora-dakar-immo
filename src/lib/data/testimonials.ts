@@ -80,4 +80,25 @@ export const TESTIMONIALS: Testimonial[] = [
       "À quelqu'un qui hésite encore, je lui dirais : “Let's go, vas-y ! Tu n'auras pas de regret, Insh'Allah.” Le Sénégal est un très beau pays et avec Diaspora Dakar Immo, tout est encore plus beau.",
     ],
   },
+  {
+    name: "Marème Soda Gueye",
+    country: "Italie",
+    flag: "🇮🇹",
+    badge: "Cliente diaspora",
+    headline: "Une relation de confiance qui dure depuis 2008",
+    projects: [
+      {
+        title: "Acquisition du terrain + construction d'une maison R+1",
+        location: "Cité Gadaye, Guédiawaye",
+      },
+      { title: "Gestion locative du bien", location: "Cité Gadaye, Guédiawaye" },
+    ],
+    quote: [
+      "Mon projet avec Diaspora Dakar Immo a commencé par l'acquisition d'un terrain, suivie de la construction d'une maison R+1. Depuis, Diaspora Dakar Immo assure également la gestion locative de mon bien.",
+      "Vivant en Italie, ma principale inquiétude était de pouvoir faire confiance à une équipe sérieuse et engagée, sans avoir à craindre la trahison ou le manque de suivi.",
+      "Au fil des années, j'ai apprécié leur fidélité, leur véritable engagement et la confiance qui s'est installée entre nous.",
+      "Aujourd'hui, je peux dire que cette collaboration se fait dans la confiance et avec une bonne gestion. Je ne regrette pas de leur avoir confié mon projet et la gestion de mon bien.",
+      "À une personne qui souhaite investir au Sénégal depuis l'étranger, je dirais : soyez courageux, restez attentif, mais n'ayez pas peur de vous lancer avec une équipe de confiance.",
+    ],
+  },
 ];
