@@ -3,6 +3,7 @@ import { SectionHeading } from "@/components/SectionHeading";
 import { EmptyState } from "@/components/EmptyState";
 import { getPublishedRealisations } from "@/lib/data/realisations";
 import type { RealisationStatus } from "@/lib/data/types";
+import { posterFor } from "@/lib/media";
 
 const STATUS_LABELS: Record<RealisationStatus, string> = {
   livre: "Livré",
@@ -87,6 +88,7 @@ export default function RealisationsPage() {
                       key={photo}
                       src={photo}
                       alt={`${r.title} — photo ${i + 1}`}
+                      loading="lazy"
                       className="aspect-[4/3] w-full rounded-xl object-cover"
                     />
                   ))}
@@ -94,15 +96,20 @@ export default function RealisationsPage() {
               )}
 
               {r.videos && r.videos.length > 0 && (
-                <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                // Même grille que les photos : les vidéos sont en portrait,
+                // trois colonnes de 16/9 les bordaient de bandes noires.
+                <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
                   {r.videos.map((video) => (
                     <video
                       key={video}
                       src={video}
+                      poster={posterFor(video)}
                       controls
                       playsInline
-                      preload="metadata"
-                      className="aspect-video w-full rounded-xl bg-ink/5 object-cover"
+                      // Huit vidéos sur cette page : sans `none`, le navigateur
+                      // en tirait les métadonnées dès le chargement.
+                      preload="none"
+                      className="w-full rounded-xl bg-ink/5"
                     >
                       Votre navigateur ne prend pas en charge la lecture vidéo.
                     </video>

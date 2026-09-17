@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Property } from "@/lib/data/types";
+import { posterFor } from "@/lib/media";
 
 const TYPE_LABELS: Record<Property["type"], string> = {
   terrain: "Terrain",
@@ -27,7 +28,9 @@ function formatPrice(price: number | null) {
 }
 
 export function PropertyCard({ property }: { property: Property }) {
-  const cover = property.photos[0];
+  // Faute de photo, la vignette de la vidéo fait une couverture autrement
+  // plus parlante que la mention « Vidéo disponible ».
+  const cover = property.photos[0] ?? (property.video ? posterFor(property.video) : undefined);
   return (
     <Link
       href={`/nos-biens/${property.slug}`}
@@ -39,13 +42,9 @@ export function PropertyCard({ property }: { property: Property }) {
           <img
             src={cover}
             alt={property.title}
+            loading="lazy"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
-        ) : property.video ? (
-          <div className="grid h-full w-full place-items-center gap-1 text-sm text-graytext">
-            <span className="text-2xl">🎬</span>
-            Vidéo disponible
-          </div>
         ) : (
           <div className="grid h-full w-full place-items-center text-sm text-graytext">Photo à venir</div>
         )}
@@ -54,6 +53,11 @@ export function PropertyCard({ property }: { property: Property }) {
         >
           {STATUS_LABELS[property.status]}
         </span>
+        {property.video && (
+          <span className="absolute bottom-3 right-3 rounded-full bg-ink/70 px-3 py-1 text-xs font-semibold text-white">
+            ▶ Vidéo
+          </span>
+        )}
       </div>
       <div className="space-y-2 p-5">
         <p className="text-xs font-semibold uppercase tracking-wide text-primary">

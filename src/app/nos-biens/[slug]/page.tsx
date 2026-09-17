@@ -4,6 +4,7 @@ import { ButtonLink } from "@/components/Button";
 import { LeadForm } from "@/components/LeadForm";
 import { getPropertyBySlug, getPublishedProperties } from "@/lib/data/properties";
 import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
+import { posterFor } from "@/lib/media";
 
 const TYPE_LABELS: Record<string, string> = {
   terrain: "Terrain",
@@ -42,10 +43,15 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
           {property.video && (
             <video
               src={property.video}
+              poster={posterFor(property.video)}
               controls
               playsInline
-              preload="metadata"
-              className="aspect-video w-full rounded-xl bg-ink/5 object-cover"
+              // Aucun octet de vidéo n'est téléchargé avant que le visiteur ne
+              // lance la lecture : la vignette tient l'affichage. Le cadre suit
+              // le format portrait des vidéos, plutôt que de les enfermer dans
+              // un 16/9 qui les bordait de deux bandes noires.
+              preload="none"
+              className="w-full max-w-sm rounded-xl bg-ink/5"
             >
               Votre navigateur ne prend pas en charge la lecture vidéo.
             </video>
@@ -59,6 +65,7 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
                   key={photo}
                   src={photo}
                   alt={property.title}
+                  loading="lazy"
                   className="aspect-[4/3] w-full rounded-xl object-cover"
                 />
               ))
