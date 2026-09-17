@@ -15,7 +15,11 @@ export const REALISATIONS: Realisation[] = [
   },
   {
     slug: "chantier-2",
-    title: "Chantier 2",
+    title: "Projet de finitions R+1",
+    location: "Mbeye, Lac Rose",
+    year: 2022,
+    surfaceM2: 300,
+    status: "livre",
     photos: Array.from(
       { length: 10 },
       (_, i) => `/realisations/chantier-2/photo-${String(i + 1).padStart(2, "0")}.jpg`

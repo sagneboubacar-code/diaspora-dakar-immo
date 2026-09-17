@@ -2,6 +2,17 @@ import type { Metadata } from "next";
 import { SectionHeading } from "@/components/SectionHeading";
 import { EmptyState } from "@/components/EmptyState";
 import { REALISATIONS } from "@/lib/data/realisations";
+import type { RealisationStatus } from "@/lib/data/types";
+
+const STATUS_LABELS: Record<RealisationStatus, string> = {
+  livre: "Livré",
+  "en-cours": "En cours",
+};
+
+const STATUS_CLASSES: Record<RealisationStatus, string> = {
+  livre: "bg-emerald-600",
+  "en-cours": "bg-amber-500",
+};
 
 export const metadata: Metadata = {
   title: "Nos réalisations — Chantiers réels à Dakar et au Sénégal",
@@ -30,8 +41,34 @@ export default function RealisationsPage() {
               {r.type && (
                 <p className="text-xs font-semibold uppercase tracking-wide text-primary">{r.type}</p>
               )}
-              <h2 className="mt-1 font-display text-2xl font-bold text-ink">{r.title}</h2>
-              {r.location && <p className="text-sm text-graytext">📍 {r.location}</p>}
+              <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-2">
+                <h2 className="font-display text-2xl font-bold text-ink">{r.title}</h2>
+                {r.status && (
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-semibold text-white ${STATUS_CLASSES[r.status]}`}
+                  >
+                    {STATUS_LABELS[r.status]}
+                  </span>
+                )}
+              </div>
+              {r.location && <p className="mt-1 text-sm text-graytext">📍 {r.location}</p>}
+
+              {(r.year || r.surfaceM2) && (
+                <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-2 border-y border-ink/10 py-3 text-sm">
+                  {r.year && (
+                    <div className="flex gap-2">
+                      <dt className="text-graytext">Année</dt>
+                      <dd className="font-semibold text-ink">{r.year}</dd>
+                    </div>
+                  )}
+                  {r.surfaceM2 && (
+                    <div className="flex gap-2">
+                      <dt className="text-graytext">Surface</dt>
+                      <dd className="font-semibold text-ink">{r.surfaceM2} m²</dd>
+                    </div>
+                  )}
+                </dl>
+              )}
               {r.description && (
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-graytext">{r.description}</p>
               )}

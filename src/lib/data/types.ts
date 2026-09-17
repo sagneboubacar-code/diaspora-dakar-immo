@@ -19,11 +19,17 @@ export interface Property {
   video?: string; // mp4 hébergé, chemin vers /public/biens/...
 }
 
+// Statut du chantier : union plutôt que texte libre, comme PropertyStatus.
+export type RealisationStatus = "livre" | "en-cours";
+
 export interface Realisation {
   slug: string;
   title: string;
   location?: string;
   type?: string;
+  year?: number; // année de livraison, ou de réalisation si le chantier court
+  surfaceM2?: number;
+  status?: RealisationStatus;
   description?: string;
   photos: string[]; // galerie chronologique : début de chantier → finition
   videos?: string[]; // chemins vers /public/... (mp4 hébergés), même ordre chronologique
