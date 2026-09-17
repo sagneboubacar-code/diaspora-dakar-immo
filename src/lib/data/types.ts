@@ -20,14 +20,17 @@ export interface Property {
 }
 
 // Statut du chantier : union plutôt que texte libre, comme PropertyStatus.
-export type RealisationStatus = "livre" | "en-cours";
+// « livre-en-location » distingue les chantiers dont l'agence assure aussi
+// la gestion locative après livraison — c'est un argument en soi.
+export type RealisationStatus = "livre" | "livre-en-location" | "en-cours";
 
 export interface Realisation {
   slug: string;
   title: string;
   location?: string;
   type?: string;
-  year?: number; // année de livraison, ou de réalisation si le chantier court
+  startYear?: number; // début des travaux, si le chantier court sur plusieurs années
+  year?: number; // année de livraison
   surfaceM2?: number;
   status?: RealisationStatus;
   description?: string;

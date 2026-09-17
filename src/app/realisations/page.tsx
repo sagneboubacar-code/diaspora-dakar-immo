@@ -6,11 +6,13 @@ import type { RealisationStatus } from "@/lib/data/types";
 
 const STATUS_LABELS: Record<RealisationStatus, string> = {
   livre: "Livré",
+  "livre-en-location": "Livré et mis en location",
   "en-cours": "En cours",
 };
 
 const STATUS_CLASSES: Record<RealisationStatus, string> = {
   livre: "bg-emerald-600",
+  "livre-en-location": "bg-emerald-600",
   "en-cours": "bg-amber-500",
 };
 
@@ -57,8 +59,10 @@ export default function RealisationsPage() {
                 <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-2 border-y border-ink/10 py-3 text-sm">
                   {r.year && (
                     <div className="flex gap-2">
-                      <dt className="text-graytext">Année</dt>
-                      <dd className="font-semibold text-ink">{r.year}</dd>
+                      <dt className="text-graytext">{r.startYear ? "Période" : "Année"}</dt>
+                      <dd className="font-semibold text-ink">
+                        {r.startYear ? `${r.startYear} – ${r.year}` : r.year}
+                      </dd>
                     </div>
                   )}
                   {r.surfaceM2 && (

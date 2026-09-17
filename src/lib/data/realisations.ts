@@ -15,7 +15,8 @@ export const REALISATIONS: Realisation[] = [
   },
   {
     slug: "chantier-2",
-    title: "Projet de finitions R+1",
+    title: "Projet de finitions",
+    type: "R+1",
     location: "Mbeye, Lac Rose",
     year: 2022,
     surfaceM2: 300,
@@ -27,7 +28,15 @@ export const REALISATIONS: Realisation[] = [
   },
   {
     slug: "chantier-3",
-    title: "Chantier 3",
+    title: "Rénovation du RDC et construction du 1er et 2e étage",
+    type: "R+2",
+    location: "Cité Gadaye, Guédiawaye",
+    startYear: 2020,
+    year: 2022,
+    surfaceM2: 150,
+    status: "livre-en-location",
+    description:
+      "Rénovation du rez-de-chaussée puis construction du 1er et du 2e étage. 2DKR Immo & Construction assure également la gestion locative du bien depuis sa livraison.",
     photos: [],
     videos: [
       "/realisations/chantier-3/01-debut.mp4",
