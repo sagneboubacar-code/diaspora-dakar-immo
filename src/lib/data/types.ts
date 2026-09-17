@@ -37,6 +37,11 @@ export interface Realisation {
   photos: string[]; // galerie chronologique : début de chantier → finition
   videos?: string[]; // chemins vers /public/... (mp4 hébergés), même ordre chronologique
   videoUrl?: string; // vidéo unique embarquée (YouTube/Vimeo...), distincte des mp4 ci-dessus
+  // Par défaut publié. Passer à false pour garder un chantier dans les
+  // données — ses photos peuvent servir ailleurs sur le site — sans
+  // l'afficher dans la liste des réalisations tant que l'agence n'a pas
+  // fourni ses informations.
+  published?: boolean;
 }
 
 export interface Partner {

@@ -8,6 +8,11 @@ export const REALISATIONS: Realisation[] = [
   {
     slug: "chantier-1",
     title: "Chantier 1",
+    // Informations pas encore fournies par l'agence : le chantier est
+    // masqué plutôt que publié sous un titre générique à côté de trois
+    // fiches complètes. Ses photos restent utilisées par le Hero de
+    // l'accueil et par la page services.
+    published: false,
     photos: Array.from(
       { length: 27 },
       (_, i) => `/realisations/chantier-1/photo-${String(i + 1).padStart(2, "0")}.jpg`
@@ -66,6 +71,10 @@ export const REALISATIONS: Realisation[] = [
     photos: ["/realisations/chantier-4/photo-01.jpg"],
   },
 ];
+
+export function getPublishedRealisations() {
+  return REALISATIONS.filter((r) => r.published !== false);
+}
 
 export function getRealisationBySlug(slug: string) {
   return REALISATIONS.find((r) => r.slug === slug) ?? null;

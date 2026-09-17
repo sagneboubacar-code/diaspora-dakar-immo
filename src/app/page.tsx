@@ -8,7 +8,7 @@ import { Reveal } from "@/components/Reveal";
 import { HeroShowcase } from "@/components/HeroShowcase";
 import { SITE, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
 import { getPublishedProperties } from "@/lib/data/properties";
-import { REALISATIONS } from "@/lib/data/realisations";
+import { getPublishedRealisations } from "@/lib/data/realisations";
 import { TESTIMONIALS } from "@/lib/data/testimonials";
 import { Testimonials } from "@/components/Testimonials";
 
@@ -89,6 +89,7 @@ const WHY_US = [
 
 export default function HomePage() {
   const properties = getPublishedProperties().slice(0, 4);
+  const realisations = getPublishedRealisations();
 
   return (
     <>
@@ -193,7 +194,7 @@ export default function HomePage() {
             />
           </Reveal>
           <div className="mt-10">
-            {REALISATIONS.length === 0 ? (
+            {realisations.length === 0 ? (
               <div className="rounded-2xl border border-dashed border-white/20 bg-white/5 p-10 text-center">
                 <p className="font-display text-lg font-semibold text-white">
                   Nos réalisations sont en cours de mise en ligne.

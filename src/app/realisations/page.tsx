@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { SectionHeading } from "@/components/SectionHeading";
 import { EmptyState } from "@/components/EmptyState";
-import { REALISATIONS } from "@/lib/data/realisations";
+import { getPublishedRealisations } from "@/lib/data/realisations";
 import type { RealisationStatus } from "@/lib/data/types";
 
 const STATUS_LABELS: Record<RealisationStatus, string> = {
@@ -23,6 +23,8 @@ export const metadata: Metadata = {
 };
 
 export default function RealisationsPage() {
+  const realisations = getPublishedRealisations();
+
   return (
     <div className="container-site py-16 sm:py-20">
       <SectionHeading
@@ -32,13 +34,13 @@ export default function RealisationsPage() {
       />
 
       <div className="mt-12 space-y-16">
-        {REALISATIONS.length === 0 ? (
+        {realisations.length === 0 ? (
           <EmptyState
             title="Nos réalisations sont en cours de mise en ligne."
             description="Les photos de nos chantiers, du début à la finition, seront publiées ici prochainement. Contactez-nous pour en découvrir dès maintenant."
           />
         ) : (
-          REALISATIONS.map((r) => (
+          realisations.map((r) => (
             <article key={r.slug}>
               {r.type && (
                 <p className="text-xs font-semibold uppercase tracking-wide text-primary">{r.type}</p>
