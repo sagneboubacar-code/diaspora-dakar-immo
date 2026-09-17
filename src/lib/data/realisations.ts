@@ -51,9 +51,18 @@ export const REALISATIONS: Realisation[] = [
   },
   {
     slug: "chantier-4",
-    title: "Chantier 4",
+    title: "Projet de finition et rajout d'un 3e étage",
+    type: "R+3",
+    location: "Asecna, Yeumbeul",
+    startYear: 2024,
+    year: 2025,
+    surfaceM2: 232,
+    status: "livre-en-location",
+    // La réserve sur la peinture vient de l'agence et porte sur l'étage
+    // ajouté en 2025 : elle est maintenue malgré le statut « livré », le
+    // site ne surpromet pas.
     description:
-      "2DKR Immo & Construction a réalisé une partie des travaux de finition de cet immeuble. Le dernier étage n'est pas encore terminé en peinture.",
+      "Finition extérieure de l'immeuble en 2024, puis rajout d'un 3e étage en 2025. 2DKR Immo & Construction a réalisé une partie des travaux de finition et assure la gestion locative du bien ; le dernier étage n'est pas encore terminé en peinture.",
     photos: ["/realisations/chantier-4/photo-01.jpg"],
   },
 ];
