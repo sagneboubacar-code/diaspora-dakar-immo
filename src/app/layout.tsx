@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { SITE } from "@/lib/site-config";
+import { BASE_OPEN_GRAPH } from "@/lib/metadata";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const jakarta = Plus_Jakarta_Sans({
@@ -37,12 +38,8 @@ export const metadata: Metadata = {
     "investir au Sénégal",
     "immobilier diaspora Sénégal",
   ],
-  openGraph: {
-    type: "website",
-    locale: "fr_FR",
-    siteName: SITE.name,
-    url: SITE.url,
-  },
+  alternates: { canonical: "/" },
+  openGraph: { ...BASE_OPEN_GRAPH, url: SITE.url },
 };
 
 const structuredData = {

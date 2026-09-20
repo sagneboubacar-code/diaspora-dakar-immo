@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { LeadForm } from "@/components/LeadForm";
 import { SITE, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/contact",
   title: "Contact",
   description:
     "Contactez Diaspora Dakar Immo (2DKR Immo & Construction) à Cité Gadaye, Guédiawaye, Dakar, par téléphone, WhatsApp, email ou via notre formulaire.",
-};
+});
 
 const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(SITE.address)}&output=embed`;
 

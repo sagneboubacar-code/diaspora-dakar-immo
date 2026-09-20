@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { EmptyState } from "@/components/EmptyState";
 import { PARTNERS } from "@/lib/data/partners";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/partenaires",
   title: "Nos partenaires — Artisans et professionnels de confiance",
   description:
     "Découvrez les partenaires avec lesquels 2DKR Immo & Construction travaille pour accompagner vos projets au Sénégal.",
-};
+});
 
 export default function PartenairesPage() {
   return (

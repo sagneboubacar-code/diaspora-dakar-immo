@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { LeadForm } from "@/components/LeadForm";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/diaspora",
   title: "Diaspora — Votre projet immobilier au Sénégal, à distance",
   description:
     "Diaspora Dakar Immo accompagne les Sénégalais de l'étranger : recherche de terrain, visites, vérifications, acquisition, construction, suivi de chantier et remise des clés.",
-};
+});
 
 const ACCOMPAGNEMENT = [
   "Recherche de terrain",

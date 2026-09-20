@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { EmptyState } from "@/components/EmptyState";
 import { getPublishedRealisations } from "@/lib/data/realisations";
@@ -17,11 +18,12 @@ const STATUS_CLASSES: Record<RealisationStatus, string> = {
   "en-cours": "bg-amber-500",
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/realisations",
   title: "Nos réalisations — Chantiers réels à Dakar et au Sénégal",
   description:
     "Découvrez les projets de construction réellement menés par 2DKR Immo & Construction, du début du chantier jusqu'à la finition.",
-};
+});
 
 export default function RealisationsPage() {
   const realisations = getPublishedRealisations();

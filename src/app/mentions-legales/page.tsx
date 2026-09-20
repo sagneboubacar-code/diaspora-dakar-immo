@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SITE } from "@/lib/site-config";
 
-export const metadata: Metadata = { title: "Mentions légales", robots: { index: false } };
+export const metadata: Metadata = pageMetadata({
+  path: "/mentions-legales",
+  title: "Mentions légales",
+  robots: { index: false },
+});
 
 export default function LegalNoticePage() {
   return (

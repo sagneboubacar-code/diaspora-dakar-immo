@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { ButtonLink } from "@/components/Button";
 import { SITE } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/merci",
   title: "Merci",
   robots: { index: false },
-};
+});
 
 export default function ThankYouPage({ searchParams }: { searchParams: { wa?: string } }) {
   return (

@@ -4,6 +4,7 @@ import { ButtonLink } from "@/components/Button";
 import { LeadForm } from "@/components/LeadForm";
 import { getPropertyBySlug, getPublishedProperties } from "@/lib/data/properties";
 import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
+import { pageMetadata } from "@/lib/metadata";
 import { posterFor } from "@/lib/media";
 
 const TYPE_LABELS: Record<string, string> = {
@@ -26,10 +27,18 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const property = getPropertyBySlug(params.slug);
   if (!property) return {};
-  return {
-    title: `${property.title} — ${property.location}`,
+  // Les titres de biens contiennent déjà leur localisation ; la recoller
+  // donnait « Terrain — Cité Manian Seck, Kounoune 2 — Cité Manian Seck,
+  // Kounoune 2 ». Elle n'est ajoutée que si elle manque.
+  const path = `/nos-biens/${property.slug}`;
+  return pageMetadata({
+    path,
+    title: property.title.includes(property.location)
+      ? property.title
+      : `${property.title} — ${property.location}`,
     description: property.description,
-  };
+    image: `${path}/opengraph-image`,
+  });
 }
 
 export default function PropertyDetailPage({ params }: { params: { slug: string } }) {

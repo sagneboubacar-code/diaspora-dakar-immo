@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
 import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/nos-services",
   title: "Nos services — Acquisition, construction, immobilier, gestion",
   description:
     "Acquisition foncière, construction, immobilier et gestion locative au Sénégal : découvrez comment Diaspora Dakar Immo accompagne votre projet de A à Z.",
-};
+});
 
 const SERVICES = [
   {

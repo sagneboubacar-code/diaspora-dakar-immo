@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { getPublishedProperties } from "@/lib/data/properties";
 import { PropertyBrowser } from "./PropertyBrowser";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/nos-biens",
   title: "Nos biens — Terrains, maisons, villas et appartements à Dakar",
   description:
     "Découvrez les terrains, maisons, villas, appartements et projets immobiliers disponibles avec Diaspora Dakar Immo, à Dakar et partout au Sénégal.",
-};
+});
 
 export default function PropertiesPage() {
   const properties = getPublishedProperties();

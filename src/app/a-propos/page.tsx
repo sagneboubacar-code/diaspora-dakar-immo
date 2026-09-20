@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SITE } from "@/lib/site-config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: "/a-propos",
   title: "À propos — Diaspora Dakar Immo / 2DKR Immo & Construction",
   description:
     "18 ans d'expérience et de nombreux projets réalisés au Sénégal : découvrez l'histoire, la mission et les valeurs de Diaspora Dakar Immo (2DKR Immo & Construction).",
-};
+});
 
 const VALUES = ["Confiance", "Transparence", "Professionnalisme", "Réactivité", "Satisfaction"];
 
