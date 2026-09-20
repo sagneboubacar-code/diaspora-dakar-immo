@@ -63,11 +63,8 @@ export const REALISATIONS: Realisation[] = [
     year: 2025,
     surfaceM2: 232,
     status: "livre-en-location",
-    // La réserve sur la peinture vient de l'agence et porte sur l'étage
-    // ajouté en 2025 : elle est maintenue malgré le statut « livré », le
-    // site ne surpromet pas.
     description:
-      "Finition extérieure de l'immeuble en 2024, puis rajout d'un 3e étage en 2025. 2DKR Immo & Construction a réalisé une partie des travaux de finition et assure la gestion locative du bien ; le dernier étage n'est pas encore terminé en peinture.",
+      "Finition extérieure de l'immeuble en 2024, puis rajout d'un 3e étage en 2025. 2DKR Immo & Construction a réalisé une partie des travaux de finition et assure la gestion locative du bien.",
     photos: ["/realisations/chantier-4/photo-01.jpg"],
   },
 ];
