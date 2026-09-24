@@ -45,3 +45,8 @@ chantier concerné s'affichera en noir.
 - `src/lib/data/realisations.ts` — chantiers réels (photos avant/pendant/après)
 - `src/lib/data/testimonials.ts` — témoignages clients
 - `public/` — logo et photos réelles (le Hero utilise un dégradé de marque en attendant une vraie photo)
+
+## Logiciel de gestion locative
+
+Le dossier [`baraka-immo/`](baraka-immo/) contient **Baraka Immo**, un projet indépendant de ce site :
+logiciel de gestion locative pour agences et propriétaires (voir son propre README).
