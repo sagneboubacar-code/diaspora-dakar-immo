@@ -12,20 +12,45 @@ import { getPublishedRealisations } from "@/lib/data/realisations";
 import { TESTIMONIALS } from "@/lib/data/testimonials";
 import { Testimonials } from "@/components/Testimonials";
 
-// Les quatre étapes de l'accompagnement, illustrées par des photos réelles de
-// l'agence. Les étapes 02 à 04 sont le MÊME chantier (villa de la photo
-// finale) ; l'étape 01 vient d'un autre terrain, faute de photo du terrain
-// d'origine de cette villa — la légende parle donc du parcours proposé, sans
-// prétendre qu'il s'agit d'un seul et même projet de bout en bout.
-// Les deux premières étapes défilent plus vite : ce sont les moins
-// vendeuses, l'objectif est d'arriver rapidement à la villa livrée, qui
-// reste elle affichée plus longtemps.
+// Les quatre étapes de l'accompagnement, sur le montage vidéo des photos
+// réelles de l'agence (scripts/build-hero-video.sh). Les étapes 02 à 04 sont
+// le MÊME chantier (chantier 1, jusqu'à sa façade livrée) ; l'étape 01 vient
+// d'un autre terrain, faute de photo du terrain d'origine de cette villa — la
+// légende parle donc du parcours proposé, sans prétendre qu'il s'agit d'un
+// seul et même projet de bout en bout.
+// `videoStartS` : début de chaque étape dans le montage, affiché par le
+// script. Les photos et `durationMs` servent au diaporama de secours, quand
+// la vidéo ne peut pas être lue ; les deux premières étapes y défilent plus
+// vite, pour arriver rapidement à la villa livrée.
 const HERO_PHASES = [
-  { n: "01", label: "Achat de terrain", photo: "/biens/terrain-kounoune-2/photo-01.jpg", durationMs: 2200 },
-  { n: "02", label: "Gros œuvres", photo: "/realisations/chantier-1/photo-06.jpg", durationMs: 2200 },
-  { n: "03", label: "Finitions", photo: "/realisations/chantier-1/photo-08.jpg" },
-  { n: "04", label: "Clés en mains", photo: "/hero-villa.jpg", durationMs: 5000 },
+  {
+    n: "01",
+    label: "Achat de terrain",
+    photo: "/biens/terrain-kounoune-2/photo-01.jpg",
+    durationMs: 2200,
+    videoStartS: 0,
+  },
+  {
+    n: "02",
+    label: "Gros œuvres",
+    photo: "/realisations/chantier-1/photo-06.jpg",
+    durationMs: 2200,
+    videoStartS: 3.1,
+  },
+  { n: "03", label: "Finitions", photo: "/realisations/chantier-1/photo-08.jpg", videoStartS: 7.5 },
+  {
+    n: "04",
+    label: "Clés en mains",
+    photo: "/realisations/chantier-1/photo-28.jpg",
+    durationMs: 5000,
+    videoStartS: 29.6,
+  },
 ];
+
+const HERO_VIDEO = {
+  portrait: "/hero/hero-portrait.mp4",
+  landscape: "/hero/hero-paysage.mp4",
+};
 
 const DIASPORA_STEPS = [
   { icon: "🌳", title: "Trouver votre terrain", text: "Recherche et vérifications préalables." },
@@ -98,6 +123,7 @@ export default function HomePage() {
           démontre la promesse au lieu de l'affirmer. */}
       <HeroShowcase
         phases={HERO_PHASES}
+        video={HERO_VIDEO}
         caption={
           // Aligné à gauche : le bouton WhatsApp flottant occupe le coin bas
           // droit, un lien collé au bord droit passerait dessous.

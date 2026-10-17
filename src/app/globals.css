@@ -25,8 +25,8 @@ h1, h2, h3, h4 {
 }
 
 /* Barre de progression d'un élément qui s'affiche pendant une durée donnée :
-   les étapes du Hero et les témoignages du carrousel. Remontée à zéro à chaque
-   changement via une `key` React. */
+   les témoignages du carrousel. Remontée à zéro à chaque changement via une
+   `key` React. (Les étapes du Hero suivent, elles, le temps de la vidéo.) */
 @keyframes progress-fill {
   from {
     transform: scaleX(0);
