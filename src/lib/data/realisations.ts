@@ -13,8 +13,12 @@ export const REALISATIONS: Realisation[] = [
     // fiches complètes. Ses photos restent utilisées par le Hero de
     // l'accueil et par la page services.
     published: false,
+    // 1 à 27 : du gros œuvre aux premières finitions. 28 à 39 : envoi
+    // d'octobre 2026 — la façade terminée (28), puis les finitions
+    // intérieures (entrée, séjour, chambres, salles d'eau). 12 vues retenues
+    // sur 24 pour éviter les doublons d'angle.
     photos: Array.from(
-      { length: 27 },
+      { length: 39 },
       (_, i) => `/realisations/chantier-1/photo-${String(i + 1).padStart(2, "0")}.jpg`
     ),
   },

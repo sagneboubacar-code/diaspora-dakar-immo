@@ -14,5 +14,9 @@ next-env.d.ts
 /bien 3/
 /bien 4/
 /chantier 3/
+/FINITION CHANTIER 1/
 /IMAGES DIASPORA/
 /*.jpeg
+
+# Lien local vers le projet Vercel (créé par `vercel link`).
+.vercel
