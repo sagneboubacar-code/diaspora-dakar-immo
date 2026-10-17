@@ -79,9 +79,14 @@ export default function AboutPage() {
       {/* 18. Texte personnel du responsable */}
       <div className="container-site mt-16">
         <div className="grid grid-cols-1 items-center gap-10 rounded-2xl border border-ink/10 bg-sand p-8 sm:p-10 lg:grid-cols-[280px_1fr]">
-          <div className="mx-auto grid aspect-square w-40 place-items-center rounded-full bg-ink text-4xl font-display font-bold text-white lg:w-full lg:max-w-[220px]">
-            2DKR
-          </div>
+          {/* Façade livrée du chantier 1, prise de face. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/realisations/chantier-1/photo-28.jpg"
+            alt="Façade terminée d'une villa réalisée par 2DKR Immo & Construction"
+            loading="lazy"
+            className="mx-auto aspect-[3/4] w-56 rounded-2xl object-cover shadow-card sm:w-64 lg:w-full lg:max-w-[280px]"
+          />
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">
               De la France au Sénégal
