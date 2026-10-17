@@ -108,19 +108,33 @@ export default function HomePage() {
         caption={
           // Aligné à gauche : le bouton WhatsApp flottant occupe le coin bas
           // droit, un lien collé au bord droit passerait dessous.
-          <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 pr-16 sm:pr-20">
-            <p className="text-sm font-semibold text-white sm:text-base">
-              De l&apos;achat du terrain à la remise des clés.{" "}
-              <span className="font-normal text-white/55">
-                Chaque étape suivie par notre équipe sur place.
+          <div className="pr-16 sm:pr-20">
+            {/* Crédit du film de fond. Tout le montage est le chantier 1, sauf
+                le terrain du premier plan (une autre parcelle) : la mention
+                s'en tient à ce qui est vrai de ce chantier, du gros œuvre aux
+                finitions, et ne revendique pas l'achat du terrain. */}
+            <p className="flex items-start gap-3 text-sm leading-relaxed text-white/80">
+              <span aria-hidden className="mt-[0.7em] h-px w-6 shrink-0 bg-primary" />
+              <span>
+                <span className="font-semibold text-primary">En vidéo :</span> un chantier réalisé par{" "}
+                <span className="font-semibold text-white">{SITE.signature}</span>, du gros œuvre aux
+                finitions.
               </span>
             </p>
-            <Link
-              href="/realisations"
-              className="rounded text-[11px] font-semibold uppercase tracking-[0.16em] text-primary transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
-            >
-              Voir toutes nos réalisations →
-            </Link>
+            <div className="mt-3 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+              <p className="text-sm font-semibold text-white sm:text-base">
+                De l&apos;achat du terrain à la remise des clés.{" "}
+                <span className="font-normal text-white/55">
+                  Chaque étape suivie par notre équipe sur place.
+                </span>
+              </p>
+              <Link
+                href="/realisations"
+                className="rounded text-[11px] font-semibold uppercase tracking-[0.16em] text-primary transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+              >
+                Voir toutes nos réalisations →
+              </Link>
+            </div>
           </div>
         }
       >
