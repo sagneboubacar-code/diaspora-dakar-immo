@@ -7,7 +7,7 @@ import type { Property } from "./types";
 export const PROPERTIES: Property[] = [
   {
     slug: "appartement-cite-gadaye",
-    title: "Appartement 3 chambres — Cité Gadaye",
+    title: "Appartement 3 chambres · Cité Gadaye",
     type: "appartement",
     purpose: "location",
     status: "disponible",
@@ -31,7 +31,7 @@ export const PROPERTIES: Property[] = [
   },
   {
     slug: "terrain-gadaye-1ere-position",
-    title: "Terrain 150 m² — Rond-point Gadaye, 1ère position",
+    title: "Terrain 150 m² · Rond-point Gadaye, 1ère position",
     type: "terrain",
     purpose: "vente",
     status: "disponible",
@@ -50,7 +50,7 @@ export const PROPERTIES: Property[] = [
   },
   {
     slug: "terrain-gadaye-3eme-position",
-    title: "Terrain 150 m² — Rond-point Gadaye, 3è position",
+    title: "Terrain 150 m² · Rond-point Gadaye, 3è position",
     type: "terrain",
     purpose: "vente",
     status: "disponible",
@@ -66,7 +66,7 @@ export const PROPERTIES: Property[] = [
   },
   {
     slug: "terrain-kounoune-2-manian-seck",
-    title: "Terrain 150 m² — Cité Manian Seck, Kounoune 2",
+    title: "Terrain 150 m² · Cité Manian Seck, Kounoune 2",
     type: "terrain",
     purpose: "vente",
     status: "disponible",
@@ -92,7 +92,7 @@ export const PROPERTIES: Property[] = [
   },
   {
     slug: "duplex-camberene-1",
-    title: "Duplex 2 chambres — Cambérène 1",
+    title: "Duplex 2 chambres · Cambérène 1",
     type: "appartement",
     purpose: "location",
     status: "disponible",

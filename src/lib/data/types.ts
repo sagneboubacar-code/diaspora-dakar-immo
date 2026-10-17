@@ -47,7 +47,6 @@ export interface Realisation {
 export interface Partner {
   slug: string;
   name: string;
-  emoji?: string;
   logo: string;
   tagline?: string;
   location?: string;
@@ -66,7 +65,6 @@ export interface TestimonialProject {
 export interface Testimonial {
   name: string;
   country: string; // ville et/ou pays de résidence du client
-  flag?: string; // drapeau du pays, affiché à côté du nom
   badge?: string; // « Client diaspora », « Client au Sénégal »...
   headline?: string; // phrase-titre du témoignage, mise en avant
   projects?: TestimonialProject[]; // projets ou services confiés, dans l'ordre

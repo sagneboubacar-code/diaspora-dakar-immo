@@ -5,7 +5,7 @@ import { LeadForm } from "@/components/LeadForm";
 
 export const metadata: Metadata = pageMetadata({
   path: "/diaspora",
-  title: "Diaspora — Votre projet immobilier au Sénégal, à distance",
+  title: "Diaspora : votre projet immobilier au Sénégal, à distance",
   description:
     "Diaspora Dakar Immo accompagne les Sénégalais de l'étranger : recherche de terrain, visites, vérifications, acquisition, construction, suivi de chantier et remise des clés.",
 });
@@ -29,7 +29,7 @@ export default function DiasporaPage() {
     <div className="py-16 sm:py-20">
       <div className="container-site">
         <SectionHeading
-          eyebrow="🇸🇳 Diaspora"
+          eyebrow="Diaspora"
           title="Votre projet au Sénégal, même à distance."
           subtitle="Vous êtes à l'étranger, notre équipe est sur le terrain."
         />
@@ -39,7 +39,7 @@ export default function DiasporaPage() {
             <p className="text-sm leading-relaxed text-graytext">
               Vivre à l&apos;étranger ne doit pas être un frein à la réalisation d&apos;un projet immobilier au
               Sénégal. Depuis Dakar, notre équipe se déplace, vérifie, coordonne et vous tient informé à
-              chaque étape — de la première recherche jusqu&apos;à la remise des clés.
+              chaque étape, de la première recherche jusqu&apos;à la remise des clés.
             </p>
 
             <p className="mt-6 font-display text-lg font-semibold text-ink">

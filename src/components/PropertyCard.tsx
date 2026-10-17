@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Property } from "@/lib/data/types";
 import { posterFor } from "@/lib/media";
+import { PinIcon, PlayIcon } from "@/components/Icon";
 
 const TYPE_LABELS: Record<Property["type"], string> = {
   terrain: "Terrain",
@@ -54,8 +55,9 @@ export function PropertyCard({ property }: { property: Property }) {
           {STATUS_LABELS[property.status]}
         </span>
         {property.video && (
-          <span className="absolute bottom-3 right-3 rounded-full bg-ink/70 px-3 py-1 text-xs font-semibold text-white">
-            ▶ Vidéo
+          <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-ink/70 px-3 py-1 text-xs font-semibold text-white">
+            <PlayIcon className="h-2.5 w-2.5" />
+            Vidéo
           </span>
         )}
       </div>
@@ -64,7 +66,10 @@ export function PropertyCard({ property }: { property: Property }) {
           {TYPE_LABELS[property.type]} · {property.purpose === "vente" ? "À vendre" : "À louer"}
         </p>
         <h3 className="font-display text-lg font-semibold text-ink">{property.title}</h3>
-        <p className="text-sm text-graytext">📍 {property.location}</p>
+        <p className="flex items-center gap-1.5 text-sm text-graytext">
+          <PinIcon className="h-4 w-4 shrink-0 text-primary" />
+          {property.location}
+        </p>
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-graytext">
           {property.surfaceM2 && <span>{property.surfaceM2} m²</span>}
           {property.bedrooms !== null && <span>{property.bedrooms} chambres</span>}

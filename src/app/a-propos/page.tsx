@@ -5,7 +5,7 @@ import { SITE } from "@/lib/site-config";
 
 export const metadata: Metadata = pageMetadata({
   path: "/a-propos",
-  title: "À propos — Diaspora Dakar Immo / 2DKR Immo & Construction",
+  title: "À propos de Diaspora Dakar Immo (2DKR Immo & Construction)",
   description:
     "18 ans d'expérience et de nombreux projets réalisés au Sénégal : découvrez l'histoire, la mission et les valeurs de Diaspora Dakar Immo (2DKR Immo & Construction).",
 });
@@ -18,7 +18,7 @@ export default function AboutPage() {
       <div className="container-site">
         <SectionHeading
           eyebrow="À propos"
-          title={`${SITE.name} — ${SITE.signature}`}
+          title={`${SITE.name} · ${SITE.signature}`}
           subtitle={SITE.slogan}
         />
 
@@ -47,7 +47,7 @@ export default function AboutPage() {
             <h2 className="font-display text-xl font-bold text-ink">Notre mission</h2>
             <p className="mt-3 text-sm leading-relaxed text-graytext">
               Accompagner chaque client, qu&apos;il vive au Sénégal ou à l&apos;étranger, dans la réalisation
-              de son projet immobilier — de la recherche du terrain jusqu&apos;à la remise des clés — avec
+              de son projet immobilier, de la recherche du terrain jusqu&apos;à la remise des clés, avec
               rigueur, transparence et une présence constante sur le terrain.
             </p>
           </div>
@@ -84,7 +84,7 @@ export default function AboutPage() {
           </div>
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-              🇫🇷 De la France au Sénégal
+              De la France au Sénégal
             </p>
             <h2 className="mt-2 font-display text-2xl font-bold text-ink">Nous comprenons votre réalité</h2>
             <p className="mt-4 text-sm leading-relaxed text-graytext">

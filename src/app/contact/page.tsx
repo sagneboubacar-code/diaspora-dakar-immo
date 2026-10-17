@@ -3,6 +3,7 @@ import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { LeadForm } from "@/components/LeadForm";
 import { SITE, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
+import { MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/Icon";
 
 export const metadata: Metadata = pageMetadata({
   path: "/contact",
@@ -24,17 +25,22 @@ export default function ContactPage() {
             <p className="font-display text-lg font-bold text-ink">{SITE.name}</p>
             <p className="text-xs font-semibold uppercase tracking-wide text-primary">{SITE.signature}</p>
             <ul className="mt-5 space-y-3 text-sm text-graytext">
-              <li>📍 {SITE.address}</li>
+              <li className="flex items-start gap-2">
+                <PinIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                {SITE.address}
+              </li>
               {SITE.phones.map((phone) => (
                 <li key={phone.href}>
-                  <a href={phone.href} className="hover:text-primary">
-                    📞 {phone.label}
+                  <a href={phone.href} className="inline-flex items-center gap-2 hover:text-primary">
+                    <PhoneIcon className="h-4 w-4 shrink-0 text-primary" />
+                    {phone.label}
                   </a>
                 </li>
               ))}
               <li>
-                <a href={`mailto:${SITE.email}`} className="hover:text-primary">
-                  ✉️ {SITE.email}
+                <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-2 hover:text-primary">
+                  <MailIcon className="h-4 w-4 shrink-0 text-primary" />
+                  {SITE.email}
                 </a>
               </li>
             </ul>
@@ -44,7 +50,8 @@ export default function ContactPage() {
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-dark"
             >
-              💬 Écrire sur WhatsApp
+              <WhatsAppIcon className="h-4 w-4" />
+              Écrire sur WhatsApp
             </a>
           </div>
 

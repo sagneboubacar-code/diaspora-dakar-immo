@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { NAV_LINKS, SITE, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
+import { MailIcon, PhoneIcon, PinIcon, WhatsAppIcon } from "@/components/Icon";
 
 export function Footer() {
   return (
@@ -27,17 +28,22 @@ export function Footer() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-wider text-white/40">Contact</p>
           <ul className="mt-4 space-y-2 text-sm text-white/70">
-            <li>📍 {SITE.address}</li>
+            <li className="flex items-start gap-2">
+              <PinIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+              {SITE.address}
+            </li>
             {SITE.phones.map((phone) => (
               <li key={phone.href}>
-                <a href={phone.href} className="hover:text-primary">
-                  📞 {phone.label}
+                <a href={phone.href} className="inline-flex items-center gap-2 hover:text-primary">
+                  <PhoneIcon className="h-4 w-4 shrink-0 text-primary" />
+                  {phone.label}
                 </a>
               </li>
             ))}
             <li>
-              <a href={`mailto:${SITE.email}`} className="hover:text-primary">
-                ✉️ {SITE.email}
+              <a href={`mailto:${SITE.email}`} className="inline-flex items-center gap-2 hover:text-primary">
+                <MailIcon className="h-4 w-4 shrink-0 text-primary" />
+                {SITE.email}
               </a>
             </li>
           </ul>
@@ -51,7 +57,8 @@ export function Footer() {
             rel="noopener noreferrer"
             className="mt-4 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary-dark"
           >
-            💬 WhatsApp
+            <WhatsAppIcon className="h-4 w-4" />
+            WhatsApp
           </a>
         </div>
       </div>
@@ -59,7 +66,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-site flex flex-col gap-3 py-6 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
           <p>
-            © {new Date().getFullYear()} {SITE.name} — {SITE.signature}. Tous droits réservés.
+            © {new Date().getFullYear()} {SITE.name} ({SITE.signature}). Tous droits réservés.
           </p>
           <div className="flex gap-4">
             <Link href="/mentions-legales" className="hover:text-white/70">

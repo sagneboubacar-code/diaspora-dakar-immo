@@ -5,6 +5,7 @@ import { EmptyState } from "@/components/EmptyState";
 import { getPublishedRealisations } from "@/lib/data/realisations";
 import type { RealisationStatus } from "@/lib/data/types";
 import { posterFor } from "@/lib/media";
+import { PinIcon } from "@/components/Icon";
 
 const STATUS_LABELS: Record<RealisationStatus, string> = {
   livre: "Livré",
@@ -20,7 +21,7 @@ const STATUS_CLASSES: Record<RealisationStatus, string> = {
 
 export const metadata: Metadata = pageMetadata({
   path: "/realisations",
-  title: "Nos réalisations — Chantiers réels à Dakar et au Sénégal",
+  title: "Nos réalisations : chantiers réels à Dakar et au Sénégal",
   description:
     "Découvrez les projets de construction réellement menés par 2DKR Immo & Construction, du début du chantier jusqu'à la finition.",
 });
@@ -31,9 +32,9 @@ export default function RealisationsPage() {
   return (
     <div className="container-site py-16 sm:py-20">
       <SectionHeading
-        eyebrow="Preuves concrètes"
-        title="Des projets réels. Des résultats concrets."
-        subtitle="Chaque réalisation présentée ici est un chantier authentique de 2DKR Immo & Construction, du début des travaux jusqu'à la finition."
+        eyebrow="Nos réalisations"
+        title="Nos chantiers au Sénégal"
+        subtitle="Les photos et vidéos présentées viennent toutes de nos propres chantiers."
       />
 
       <div className="mt-12 space-y-16">
@@ -58,7 +59,12 @@ export default function RealisationsPage() {
                   </span>
                 )}
               </div>
-              {r.location && <p className="mt-1 text-sm text-graytext">📍 {r.location}</p>}
+              {r.location && (
+                <p className="mt-1 flex items-center gap-1.5 text-sm text-graytext">
+                  <PinIcon className="h-4 w-4 shrink-0 text-primary" />
+                  {r.location}
+                </p>
+              )}
 
               {(r.year || r.surfaceM2) && (
                 <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-2 border-y border-ink/10 py-3 text-sm">

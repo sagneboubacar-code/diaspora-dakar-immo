@@ -6,6 +6,7 @@ import { getPropertyBySlug, getPublishedProperties } from "@/lib/data/properties
 import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
 import { pageMetadata } from "@/lib/metadata";
 import { posterFor } from "@/lib/media";
+import { PinIcon, WhatsAppIcon } from "@/components/Icon";
 
 const TYPE_LABELS: Record<string, string> = {
   terrain: "Terrain",
@@ -35,7 +36,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     path,
     title: property.title.includes(property.location)
       ? property.title
-      : `${property.title} — ${property.location}`,
+      : `${property.title}, ${property.location}`,
     description: property.description,
     image: `${path}/opengraph-image`,
   });
@@ -89,7 +90,10 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
             {TYPE_LABELS[property.type]} · {property.purpose === "vente" ? "À vendre" : "À louer"}
           </p>
           <h1 className="mt-1 font-display text-3xl font-bold text-ink">{property.title}</h1>
-          <p className="mt-1 text-sm text-graytext">📍 {property.location}</p>
+          <p className="mt-1 flex items-center gap-1.5 text-sm text-graytext">
+            <PinIcon className="h-4 w-4 shrink-0 text-primary" />
+            {property.location}
+          </p>
 
           <div className="mt-6 flex flex-wrap gap-6 border-y border-ink/10 py-5 text-sm text-graytext">
             {property.surfaceM2 && <span>{property.surfaceM2} m²</span>}
@@ -116,7 +120,8 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
             href={whatsappHref(WHATSAPP_MESSAGES.property(property.title))}
             className="mt-5 w-full"
           >
-            💬 WhatsApp pour ce bien
+            <WhatsAppIcon className="h-4 w-4" />
+            WhatsApp pour ce bien
           </ButtonLink>
           <div className="mt-6 border-t border-ink/10 pt-6">
             <p className="mb-4 text-sm font-semibold text-ink">Demander plus d&apos;informations</p>

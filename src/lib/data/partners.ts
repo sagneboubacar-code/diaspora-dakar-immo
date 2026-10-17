@@ -6,7 +6,6 @@ export const PARTNERS: Partner[] = [
   {
     slug: "cvc-pro",
     name: "CVC PRO",
-    emoji: "❄️",
     logo: "/partenaires/cvc-pro/logo.jpg",
     tagline: "Climatisation / plomberie / VMC (ventilation mécanique contrôlée)",
     location: "France & Sénégal",
@@ -23,7 +22,6 @@ export const PARTNERS: Partner[] = [
   {
     slug: "sarah-home-design",
     name: "Sarah Home Design",
-    emoji: "✨",
     logo: "/partenaires/sarah-home-design/logo.jpg",
     tagline: "Décoration d'intérieur",
     description:

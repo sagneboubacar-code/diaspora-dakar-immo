@@ -52,8 +52,7 @@ export function KeyStats() {
               {open && (
                 <p className="mt-3 text-left text-xs leading-relaxed text-graytext">
                   Avant toute proposition, la situation juridique du terrain ou du bien (titre, statut
-                  foncier, conformité) fait l&apos;objet d&apos;une vérification par notre équipe. Le détail
-                  exact de cette procédure — étapes et documents contrôlés — sera précisé ici par l&apos;agence.
+                  foncier, conformité) fait l&apos;objet d&apos;une vérification par notre équipe.
                 </p>
               )}
             </>

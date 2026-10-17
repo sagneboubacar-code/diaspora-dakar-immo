@@ -6,7 +6,7 @@ import { PropertyBrowser } from "./PropertyBrowser";
 
 export const metadata: Metadata = pageMetadata({
   path: "/nos-biens",
-  title: "Nos biens — Terrains, maisons, villas et appartements à Dakar",
+  title: "Nos biens : terrains, maisons, villas et appartements à Dakar",
   description:
     "Découvrez les terrains, maisons, villas, appartements et projets immobiliers disponibles avec Diaspora Dakar Immo, à Dakar et partout au Sénégal.",
 });
@@ -19,7 +19,7 @@ export default function PropertiesPage() {
       <SectionHeading
         eyebrow="Vitrine immobilière"
         title="Nos biens"
-        subtitle="Terrains, maisons, villas, appartements et projets — sélectionnés et vérifiés par notre équipe au Sénégal."
+        subtitle="Terrains, maisons, villas, appartements et projets, sélectionnés et vérifiés par notre équipe au Sénégal."
       />
       <div className="mt-10">
         <PropertyBrowser properties={properties} />

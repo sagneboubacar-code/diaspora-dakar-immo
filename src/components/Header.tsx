@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, SITE, WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
+import { WhatsAppIcon } from "@/components/Icon";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -45,7 +46,8 @@ export function Header() {
             rel="noopener noreferrer"
             className="hidden items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary-dark sm:inline-flex"
           >
-            💬 WhatsApp
+            <WhatsAppIcon className="h-4 w-4" />
+            WhatsApp
           </a>
           <button
             type="button"
@@ -89,7 +91,8 @@ export function Header() {
               rel="noopener noreferrer"
               className="my-3 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-white"
             >
-              💬 Parler sur WhatsApp
+              <WhatsAppIcon className="h-4 w-4" />
+              Parler sur WhatsApp
             </a>
           </div>
         </nav>

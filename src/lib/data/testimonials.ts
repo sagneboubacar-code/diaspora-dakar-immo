@@ -9,7 +9,6 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Omar Simond",
     country: "Dakar, Sénégal",
-    flag: "🇸🇳",
     badge: "Client au Sénégal",
     headline: "Un accompagnement complet, du terrain jusqu'à la remise des clés",
     projects: [
@@ -28,7 +27,6 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: "M. Dieng",
     country: "Bordeaux, France",
-    flag: "🇫🇷",
     badge: "Client diaspora",
     headline: "Une première expérience qui m'a conduit à leur confier un nouveau projet",
     projects: [
@@ -45,7 +43,6 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Pape Djibril Diop",
     country: "New York, États-Unis",
-    flag: "🇺🇸",
     badge: "Propriétaire bailleur",
     headline: "Une gestion transparente et un suivi efficace, même à distance",
     projectsLabel: "Service",
@@ -63,7 +60,6 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Kaba Cissé",
     country: "Paris 14e, France",
-    flag: "🇫🇷",
     badge: "Client diaspora",
     headline: "Un suivi à distance étape par étape",
     projects: [
@@ -83,7 +79,6 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: "Marème Soda Gueye",
     country: "Italie",
-    flag: "🇮🇹",
     badge: "Cliente diaspora",
     headline: "Une relation de confiance qui dure depuis 2008",
     projects: [

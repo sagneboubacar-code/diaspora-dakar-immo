@@ -18,7 +18,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: `${SITE.name} — Agence immobilière Dakar, Sénégal | Terrain, Construction, Immobilier, Gestion`,
+    default: `${SITE.name} | Agence immobilière Dakar, Sénégal | Terrain, Construction, Immobilier, Gestion`,
     template: `%s | ${SITE.name}`,
   },
   description:

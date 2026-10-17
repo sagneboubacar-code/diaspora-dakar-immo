@@ -3,10 +3,11 @@ import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { EmptyState } from "@/components/EmptyState";
 import { PARTNERS } from "@/lib/data/partners";
+import { PinIcon } from "@/components/Icon";
 
 export const metadata: Metadata = pageMetadata({
   path: "/partenaires",
-  title: "Nos partenaires — Artisans et professionnels de confiance",
+  title: "Nos partenaires : artisans et professionnels de confiance",
   description:
     "Découvrez les partenaires avec lesquels 2DKR Immo & Construction travaille pour accompagner vos projets au Sénégal.",
 });
@@ -38,7 +39,6 @@ export default function PartenairesPage() {
                 />
                 <div>
                   <h2 className="font-display text-xl font-bold text-ink">
-                    {p.emoji && <span className="mr-2">{p.emoji}</span>}
                     {p.name}
                   </h2>
                   {p.tagline && <p className="mt-1 text-sm text-graytext">{p.tagline}</p>}
@@ -46,8 +46,9 @@ export default function PartenairesPage() {
                   {(p.location || (p.services && p.services.length > 0)) && (
                     <div className="mt-3 flex flex-wrap items-center gap-2">
                       {p.location && (
-                        <span className="rounded-full bg-sand px-3 py-1 text-xs font-semibold text-ink/70">
-                          📍 {p.location}
+                        <span className="inline-flex items-center gap-1 rounded-full bg-sand px-3 py-1 text-xs font-semibold text-ink/70">
+                          <PinIcon className="h-3.5 w-3.5 text-primary" />
+                          {p.location}
                         </span>
                       )}
                       {p.services?.map((service) => (

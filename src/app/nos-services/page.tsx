@@ -3,17 +3,18 @@ import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ButtonLink } from "@/components/Button";
 import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
+import { BuildingIcon, HomeIcon, KeyIcon, MapIcon } from "@/components/Icon";
 
 export const metadata: Metadata = pageMetadata({
   path: "/nos-services",
-  title: "Nos services — Acquisition, construction, immobilier, gestion",
+  title: "Nos services : acquisition, construction, immobilier, gestion",
   description:
     "Acquisition foncière, construction, immobilier et gestion locative au Sénégal : découvrez comment Diaspora Dakar Immo accompagne votre projet de A à Z.",
 });
 
 const SERVICES = [
   {
-    icon: "🌳",
+    icon: MapIcon,
     photo: "/biens/terrain-kounoune-2/photo-01.jpg" as string | null,
     title: "Acquisition foncière",
     description: "Vous cherchez un terrain au Sénégal ? Nous vous accompagnons dans la recherche, la visite et les vérifications nécessaires avant votre acquisition.",
@@ -26,7 +27,7 @@ const SERVICES = [
     cta: { href: whatsappHref(WHATSAPP_MESSAGES.project), label: "EN SAVOIR PLUS" },
   },
   {
-    icon: "🏠",
+    icon: HomeIcon,
     photo: "/realisations/chantier-2/photo-01.jpg",
     title: "Construction",
     description: "Vous avez un terrain et souhaitez construire ? Nous vous accompagnons de la conception au suivi du chantier jusqu'à la remise des clés.",
@@ -39,7 +40,7 @@ const SERVICES = [
     cta: { href: whatsappHref(WHATSAPP_MESSAGES.project), label: "EN SAVOIR PLUS" },
   },
   {
-    icon: "🏡",
+    icon: BuildingIcon,
     photo: "/realisations/chantier-1/photo-20.jpg",
     title: "Immobilier",
     description: "Maisons, villas, appartements et opportunités d'investissement. Découvrez les biens disponibles.",
@@ -52,7 +53,7 @@ const SERVICES = [
     cta: { href: "/nos-biens", label: "VOIR NOS BIENS" },
   },
   {
-    icon: "🔑",
+    icon: KeyIcon,
     photo: "/realisations/chantier-1/photo-27.jpg",
     title: "Gestion immobilière",
     description: "Vous possédez un bien mais vivez à l'étranger ? Nous pouvons vous accompagner dans son suivi et sa gestion.",
@@ -93,8 +94,8 @@ export default function ServicesPage() {
                 className="aspect-[4/3] w-full rounded-xl object-cover"
               />
             ) : (
-              <div className="grid aspect-[4/3] place-items-center rounded-xl bg-sand text-6xl">
-                {service.icon}
+              <div className="grid aspect-[4/3] place-items-center rounded-xl bg-sand text-primary/70">
+                <service.icon className="h-16 w-16" />
               </div>
             )}
             <div>

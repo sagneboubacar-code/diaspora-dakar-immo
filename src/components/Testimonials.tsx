@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Testimonial } from "@/lib/data/types";
+import { PinIcon } from "@/components/Icon";
 
 // « M. Dieng » doit donner « D », pas « MD » : la civilité n'est pas un
 // prénom. Les clients qui préfèrent rester discrets sont publiés sous cette
@@ -168,7 +169,7 @@ export function Testimonials({ items }: { items: Testimonial[] }) {
             </div>
 
             <p className="mt-4 text-center text-xs text-graytext">
-              {active + 1} / {items.length} — {current.name}
+              {active + 1} / {items.length} · {current.name}
             </p>
           </div>
         )}
@@ -269,7 +270,12 @@ function TestimonialBody({ testimonial: t }: { testimonial: Testimonial }) {
                   )}
                   <span>
                     <span className="font-medium text-ink">{project.title}</span>
-                    {project.location && <span className="block">📍 {project.location}</span>}
+                    {project.location && (
+                      <span className="mt-0.5 flex items-center gap-1">
+                        <PinIcon className="h-3.5 w-3.5 shrink-0 text-primary" />
+                        {project.location}
+                      </span>
+                    )}
                   </span>
                 </li>
               ))}
@@ -296,7 +302,7 @@ function Signature({ testimonial: t }: { testimonial: Testimonial }) {
       )}
       <div className="min-w-0">
         <p className="font-display text-sm font-semibold text-ink">
-          {t.name} {t.flag && <span aria-hidden>{t.flag}</span>}
+          {t.name}
         </p>
         <p className="text-xs text-graytext">{t.country}</p>
       </div>

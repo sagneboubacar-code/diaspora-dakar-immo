@@ -17,7 +17,7 @@ export default function LegalNoticePage() {
         <section>
           <h2 className="font-display text-base font-semibold text-ink">Éditeur du site</h2>
           <p className="mt-2">
-            {SITE.name} — {SITE.signature}
+            {SITE.name} ({SITE.signature})
             <br />
             {SITE.address}
             <br />
@@ -25,13 +25,12 @@ export default function LegalNoticePage() {
             <br />
             Email : {SITE.email}
           </p>
-          <p className="mt-2 text-xs text-graytext/70">
-            Numéro d&apos;immatriculation (RCCM/NINEA) : à compléter par l&apos;agence.
-          </p>
         </section>
         <section>
           <h2 className="font-display text-base font-semibold text-ink">Hébergement</h2>
-          <p className="mt-2">Informations d&apos;hébergement à compléter.</p>
+          <p className="mt-2">
+            Vercel Inc., 440 N Barranca Ave #4133, Covina, CA 91723, États-Unis (vercel.com).
+          </p>
         </section>
         <section>
           <h2 className="font-display text-base font-semibold text-ink">Propriété intellectuelle</h2>

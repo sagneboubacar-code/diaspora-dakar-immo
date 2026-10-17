@@ -11,6 +11,7 @@ import { getPublishedProperties } from "@/lib/data/properties";
 import { getPublishedRealisations } from "@/lib/data/realisations";
 import { TESTIMONIALS } from "@/lib/data/testimonials";
 import { Testimonials } from "@/components/Testimonials";
+import { BricksIcon, BuildingIcon, DocumentCheckIcon, HomeIcon, KeyIcon, MapIcon, VideoIcon, WhatsAppIcon } from "@/components/Icon";
 
 // Fond du Hero : montage vidéo des photos réelles de l'agence
 // (scripts/build-hero-video.sh), du terrain à la villa livrée. Tout le
@@ -34,37 +35,37 @@ const HERO_VIDEO = {
 };
 
 const DIASPORA_STEPS = [
-  { icon: "🌳", title: "Trouver votre terrain", text: "Recherche et vérifications préalables." },
-  { icon: "📑", title: "Sécuriser votre acquisition", text: "Contrôles et accompagnement dans les démarches." },
-  { icon: "🏗️", title: "Suivre votre construction", text: "Avancement, contrôle et coordination." },
-  { icon: "📹", title: "Rester informé à distance", text: "Photos, vidéos et rapports réguliers." },
-  { icon: "🔑", title: "Aller jusqu'à la remise des clés", text: "Un accompagnement de bout en bout." },
+  { icon: MapIcon, title: "Trouver votre terrain", text: "Recherche et vérifications préalables." },
+  { icon: DocumentCheckIcon, title: "Sécuriser votre acquisition", text: "Contrôles et accompagnement dans les démarches." },
+  { icon: BricksIcon, title: "Suivre votre construction", text: "Avancement, contrôle et coordination." },
+  { icon: VideoIcon, title: "Rester informé à distance", text: "Photos, vidéos et rapports réguliers." },
+  { icon: KeyIcon, title: "Aller jusqu'à la remise des clés", text: "Un accompagnement de bout en bout." },
 ];
 
 const SERVICES = [
   {
-    icon: "🌳",
+    icon: MapIcon,
     title: "Acquisition foncière",
     text: "Vous cherchez un terrain au Sénégal ? Nous vous accompagnons dans la recherche, la visite et les vérifications nécessaires avant votre acquisition.",
     href: "/nos-services",
     cta: "EN SAVOIR PLUS",
   },
   {
-    icon: "🏠",
+    icon: HomeIcon,
     title: "Construction",
     text: "Vous avez un terrain et souhaitez construire ? Nous vous accompagnons de la conception au suivi du chantier jusqu'à la remise des clés.",
     href: "/nos-services",
     cta: "EN SAVOIR PLUS",
   },
   {
-    icon: "🏡",
+    icon: BuildingIcon,
     title: "Immobilier",
     text: "Maisons, villas, appartements et opportunités d'investissement. Découvrez les biens disponibles.",
     href: "/nos-biens",
     cta: "VOIR NOS BIENS",
   },
   {
-    icon: "🔑",
+    icon: KeyIcon,
     title: "Gestion immobilière",
     text: "Vous possédez un bien mais vivez à l'étranger ? Nous pouvons vous accompagner dans son suivi et sa gestion.",
     href: "/nos-services",
@@ -142,7 +143,7 @@ export default function HomePage() {
           {SITE.signature}
           {/* La liste des métiers alourdit l'en-tête sur mobile (3 lignes) —
               réservée aux écrans où elle tient sur une ligne. */}
-          <span className="hidden sm:inline"> — Terrain · Construction · Immobilier · Gestion</span>
+          <span className="hidden sm:inline"> | Terrain · Construction · Immobilier · Gestion</span>
         </p>
         <h1 className="mt-5 max-w-3xl text-balance font-display text-[2.35rem] font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
           Votre projet immobilier au Sénégal, en toute confiance.
@@ -153,7 +154,10 @@ export default function HomePage() {
         </p>
 
         <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-8">
-          <ButtonLink href={whatsappHref(WHATSAPP_MESSAGES.general)}>💬 PARLER À UN CONSEILLER</ButtonLink>
+          <ButtonLink href={whatsappHref(WHATSAPP_MESSAGES.general)}>
+            <WhatsAppIcon className="h-4 w-4" />
+            PARLER À UN CONSEILLER
+          </ButtonLink>
           <ButtonLink href="/nos-biens" variant="outline-light">
             DÉCOUVRIR NOS BIENS
           </ButtonLink>
@@ -180,7 +184,9 @@ export default function HomePage() {
             {DIASPORA_STEPS.map((step, i) => (
               <Reveal key={step.title} delay={i * 80}>
                 <div className="h-full rounded-2xl border border-ink/10 bg-white p-6 shadow-card">
-                  <span className="text-3xl">{step.icon}</span>
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
+                    <step.icon className="h-5 w-5" />
+                  </span>
                   <p className="mt-4 font-display text-base font-semibold text-ink">{step.title}</p>
                   <p className="mt-1.5 text-sm leading-relaxed text-graytext">{step.text}</p>
                 </div>
@@ -209,8 +215,8 @@ export default function HomePage() {
           <Reveal>
             <SectionHeading
               eyebrow="Nos réalisations"
-              title="Des projets réels. Des résultats concrets."
-              subtitle="Chaque réalisation présentée est un chantier authentique de 2DKR Immo & Construction — jamais une photo générique."
+              title="Quelques-uns de nos chantiers"
+              subtitle="Les photos présentées viennent toutes de nos propres chantiers."
               light
             />
           </Reveal>
@@ -224,7 +230,8 @@ export default function HomePage() {
                   Contactez-nous pour découvrir des exemples de chantiers menés par notre équipe.
                 </p>
                 <ButtonLink href={whatsappHref(WHATSAPP_MESSAGES.general)} className="mt-5">
-                  💬 Nous contacter sur WhatsApp
+                  <WhatsAppIcon className="h-4 w-4" />
+                  Nous contacter sur WhatsApp
                 </ButtonLink>
               </div>
             ) : (
@@ -244,7 +251,7 @@ export default function HomePage() {
           <Reveal>
             <SectionHeading
               eyebrow="Opportunités"
-              title="🏡 Découvrez nos opportunités immobilières"
+              title="Découvrez nos opportunités immobilières"
               subtitle="Des terrains, maisons, appartements et projets sélectionnés pour vous."
             />
           </Reveal>
@@ -278,7 +285,7 @@ export default function HomePage() {
           <Reveal>
             <SectionHeading
               eyebrow="Nos services"
-              title="🏗️ Un accompagnement complet pour votre projet"
+              title="Un accompagnement complet pour votre projet"
             />
           </Reveal>
 
@@ -286,7 +293,9 @@ export default function HomePage() {
             {SERVICES.map((service, i) => (
               <Reveal key={service.title} delay={i * 80}>
                 <div className="h-full rounded-2xl border border-ink/10 bg-white p-7 shadow-card">
-                  <span className="text-3xl">{service.icon}</span>
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-primary/10 text-primary">
+                    <service.icon className="h-6 w-6" />
+                  </span>
                   <h3 className="mt-4 font-display text-xl font-semibold text-ink">{service.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-graytext">{service.text}</p>
                   <ButtonLink href={service.href} variant="outline" className="mt-5 px-5 py-2 text-xs">
@@ -324,7 +333,7 @@ export default function HomePage() {
       <section id="temoignages" className="scroll-mt-24 bg-sand py-20 sm:py-24">
         <div className="container-site">
           <Reveal>
-            <SectionHeading eyebrow="Preuves" title="Ils nous ont fait confiance" align="center" />
+            <SectionHeading eyebrow="Témoignages" title="Ils nous ont fait confiance" align="center" />
           </Reveal>
         </div>
 
@@ -333,7 +342,7 @@ export default function HomePage() {
             <div className="container-site">
               <EmptyState
                 title="Les témoignages de nos clients arrivent bientôt."
-                description="Des clients au Sénégal, en France et au Canada partagent déjà leur expérience avec nous — leurs témoignages seront publiés ici."
+                description="Des clients au Sénégal, en France et au Canada partagent déjà leur expérience avec nous. Leurs témoignages seront publiés ici."
               />
             </div>
           ) : (
@@ -371,7 +380,7 @@ export default function HomePage() {
         <div className="container-site">
           <Reveal>
             <h2 className="text-balance font-display text-3xl font-bold text-white sm:text-4xl">
-              🇸🇳 Vous avez un projet immobilier au Sénégal ?
+              Vous avez un projet immobilier au Sénégal ?
             </h2>
             <p className="mt-3 text-lg font-medium text-primary">Parlons de votre projet.</p>
             <p className="mx-auto mt-4 max-w-xl text-balance text-sm leading-relaxed text-white/70">
@@ -380,7 +389,8 @@ export default function HomePage() {
             </p>
             <div className="mt-8">
               <ButtonLink href={whatsappHref(WHATSAPP_MESSAGES.general)} className="px-8 py-4 text-base">
-                🟢 PARLER À UN CONSEILLER SUR WHATSAPP
+                <WhatsAppIcon className="h-5 w-5" />
+                PARLER À UN CONSEILLER SUR WHATSAPP
               </ButtonLink>
             </div>
             <p className="mt-4 text-xs uppercase tracking-wide text-white/40">
