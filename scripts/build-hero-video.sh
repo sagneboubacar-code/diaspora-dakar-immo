@@ -14,9 +14,6 @@
 # Le point focal de chaque plan décide quelle partie de la photo reste dans
 # le cadre quand on recadre (les lustres sont en haut de l'image, par ex.).
 #
-# Le script affiche à la fin l'instant où commence chaque étape : ce sont les
-# valeurs `videoStartS` de HERO_PHASES (src/app/page.tsx).
-#
 # Usage : ./scripts/build-hero-video.sh   (nécessite ffmpeg)
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -26,25 +23,26 @@ FADE=0.8      # fondu enchaîné entre deux plans (s)
 END_FADE=0.8  # fondu au noir avant que la boucle reparte (s)
 CRF=28        # 18 = quasi sans perte, 28 = léger ; le Hero est sous un voile sombre
 
-# image | durée (s) | mouvement (in, out, left, right, up, down) | focal x | focal y | étape
-# La façade suit toute sa progression (finition → peinte → livrée, de biais
-# puis de face) ; l'intérieur fait la visite : entrée, séjour et ses trois
-# lustres, baie vitrée, chambre, salle d'eau.
+# image | durée (s) | mouvement (in, out, left, right, up, down) | focal x | focal y
+# Terrain, gros œuvre, puis la façade suit toute sa progression (finition →
+# peinte → livrée, de biais puis de face) ; entre les deux, l'intérieur fait
+# la visite : entrée, séjour et ses trois lustres, baie vitrée, chambre,
+# salle d'eau.
 SHOTS=(
-  "public/biens/terrain-kounoune-2/photo-01.jpg|3.5|in|0.50|0.50|01"
-  "public/realisations/chantier-1/photo-01.jpg|3.0|in|0.50|0.50|02"
-  "public/realisations/chantier-1/photo-06.jpg|3.0|out|0.50|0.55|"
-  "public/realisations/chantier-1/photo-08.jpg|3.2|up|0.50|0.40|03"
-  "public/hero-villa.jpg|3.5|in|0.50|0.40|"
-  "public/realisations/chantier-1/photo-29.jpg|3.2|in|0.50|0.30|"
-  "public/realisations/chantier-1/photo-31.jpg|3.4|right|0.50|0.15|"
-  "public/realisations/chantier-1/photo-32.jpg|3.4|down|0.50|0.12|"
-  "public/realisations/chantier-1/photo-33.jpg|3.2|left|0.50|0.15|"
-  "public/realisations/chantier-1/photo-34.jpg|3.4|in|0.50|0.15|"
-  "public/realisations/chantier-1/photo-35.jpg|3.0|right|0.50|0.25|"
-  "public/realisations/chantier-1/photo-37.jpg|3.0|in|0.50|0.30|"
-  "public/hero/facade-livree-biais.jpg|4.0|in|0.50|0.35|04"
-  "public/realisations/chantier-1/photo-28.jpg|6.0|in|0.50|0.35|"
+  "public/biens/terrain-kounoune-2/photo-01.jpg|3.5|in|0.50|0.50"
+  "public/realisations/chantier-1/photo-01.jpg|3.0|in|0.50|0.50"
+  "public/realisations/chantier-1/photo-06.jpg|3.0|out|0.50|0.55"
+  "public/realisations/chantier-1/photo-08.jpg|3.2|up|0.50|0.40"
+  "public/hero-villa.jpg|3.5|in|0.50|0.40"
+  "public/realisations/chantier-1/photo-29.jpg|3.2|in|0.50|0.30"
+  "public/realisations/chantier-1/photo-31.jpg|3.4|right|0.50|0.15"
+  "public/realisations/chantier-1/photo-32.jpg|3.4|down|0.50|0.12"
+  "public/realisations/chantier-1/photo-33.jpg|3.2|left|0.50|0.15"
+  "public/realisations/chantier-1/photo-34.jpg|3.4|in|0.50|0.15"
+  "public/realisations/chantier-1/photo-35.jpg|3.0|right|0.50|0.25"
+  "public/realisations/chantier-1/photo-37.jpg|3.0|in|0.50|0.30"
+  "public/hero/facade-livree-biais.jpg|4.0|in|0.50|0.35"
+  "public/realisations/chantier-1/photo-28.jpg|6.0|in|0.50|0.35"
 )
 
 tmp=$(mktemp -d)
@@ -59,7 +57,7 @@ render() {
   local inputs=() i=0
 
   for shot in "${SHOTS[@]}"; do
-    IFS='|' read -r image duration motion fx fy _ <<< "$shot"
+    IFS='|' read -r image duration motion fx fy <<< "$shot"
     local frames
     frames=$(awk -v d="$duration" -v f="$FPS" 'BEGIN { printf "%d", d * f }')
     local zoom x y
@@ -105,16 +103,3 @@ format=yuv420p" -frames:v "$frames" -c:v libx264 -preset veryfast -crf 12 "$tmp/
 
 render 720 1280 public/hero/hero-portrait.mp4
 render 1280 720 public/hero/hero-paysage.mp4
-
-# Début de chaque étape = milieu du fondu qui fait entrer son premier plan.
-echo "Débuts d'étape (videoStartS) :"
-start=0 ; k=0
-for shot in "${SHOTS[@]}"; do
-  IFS='|' read -r _ duration _ _ _ phase <<< "$shot"
-  if [ -n "$phase" ]; then
-    at=$(awk -v s="$start" -v f="$FADE" -v k="$k" 'BEGIN { printf "%.1f", (k == 0) ? 0 : s + f / 2 }')
-    echo "  étape $phase : ${at}s"
-  fi
-  start=$(awk -v s="$start" -v d="$duration" -v f="$FADE" 'BEGIN { printf "%.3f", s + d - f }')
-  k=$((k + 1))
-done

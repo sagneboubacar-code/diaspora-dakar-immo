@@ -12,39 +12,20 @@ import { getPublishedRealisations } from "@/lib/data/realisations";
 import { TESTIMONIALS } from "@/lib/data/testimonials";
 import { Testimonials } from "@/components/Testimonials";
 
-// Les quatre étapes de l'accompagnement, sur le montage vidéo des photos
-// réelles de l'agence (scripts/build-hero-video.sh). Les étapes 02 à 04 sont
-// le MÊME chantier (chantier 1, jusqu'à sa façade livrée) ; l'étape 01 vient
-// d'un autre terrain, faute de photo du terrain d'origine de cette villa — la
+// Fond du Hero : montage vidéo des photos réelles de l'agence
+// (scripts/build-hero-video.sh), du terrain à la villa livrée. Tout le
+// montage suit le MÊME chantier (chantier 1) sauf le terrain du début, qui en
+// est un autre, faute de photo du terrain d'origine de cette villa — la
 // légende parle donc du parcours proposé, sans prétendre qu'il s'agit d'un
 // seul et même projet de bout en bout.
-// `videoStartS` : début de chaque étape dans le montage, affiché par le
-// script. Les photos et `durationMs` servent au diaporama de secours, quand
-// la vidéo ne peut pas être lue ; les deux premières étapes y défilent plus
-// vite, pour arriver rapidement à la villa livrée.
-const HERO_PHASES = [
-  {
-    n: "01",
-    label: "Achat de terrain",
-    photo: "/biens/terrain-kounoune-2/photo-01.jpg",
-    durationMs: 2200,
-    videoStartS: 0,
-  },
-  {
-    n: "02",
-    label: "Gros œuvres",
-    photo: "/realisations/chantier-1/photo-06.jpg",
-    durationMs: 2200,
-    videoStartS: 3.1,
-  },
-  { n: "03", label: "Finitions", photo: "/realisations/chantier-1/photo-08.jpg", videoStartS: 7.5 },
-  {
-    n: "04",
-    label: "Clés en mains",
-    photo: "/realisations/chantier-1/photo-28.jpg",
-    durationMs: 5000,
-    videoStartS: 29.6,
-  },
+// Ces photos servent de diaporama quand la vidéo ne peut pas être lue ; les
+// deux premières y défilent plus vite, pour arriver rapidement à la villa
+// livrée, qui reste plus longtemps.
+const HERO_PHOTOS = [
+  { src: "/biens/terrain-kounoune-2/photo-01.jpg", durationMs: 2200 },
+  { src: "/realisations/chantier-1/photo-06.jpg", durationMs: 2200 },
+  { src: "/realisations/chantier-1/photo-08.jpg" },
+  { src: "/realisations/chantier-1/photo-28.jpg", durationMs: 5000 },
 ];
 
 const HERO_VIDEO = {
@@ -122,7 +103,7 @@ export default function HomePage() {
           chantier de l'agence : le visiteur voit la villa se construire, ce qui
           démontre la promesse au lieu de l'affirmer. */}
       <HeroShowcase
-        phases={HERO_PHASES}
+        photos={HERO_PHOTOS}
         video={HERO_VIDEO}
         caption={
           // Aligné à gauche : le bouton WhatsApp flottant occupe le coin bas
