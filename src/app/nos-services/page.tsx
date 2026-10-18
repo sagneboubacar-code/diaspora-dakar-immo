@@ -41,7 +41,7 @@ const SERVICES = [
   },
   {
     icon: BuildingIcon,
-    photo: "/realisations/chantier-1/photo-20.jpg",
+    photo: "/realisations/chantier-1/photo-32.jpg",
     title: "Immobilier",
     description: "Maisons, villas, appartements et opportunités d'investissement. Découvrez les biens disponibles.",
     advantages: [
@@ -54,7 +54,7 @@ const SERVICES = [
   },
   {
     icon: KeyIcon,
-    photo: "/realisations/chantier-1/photo-27.jpg",
+    photo: "/realisations/chantier-1/photo-31.jpg",
     title: "Gestion immobilière",
     description: "Vous possédez un bien mais vivez à l'étranger ? Nous pouvons vous accompagner dans son suivi et sa gestion.",
     advantages: [
