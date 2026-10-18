@@ -13,12 +13,18 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-ink/5 bg-white/95 backdrop-blur">
       <div className="container-site flex h-[76px] items-center justify-between">
-        <Link href="/" className="flex flex-col leading-tight" onClick={() => setOpen(false)}>
-          <span className="font-display text-lg font-bold tracking-tight text-ink sm:text-xl">
-            {SITE.name}
-          </span>
-          <span className="text-[11px] font-medium uppercase tracking-wider text-primary">
-            {SITE.signature}
+        <Link href="/" className="flex items-center gap-2.5" onClick={() => setOpen(false)}>
+          {/* Le bâtiment du logo de l'agence ; le nom reste en texte, lisible à
+              cette taille, là où le logo complet serait illisible. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-mark.png" alt="" width={153} height={96} className="h-8 w-auto sm:h-9" />
+          <span className="flex flex-col leading-tight">
+            <span className="font-display text-lg font-bold tracking-tight text-ink sm:text-xl">
+              {SITE.name}
+            </span>
+            <span className="text-[11px] font-medium uppercase tracking-wider text-primary">
+              {SITE.signature}
+            </span>
           </span>
         </Link>
 
