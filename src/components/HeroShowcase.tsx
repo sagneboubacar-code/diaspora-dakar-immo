@@ -30,6 +30,12 @@ type NavigatorWithConnection = Navigator & { connection?: { saveData?: boolean }
 // Fond du Hero : le montage vidéo d'une villa réellement livrée, sous un
 // voile sombre qui garde le texte lisible. Les photos du montage servent de
 // diaporama quand la vidéo ne peut pas être lue.
+//
+// La façade doit rester entière, rez-de-chaussée compris : sur téléphone elle
+// occupe le haut du Hero, sur écran large la droite, à côté du texte (voir
+// scripts/build-hero-video.sh). La vidéo est donc calée en haut (et à droite
+// en paysage) plutôt qu'au centre, et le voile n'assombrit fortement que la
+// zone du texte.
 export function HeroShowcase({
   photos,
   video,
@@ -135,7 +141,7 @@ export function HeroShowcase({
         <div
           key={photo.src}
           aria-hidden
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-out ${
+          className={`absolute inset-0 bg-contain bg-no-repeat transition-opacity duration-1000 ease-out portrait:bg-top landscape:bg-right ${
             i === active ? "opacity-100" : "opacity-0"
           }`}
           style={{ backgroundImage: `url('${photo.src}')` }}
@@ -151,18 +157,29 @@ export function HeroShowcase({
           playsInline
           preload="auto"
           disablePictureInPicture
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 portrait:object-top landscape:object-right-top ${
             videoShown ? "opacity-100" : "opacity-0"
           }`}
         />
       )}
 
+      {/* Téléphone : le texte couvre le bas, le voile fonce vers le bas. */}
       <div
         aria-hidden
-        className="absolute inset-0"
+        className="absolute inset-0 landscape:hidden"
         style={{
           backgroundImage:
             "linear-gradient(180deg, rgba(17,17,17,0.30) 0%, rgba(17,17,17,0.60) 50%, rgba(17,17,17,0.95) 100%)",
+        }}
+      />
+      {/* Écran large : le texte est à gauche, la façade à droite reste
+          claire ; une bande sombre en bas garde la légende lisible. */}
+      <div
+        aria-hidden
+        className="absolute inset-0 portrait:hidden"
+        style={{
+          backgroundImage:
+            "linear-gradient(90deg, rgba(17,17,17,0.88) 0%, rgba(17,17,17,0.80) 38%, rgba(17,17,17,0.40) 56%, rgba(17,17,17,0.10) 68%), linear-gradient(180deg, rgba(17,17,17,0) 80%, rgba(17,17,17,0.75) 100%)",
         }}
       />
 
