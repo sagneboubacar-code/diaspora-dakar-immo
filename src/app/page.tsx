@@ -13,20 +13,19 @@ import { TESTIMONIALS } from "@/lib/data/testimonials";
 import { Testimonials } from "@/components/Testimonials";
 import { BricksIcon, BuildingIcon, DocumentCheckIcon, HomeIcon, KeyIcon, MapIcon, VideoIcon, WhatsAppIcon } from "@/components/Icon";
 
-// Fond du Hero : montage vidéo des photos réelles de l'agence
-// (scripts/build-hero-video.sh), du terrain à la villa livrée. Tout le
-// montage suit le MÊME chantier (chantier 1) sauf le terrain du début, qui en
-// est un autre, faute de photo du terrain d'origine de cette villa — la
-// légende parle donc du parcours proposé, sans prétendre qu'il s'agit d'un
-// seul et même projet de bout en bout.
-// Ces photos servent de diaporama quand la vidéo ne peut pas être lue ; les
-// deux premières y défilent plus vite, pour arriver rapidement à la villa
-// livrée, qui reste plus longtemps.
+// Fond du Hero : montage vidéo des images réelles de finition du chantier 1
+// (scripts/build-hero-video.sh) : uniquement la façade de la villa livrée,
+// au crépuscule et de jour (photos et vidéos). Ni terrain ni gros œuvre, et
+// l'intérieur est réservé aux Réalisations, à la demande de l'agence.
+// Ces photos servent de diaporama quand la vidéo ne peut pas être lue ; la
+// première est la première image du film, la dernière la façade de face
+// (seule image montrée quand le mouvement réduit est demandé).
 const HERO_PHOTOS = [
-  { src: "/biens/terrain-kounoune-2/photo-01.jpg", durationMs: 2200 },
-  { src: "/realisations/chantier-1/photo-06.jpg", durationMs: 2200 },
-  { src: "/realisations/chantier-1/photo-08.jpg" },
-  { src: "/realisations/chantier-1/photo-28.jpg", durationMs: 5000 },
+  { src: "/hero/finition-01.jpg" },
+  { src: "/hero/finition-02.jpg" },
+  { src: "/hero/facade-jour-01.jpg" },
+  { src: "/hero/facade-jour-02.jpg" },
+  { src: "/hero/finition-04.jpg", durationMs: 5000 },
 ];
 
 const HERO_VIDEO = {
@@ -100,9 +99,9 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 6. HERO — le fond défile à travers les trois étapes réelles d'un même
-          chantier de l'agence : le visiteur voit la villa se construire, ce qui
-          démontre la promesse au lieu de l'affirmer. */}
+      {/* 6. HERO — le fond montre en vidéo une villa réellement livrée par
+          l'agence : le visiteur voit le résultat, ce qui démontre la promesse
+          au lieu de l'affirmer. */}
       <HeroShowcase
         photos={HERO_PHOTOS}
         video={HERO_VIDEO}
@@ -110,10 +109,8 @@ export default function HomePage() {
           // Aligné à gauche : le bouton WhatsApp flottant occupe le coin bas
           // droit, un lien collé au bord droit passerait dessous.
           <div className="pr-16 sm:pr-20">
-            {/* Crédit du film de fond. Tout le montage est le chantier 1, sauf
-                le terrain du premier plan (une autre parcelle) : la mention
-                s'en tient à ce qui est vrai de ce chantier, du gros œuvre aux
-                finitions, et ne revendique pas l'achat du terrain. */}
+            {/* Crédit du film de fond (chantier 1, finitions). Texte conservé
+                tel quel à la demande de l'agence. */}
             <p className="flex items-start gap-3 text-sm leading-relaxed text-white/80">
               <span aria-hidden className="mt-[0.7em] h-px w-6 shrink-0 bg-primary" />
               <span>

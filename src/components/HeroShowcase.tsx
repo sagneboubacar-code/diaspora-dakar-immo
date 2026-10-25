@@ -27,9 +27,9 @@ type Mode = "pending" | "video" | "slideshow" | "still";
 
 type NavigatorWithConnection = Navigator & { connection?: { saveData?: boolean } };
 
-// Fond du Hero : le montage vidéo d'un chantier réel, du terrain à la villa
-// livrée, sous un voile sombre qui garde le texte lisible. Les photos du
-// montage servent de diaporama quand la vidéo ne peut pas être lue.
+// Fond du Hero : le montage vidéo d'une villa réellement livrée, sous un
+// voile sombre qui garde le texte lisible. Les photos du montage servent de
+// diaporama quand la vidéo ne peut pas être lue.
 export function HeroShowcase({
   photos,
   video,
