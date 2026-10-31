@@ -13,14 +13,20 @@ export const REALISATIONS: Realisation[] = [
     status: "livre",
     description:
       "2DKR Immo & Construction a accompagné le client de l'achat du terrain jusqu'à la remise des clés : gros œuvre, façade, puis finitions intérieures, en 7 mois de travaux.",
-    // 1 à 27 : du gros œuvre aux premières finitions. 28 à 39 : envoi
-    // d'octobre 2026 — la façade terminée (28), puis les finitions
-    // intérieures (entrée, séjour, chambres, salles d'eau). 12 vues retenues
-    // sur 24 pour éviter les doublons d'angle.
-    photos: Array.from(
-      { length: 39 },
-      (_, i) => `/realisations/chantier-1/photo-${String(i + 1).padStart(2, "0")}.jpg`
-    ),
+    // Une photo par étape plutôt que les 39 du dossier : la fiche se lit
+    // comme un déroulé du chantier. Les autres photos restent dans
+    // public/realisations/chantier-1 (Hero, À propos, services).
+    photos: [],
+    steps: [
+      { label: "Gros œuvre", photo: "/realisations/chantier-1/photo-02.jpg" },
+      { label: "Élévation de l'étage et de la terrasse", photo: "/realisations/chantier-1/photo-05.jpg" },
+      { label: "Enduit et peinture de la façade", photo: "/realisations/chantier-1/photo-08.jpg" },
+      { label: "Faux plafonds et éclairage", photo: "/realisations/chantier-1/photo-19.jpg" },
+      { label: "Carrelage et sanitaires", photo: "/realisations/chantier-1/photo-14.jpg" },
+      { label: "Menuiserie intérieure", photo: "/realisations/chantier-1/photo-23.jpg" },
+      { label: "Séjour terminé", photo: "/realisations/chantier-1/photo-32.jpg" },
+      { label: "Livraison : la façade terminée", photo: "/realisations/chantier-1/photo-28.jpg" },
+    ],
   },
   {
     slug: "chantier-2",

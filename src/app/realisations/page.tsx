@@ -94,6 +94,30 @@ export default function RealisationsPage() {
                 <p className="mt-3 max-w-2xl text-sm leading-relaxed text-graytext">{r.description}</p>
               )}
 
+              {r.steps && r.steps.length > 0 && (
+                // Une photo par étape, numérotée et légendée. Format portrait :
+                // la plupart des photos de chantier sont prises en hauteur.
+                <ol className="mt-6 grid grid-cols-2 gap-x-2 gap-y-4 sm:grid-cols-3 lg:grid-cols-4">
+                  {r.steps.map((step, i) => (
+                    <li key={step.photo}>
+                      <figure>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={step.photo}
+                          alt={`${r.title} — ${step.label}`}
+                          loading="lazy"
+                          className="aspect-[3/4] w-full rounded-xl object-cover"
+                        />
+                        <figcaption className="mt-2 flex gap-2 text-sm leading-snug text-ink">
+                          <span className="font-semibold text-primary">{i + 1}.</span>
+                          <span>{step.label}</span>
+                        </figcaption>
+                      </figure>
+                    </li>
+                  ))}
+                </ol>
+              )}
+
               {r.photos.length > 0 && (
                 <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
                   {r.photos.map((photo, i) => (
