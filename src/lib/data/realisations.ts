@@ -10,6 +10,7 @@ export const REALISATIONS: Realisation[] = [
     title: "Achat d'un terrain et construction clés en main",
     type: "R+1 avec terrasse",
     location: "Cité Apix, Tivaouane Peulh",
+    year: 2026,
     durationMonths: 7,
     status: "livre",
     description:
