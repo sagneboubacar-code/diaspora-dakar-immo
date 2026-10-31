@@ -31,6 +31,7 @@ export interface Realisation {
   type?: string;
   startYear?: number; // début des travaux, si le chantier court sur plusieurs années
   year?: number; // année de livraison
+  durationMonths?: number; // durée d'exécution des travaux, quand l'agence la donne plutôt que les années
   surfaceM2?: number;
   status?: RealisationStatus;
   description?: string;

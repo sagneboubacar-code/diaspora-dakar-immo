@@ -7,12 +7,12 @@ import type { Realisation } from "./types";
 export const REALISATIONS: Realisation[] = [
   {
     slug: "chantier-1",
-    title: "Chantier 1",
-    // Informations pas encore fournies par l'agence : le chantier est
-    // masqué plutôt que publié sous un titre générique à côté de trois
-    // fiches complètes. Ses photos restent utilisées par le Hero de
-    // l'accueil et par la page services.
-    published: false,
+    title: "Achat d'un terrain et construction clés en main",
+    location: "Cité Apix, Tivaouane Peulh",
+    durationMonths: 7,
+    status: "livre",
+    description:
+      "2DKR Immo & Construction a accompagné le client de l'achat du terrain jusqu'à la remise des clés : gros œuvre, façade, puis finitions intérieures, en 7 mois de travaux.",
     // 1 à 27 : du gros œuvre aux premières finitions. 28 à 39 : envoi
     // d'octobre 2026 — la façade terminée (28), puis les finitions
     // intérieures (entrée, séjour, chambres, salles d'eau). 12 vues retenues

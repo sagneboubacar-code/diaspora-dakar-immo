@@ -66,7 +66,7 @@ export default function RealisationsPage() {
                 </p>
               )}
 
-              {(r.year || r.surfaceM2) && (
+              {(r.year || r.durationMonths || r.surfaceM2) && (
                 <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-2 border-y border-ink/10 py-3 text-sm">
                   {r.year && (
                     <div className="flex gap-2">
@@ -74,6 +74,12 @@ export default function RealisationsPage() {
                       <dd className="font-semibold text-ink">
                         {r.startYear ? `${r.startYear} – ${r.year}` : r.year}
                       </dd>
+                    </div>
+                  )}
+                  {r.durationMonths && (
+                    <div className="flex gap-2">
+                      <dt className="text-graytext">Durée d&apos;exécution</dt>
+                      <dd className="font-semibold text-ink">{r.durationMonths} mois</dd>
                     </div>
                   )}
                   {r.surfaceM2 && (
