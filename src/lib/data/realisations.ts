@@ -8,6 +8,7 @@ export const REALISATIONS: Realisation[] = [
   {
     slug: "chantier-1",
     title: "Achat d'un terrain et construction clés en main",
+    type: "R+1 avec terrasse",
     location: "Cité Apix, Tivaouane Peulh",
     durationMonths: 7,
     status: "livre",
