@@ -15,19 +15,34 @@ export const REALISATIONS: Realisation[] = [
     status: "livre",
     description:
       "2DKR Immo & Construction a accompagné le client de l'achat du terrain jusqu'à la remise des clés : gros œuvre, façade, puis finitions intérieures, en 7 mois de travaux.",
-    // Une photo par étape plutôt que les 39 du dossier : la fiche se lit
-    // comme un déroulé du chantier. Les autres photos restent dans
+    // Sélection dans l'ordre du chantier, sans doublons d'angle : gros
+    // œuvre (01-03), élévation (04-05), façade (07-11), faux plafonds
+    // (19-21), salles d'eau (12-37), menuiserie (23-27), pièces terminées
+    // (29-36), puis la façade livrée (28). Les 39 photos restent dans
     // public/realisations/chantier-1 (Hero, À propos, services).
-    photos: [],
-    steps: [
-      { label: "Gros œuvre", photo: "/realisations/chantier-1/photo-02.jpg" },
-      { label: "Élévation de l'étage et de la terrasse", photo: "/realisations/chantier-1/photo-05.jpg" },
-      { label: "Enduit et peinture de la façade", photo: "/realisations/chantier-1/photo-08.jpg" },
-      { label: "Faux plafonds et éclairage", photo: "/realisations/chantier-1/photo-19.jpg" },
-      { label: "Carrelage et sanitaires", photo: "/realisations/chantier-1/photo-14.jpg" },
-      { label: "Menuiserie intérieure", photo: "/realisations/chantier-1/photo-23.jpg" },
-      { label: "Séjour terminé", photo: "/realisations/chantier-1/photo-32.jpg" },
-      { label: "Livraison : la façade terminée", photo: "/realisations/chantier-1/photo-28.jpg" },
+    photoFormat: "portrait",
+    photos: [
+      "/realisations/chantier-1/photo-01.jpg",
+      "/realisations/chantier-1/photo-02.jpg",
+      "/realisations/chantier-1/photo-03.jpg",
+      "/realisations/chantier-1/photo-04.jpg",
+      "/realisations/chantier-1/photo-05.jpg",
+      "/realisations/chantier-1/photo-07.jpg",
+      "/realisations/chantier-1/photo-08.jpg",
+      "/realisations/chantier-1/photo-11.jpg",
+      "/realisations/chantier-1/photo-19.jpg",
+      "/realisations/chantier-1/photo-21.jpg",
+      "/realisations/chantier-1/photo-12.jpg",
+      "/realisations/chantier-1/photo-14.jpg",
+      "/realisations/chantier-1/photo-37.jpg",
+      "/realisations/chantier-1/photo-23.jpg",
+      "/realisations/chantier-1/photo-27.jpg",
+      "/realisations/chantier-1/photo-29.jpg",
+      "/realisations/chantier-1/photo-31.jpg",
+      "/realisations/chantier-1/photo-32.jpg",
+      "/realisations/chantier-1/photo-34.jpg",
+      "/realisations/chantier-1/photo-36.jpg",
+      "/realisations/chantier-1/photo-28.jpg",
     ],
   },
   {

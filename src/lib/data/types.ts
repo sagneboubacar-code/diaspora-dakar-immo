@@ -24,11 +24,6 @@ export interface Property {
 // la gestion locative après livraison — c'est un argument en soi.
 export type RealisationStatus = "livre" | "livre-en-location" | "en-cours";
 
-export interface RealisationStep {
-  label: string; // nom de l'étape, affiché sous la photo
-  photo: string; // chemin vers /public/...
-}
-
 export interface Realisation {
   slug: string;
   title: string;
@@ -41,9 +36,10 @@ export interface Realisation {
   status?: RealisationStatus;
   description?: string;
   photos: string[]; // galerie chronologique : début de chantier → finition
-  // Variante courte de la galerie : une photo choisie par étape, avec sa
-  // légende. Quand elle est fournie, elle remplace `photos` à l'affichage.
-  steps?: RealisationStep[];
+  // « portrait » : galerie en grandes vignettes verticales (2 colonnes, 3 sur
+  // ordinateur), pour un chantier photographié surtout en hauteur. Par défaut,
+  // vignettes 4/3 sur 4 colonnes.
+  photoFormat?: "portrait";
   videos?: string[]; // chemins vers /public/... (mp4 hébergés), même ordre chronologique
   videoUrl?: string; // vidéo unique embarquée (YouTube/Vimeo...), distincte des mp4 ci-dessus
   // Par défaut publié. Passer à false pour garder un chantier dans les
