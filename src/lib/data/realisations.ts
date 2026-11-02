@@ -48,10 +48,12 @@ export const REALISATIONS: Realisation[] = [
     year: 2022,
     surfaceM2: 300,
     status: "livre",
-    // Photos 3 à 5 retirées le 2026-11-02 : elles montrent un immeuble de
-    // plusieurs étages, façade carrelée, pas cette maison R+1 aux garde-corps
-    // orange. L'agence doit dire de quel chantier il s'agit.
-    photos: chantierPhotos(2, 1, 2, 6, 7, 8, 9, 10),
+    // Seules restent les photos sûres : la maison R+1 aux garde-corps orange,
+    // en pleine campagne. Supprimées le 2026-11-02, faute de savoir de quel
+    // chantier elles venaient : 3 à 5, un immeuble de plusieurs étages à
+    // façade carrelée ; 6 à 10, un intérieur dont le balcon donne sur une
+    // ville dense, que rien ne relie à cette maison.
+    photos: chantierPhotos(2, 1, 2),
   },
   {
     slug: "chantier-3",
