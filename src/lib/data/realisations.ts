@@ -1,5 +1,9 @@
 import type { Realisation } from "./types";
 
+function chantierPhotos(chantier: number, ...numbers: number[]) {
+  return numbers.map((n) => `/realisations/chantier-${chantier}/photo-${String(n).padStart(2, "0")}.jpg`);
+}
+
 // Chantiers réels de l'agence — galerie chronologique de photos
 // authentiques (fournies par l'agence), du début du chantier à la
 // finition. Localisation, type et description seront ajoutés par
@@ -16,33 +20,24 @@ export const REALISATIONS: Realisation[] = [
     description:
       "2DKR Immo & Construction a accompagné le client de l'achat du terrain jusqu'à la remise des clés : gros œuvre, façade, puis finitions intérieures, en 7 mois de travaux.",
     // Sélection dans l'ordre du chantier, sans doublons d'angle : gros
-    // œuvre (01-03), élévation (04-05), façade (07-11), faux plafonds
-    // (19-21), salles d'eau (12-37), menuiserie (23-27), pièces terminées
-    // (29-36), puis la façade livrée (28). Les 39 photos restent dans
-    // public/realisations/chantier-1 (Hero, À propos, services).
+    // œuvre (01-03), élévation (04-05), façade (07-11), salle d'eau (37),
+    // pièces terminées (29-36), puis la façade livrée (28). Il n'y a pas de
+    // photos 12 à 27 : c'était l'intérieur du chantier 3 (mêmes pièces que
+    // ses vidéos de finition), rendu au chantier 3 le 2026-11-02. Les autres
+    // photos restent dans public/realisations/chantier-1 (À propos, services).
     photoFormat: "portrait",
-    photos: [
-      "/realisations/chantier-1/photo-01.jpg",
-      "/realisations/chantier-1/photo-02.jpg",
-      "/realisations/chantier-1/photo-03.jpg",
-      "/realisations/chantier-1/photo-04.jpg",
-      "/realisations/chantier-1/photo-05.jpg",
-      "/realisations/chantier-1/photo-07.jpg",
-      "/realisations/chantier-1/photo-08.jpg",
-      "/realisations/chantier-1/photo-11.jpg",
-      "/realisations/chantier-1/photo-19.jpg",
-      "/realisations/chantier-1/photo-21.jpg",
-      "/realisations/chantier-1/photo-12.jpg",
-      "/realisations/chantier-1/photo-14.jpg",
-      "/realisations/chantier-1/photo-37.jpg",
-      "/realisations/chantier-1/photo-23.jpg",
-      "/realisations/chantier-1/photo-27.jpg",
-      "/realisations/chantier-1/photo-29.jpg",
-      "/realisations/chantier-1/photo-31.jpg",
-      "/realisations/chantier-1/photo-32.jpg",
-      "/realisations/chantier-1/photo-34.jpg",
-      "/realisations/chantier-1/photo-36.jpg",
-      "/realisations/chantier-1/photo-28.jpg",
+    photos: chantierPhotos(1, 1, 2, 3, 4, 5, 7, 8, 11, 37, 29, 31, 32, 34, 36, 28),
+    // Fondations : vidéo envoyée le 2026-10-31. Les deux vidéos du début
+    // étaient publiées au chantier 3 ; elles montrent cette maison, et
+    // l'agence a remis la première dans le dossier du chantier 1. Puis la
+    // maison livrée, tirée des films de l'agence. Toutes sans le son.
+    videos: [
+      "/realisations/chantier-1/fondations.mp4",
+      "/realisations/chantier-1/debut-chantier.mp4",
+      "/realisations/chantier-1/debut-avance.mp4",
+      "/realisations/chantier-1/livraison-facade.mp4",
+      "/realisations/chantier-1/livraison-sejour.mp4",
+      "/realisations/chantier-1/livraison-salle-d-eau.mp4",
     ],
   },
   {
@@ -53,10 +48,10 @@ export const REALISATIONS: Realisation[] = [
     year: 2022,
     surfaceM2: 300,
     status: "livre",
-    photos: Array.from(
-      { length: 10 },
-      (_, i) => `/realisations/chantier-2/photo-${String(i + 1).padStart(2, "0")}.jpg`
-    ),
+    // Photos 3 à 5 retirées le 2026-11-02 : elles montrent un immeuble de
+    // plusieurs étages, façade carrelée, pas cette maison R+1 aux garde-corps
+    // orange. L'agence doit dire de quel chantier il s'agit.
+    photos: chantierPhotos(2, 1, 2, 6, 7, 8, 9, 10),
   },
   {
     slug: "chantier-3",
@@ -69,10 +64,13 @@ export const REALISATIONS: Realisation[] = [
     status: "livre-en-location",
     description:
       "Rénovation du rez-de-chaussée puis construction du 1er et du 2e étage. 2DKR Immo & Construction assure également la gestion locative du bien depuis sa livraison.",
-    photos: [],
+    // L'intérieur livré, filmé dans les vidéos de finition (escalier sous
+    // l'arche, salles d'eau, lustre et bandeaux de couleur). Ces photos
+    // étaient publiées au chantier 1 jusqu'au 2026-11-02. 12 vues sur 16 :
+    // les autres répètent un angle.
+    photoFormat: "portrait",
+    photos: chantierPhotos(3, 7, 9, 11, 12, 13, 15, 16, 1, 2, 3, 5, 6),
     videos: [
-      "/realisations/chantier-3/01-debut.mp4",
-      "/realisations/chantier-3/02-debut-avance.mp4",
       "/realisations/chantier-3/03-finition.mp4",
       "/realisations/chantier-3/04-finition.mp4",
       "/realisations/chantier-3/05-finition.mp4",

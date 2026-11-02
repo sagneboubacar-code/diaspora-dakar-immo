@@ -128,7 +128,7 @@ export default function RealisationsPage() {
                       poster={posterFor(video)}
                       controls
                       playsInline
-                      // Huit vidéos sur cette page : sans `none`, le navigateur
+                      // Une douzaine de vidéos sur cette page : sans `none`, le navigateur
                       // en tirait les métadonnées dès le chargement.
                       preload="none"
                       className="w-full rounded-xl bg-ink/5"
