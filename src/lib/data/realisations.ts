@@ -27,18 +27,16 @@ export const REALISATIONS: Realisation[] = [
     // photos restent dans public/realisations/chantier-1 (À propos, services).
     photoFormat: "portrait",
     photos: chantierPhotos(1, 1, 2, 3, 4, 5, 7, 8, 11, 37, 29, 31, 32, 34, 36, 28),
-    // Fondations : vidéo envoyée le 2026-10-31. Les deux vidéos du début
-    // étaient publiées au chantier 3 ; elles montrent cette maison, et
-    // l'agence a remis la première dans le dossier du chantier 1. Puis la
-    // maison livrée, tirée des films de l'agence. Toutes sans le son.
-    videos: [
-      "/realisations/chantier-1/fondations.mp4",
-      "/realisations/chantier-1/debut-chantier.mp4",
-      "/realisations/chantier-1/debut-avance.mp4",
-      "/realisations/chantier-1/livraison-facade.mp4",
-      "/realisations/chantier-1/livraison-sejour.mp4",
-      "/realisations/chantier-1/livraison-salle-d-eau.mp4",
-    ],
+    // Les deux seules photos prises en largeur : le R+1 en élévation et le
+    // crépissage de la façade.
+    widePhotos: chantierPhotos(1, 2, 3),
+    cover: "/realisations/chantier-1/photo-28.jpg",
+    // Un film de 2 min 08 (scripts/build-realisation-films.sh) avec les six
+    // vidéos du dossier, dans l'ordre du chantier : fondations (envoyée le
+    // 2026-10-31), début du chantier et son avancement (publiées au chantier
+    // 3 jusqu'au 2026-11-02, mais c'est cette maison), puis la façade, le
+    // séjour et la salle d'eau livrés.
+    videos: ["/realisations/chantier-1/montage.mp4"],
   },
   {
     slug: "chantier-2",
@@ -72,14 +70,11 @@ export const REALISATIONS: Realisation[] = [
     // les autres répètent un angle.
     photoFormat: "portrait",
     photos: chantierPhotos(3, 7, 9, 11, 12, 13, 15, 16, 1, 2, 3, 5, 6),
-    videos: [
-      "/realisations/chantier-3/03-finition.mp4",
-      "/realisations/chantier-3/04-finition.mp4",
-      "/realisations/chantier-3/05-finition.mp4",
-      "/realisations/chantier-3/06-finition.mp4",
-      "/realisations/chantier-3/07-finition.mp4",
-      "/realisations/chantier-3/08-finition.mp4",
-    ],
+    cover: "/realisations/chantier-3/photo-09.jpg",
+    // Un film de 1 min 44 (scripts/build-realisation-films.sh), tiré des
+    // vidéos de finition : l'entrée, le salon, la cuisine, les chambres et la
+    // salle d'eau.
+    videos: ["/realisations/chantier-3/montage.mp4"],
   },
   {
     slug: "chantier-4",
@@ -92,6 +87,9 @@ export const REALISATIONS: Realisation[] = [
     status: "livre-en-location",
     description:
       "Finition extérieure de l'immeuble en 2024, puis rajout d'un 3e étage en 2025. 2DKR Immo & Construction a réalisé une partie des travaux de finition et assure la gestion locative du bien.",
+    // Photo prise en hauteur : en vignette 4/3, le 3e étage ajouté était
+    // coupé.
+    photoFormat: "portrait",
     photos: ["/realisations/chantier-4/photo-01.jpg"],
   },
 ];
@@ -102,4 +100,8 @@ export function getPublishedRealisations() {
 
 export function getRealisationBySlug(slug: string) {
   return REALISATIONS.find((r) => r.slug === slug) ?? null;
+}
+
+export function coverOf(realisation: Realisation) {
+  return realisation.cover ?? realisation.photos[0];
 }

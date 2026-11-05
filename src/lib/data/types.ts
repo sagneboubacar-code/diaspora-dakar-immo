@@ -36,11 +36,22 @@ export interface Realisation {
   status?: RealisationStatus;
   description?: string;
   photos: string[]; // galerie chronologique : début de chantier → finition
+  // Photo de la carte du chantier et de son partage sur WhatsApp. Par défaut
+  // la première de la galerie, souvent le gros œuvre : mieux vaut montrer la
+  // maison livrée.
+  cover?: string;
   // « portrait » : galerie en grandes vignettes verticales (2 colonnes, 3 sur
   // ordinateur), pour un chantier photographié surtout en hauteur. Par défaut,
   // vignettes 4/3 sur 4 colonnes.
   photoFormat?: "portrait";
-  videos?: string[]; // chemins vers /public/... (mp4 hébergés), même ordre chronologique
+  // Photos prises en largeur dans une galerie « portrait » : elles occupent
+  // deux colonnes dans un cadre en largeur, au lieu d'être rognées de moitié
+  // dans une vignette verticale.
+  widePhotos?: string[];
+  // Chemins vers /public/... (mp4 hébergés). Un seul film par chantier, monté
+  // à partir des vidéos de l'agence : une douzaine de lecteurs côte à côte
+  // faisaient brouillon.
+  videos?: string[];
   videoUrl?: string; // vidéo unique embarquée (YouTube/Vimeo...), distincte des mp4 ci-dessus
   // Par défaut publié. Passer à false pour garder un chantier dans les
   // données — ses photos peuvent servir ailleurs sur le site — sans

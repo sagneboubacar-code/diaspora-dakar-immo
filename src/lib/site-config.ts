@@ -36,6 +36,8 @@ export const WHATSAPP_MESSAGES = {
     `Bonjour Diaspora Dakar Immo, je suis intéressé(e) par ce bien : "${title}", et souhaiterais avoir plus d'informations. Merci.`,
   project:
     "Bonjour Diaspora Dakar Immo, j'ai un projet immobilier au Sénégal et je souhaiterais être accompagné(e). Merci.",
+  realisation: (title: string) =>
+    `Bonjour Diaspora Dakar Immo, j'ai vu votre réalisation "${title}" et je souhaiterais être accompagné(e) pour un projet similaire. Merci.`,
 };
 
 export function whatsappHref(message: string, phone: string = DEFAULT_WHATSAPP) {

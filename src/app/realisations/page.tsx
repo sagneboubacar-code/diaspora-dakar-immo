@@ -2,22 +2,8 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/metadata";
 import { SectionHeading } from "@/components/SectionHeading";
 import { EmptyState } from "@/components/EmptyState";
+import { RealisationCard } from "@/components/RealisationCard";
 import { getPublishedRealisations } from "@/lib/data/realisations";
-import type { RealisationStatus } from "@/lib/data/types";
-import { posterFor } from "@/lib/media";
-import { PinIcon } from "@/components/Icon";
-
-const STATUS_LABELS: Record<RealisationStatus, string> = {
-  livre: "Livré",
-  "livre-en-location": "Livré et mis en location",
-  "en-cours": "En cours",
-};
-
-const STATUS_CLASSES: Record<RealisationStatus, string> = {
-  livre: "bg-emerald-600",
-  "livre-en-location": "bg-emerald-600",
-  "en-cours": "bg-amber-500",
-};
 
 export const metadata: Metadata = pageMetadata({
   path: "/realisations",
@@ -37,120 +23,18 @@ export default function RealisationsPage() {
         subtitle="Les photos et vidéos présentées viennent toutes de nos propres chantiers."
       />
 
-      <div className="mt-12 space-y-16">
+      <div className="mt-12">
         {realisations.length === 0 ? (
           <EmptyState
             title="Nos réalisations sont en cours de mise en ligne."
             description="Les photos de nos chantiers, du début à la finition, seront publiées ici prochainement. Contactez-nous pour en découvrir dès maintenant."
           />
         ) : (
-          realisations.map((r) => (
-            <article key={r.slug}>
-              {r.type && (
-                <p className="text-xs font-semibold uppercase tracking-wide text-primary">{r.type}</p>
-              )}
-              <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-2">
-                <h2 className="font-display text-2xl font-bold text-ink">{r.title}</h2>
-                {r.status && (
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-semibold text-white ${STATUS_CLASSES[r.status]}`}
-                  >
-                    {STATUS_LABELS[r.status]}
-                  </span>
-                )}
-              </div>
-              {r.location && (
-                <p className="mt-1 flex items-center gap-1.5 text-sm text-graytext">
-                  <PinIcon className="h-4 w-4 shrink-0 text-primary" />
-                  {r.location}
-                </p>
-              )}
-
-              {(r.year || r.durationMonths || r.surfaceM2) && (
-                <dl className="mt-4 flex flex-wrap gap-x-8 gap-y-2 border-y border-ink/10 py-3 text-sm">
-                  {r.year && (
-                    <div className="flex gap-2">
-                      <dt className="text-graytext">{r.startYear ? "Période" : "Année"}</dt>
-                      <dd className="font-semibold text-ink">
-                        {r.startYear ? `${r.startYear} – ${r.year}` : r.year}
-                      </dd>
-                    </div>
-                  )}
-                  {r.durationMonths && (
-                    <div className="flex gap-2">
-                      <dt className="text-graytext">Durée d&apos;exécution</dt>
-                      <dd className="font-semibold text-ink">{r.durationMonths} mois</dd>
-                    </div>
-                  )}
-                  {r.surfaceM2 && (
-                    <div className="flex gap-2">
-                      <dt className="text-graytext">Surface</dt>
-                      <dd className="font-semibold text-ink">{r.surfaceM2} m²</dd>
-                    </div>
-                  )}
-                </dl>
-              )}
-              {r.description && (
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-graytext">{r.description}</p>
-              )}
-
-              {r.photos.length > 0 && (
-                <div
-                  className={`mt-6 grid gap-2 ${
-                    r.photoFormat === "portrait"
-                      ? "grid-cols-2 sm:gap-3 lg:grid-cols-3"
-                      : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
-                  }`}
-                >
-                  {r.photos.map((photo, i) => (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      key={photo}
-                      src={photo}
-                      alt={`${r.title} — photo ${i + 1}`}
-                      loading="lazy"
-                      className={`w-full rounded-xl object-cover ${
-                        r.photoFormat === "portrait" ? "aspect-[3/4]" : "aspect-[4/3]"
-                      }`}
-                    />
-                  ))}
-                </div>
-              )}
-
-              {r.videos && r.videos.length > 0 && (
-                // Même grille que les photos : les vidéos sont en portrait,
-                // trois colonnes de 16/9 les bordaient de bandes noires.
-                <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-                  {r.videos.map((video) => (
-                    <video
-                      key={video}
-                      src={video}
-                      poster={posterFor(video)}
-                      controls
-                      playsInline
-                      // Une douzaine de vidéos sur cette page : sans `none`, le navigateur
-                      // en tirait les métadonnées dès le chargement.
-                      preload="none"
-                      className="w-full rounded-xl bg-ink/5"
-                    >
-                      Votre navigateur ne prend pas en charge la lecture vidéo.
-                    </video>
-                  ))}
-                </div>
-              )}
-
-              {r.videoUrl && (
-                <div className="mt-6 aspect-video w-full max-w-2xl overflow-hidden rounded-xl">
-                  <iframe
-                    src={r.videoUrl}
-                    title={`Vidéo — ${r.title}`}
-                    className="h-full w-full"
-                    allowFullScreen
-                  />
-                </div>
-              )}
-            </article>
-          ))
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {realisations.map((r) => (
+              <RealisationCard key={r.slug} realisation={r} />
+            ))}
+          </div>
         )}
       </div>
     </div>

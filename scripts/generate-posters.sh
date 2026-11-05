@@ -27,6 +27,10 @@ SAMPLES=(0.10 0.25 0.40 0.55 0.70 0.85)
 # de location. La seconde 1 montre le salon et sa porte-fenêtre.
 declare -A FIXED_SECONDS=(
   ["public/biens/duplex-camberene-1/video.mp4"]=1
+  # Films des réalisations : la maison livrée (chantier 1), le salon et son
+  # lustre (chantier 3), plutôt que le gros œuvre du début.
+  ["public/realisations/chantier-1/montage.mp4"]=84
+  ["public/realisations/chantier-3/montage.mp4"]=27
 )
 
 tmp=$(mktemp -d)

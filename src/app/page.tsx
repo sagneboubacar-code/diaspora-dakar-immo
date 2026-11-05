@@ -3,6 +3,7 @@ import { ButtonLink } from "@/components/Button";
 import { SectionHeading } from "@/components/SectionHeading";
 import { KeyStats } from "@/components/KeyStats";
 import { PropertyCard } from "@/components/PropertyCard";
+import { RealisationCard } from "@/components/RealisationCard";
 import { EmptyState } from "@/components/EmptyState";
 import { Reveal } from "@/components/Reveal";
 import { HeroShowcase } from "@/components/HeroShowcase";
@@ -233,7 +234,12 @@ export default function HomePage() {
               </div>
             ) : (
               <div className="text-center">
-                <ButtonLink href="/realisations" variant="outline-light">
+                <div className="grid grid-cols-1 gap-6 text-left sm:grid-cols-2 lg:grid-cols-4">
+                  {realisations.slice(0, 4).map((r) => (
+                    <RealisationCard key={r.slug} realisation={r} />
+                  ))}
+                </div>
+                <ButtonLink href="/realisations" variant="outline-light" className="mt-10">
                   VOIR TOUTES NOS RÉALISATIONS
                 </ButtonLink>
               </div>
