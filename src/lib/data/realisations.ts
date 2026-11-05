@@ -4,6 +4,34 @@ function chantierPhotos(chantier: number, ...numbers: number[]) {
   return numbers.map((n) => `/realisations/chantier-${chantier}/photo-${String(n).padStart(2, "0")}.jpg`);
 }
 
+// Les numéros de `first` à `last`.
+const span = (first: number, last: number) => Array.from({ length: last - first + 1 }, (_, i) => first + i);
+
+// Chantier 1 : toutes les photos du dossier, en trois parties. Les photos
+// 40 à 84 et la plupart des 29 à 39 viennent du client (discussion WhatsApp
+// « Issa France », téléchargée le 2026-11-05) : sa maison livrée et chacune
+// de ses pièces. Il n'y a pas de photos 12 à 27 : c'était l'intérieur du
+// chantier 3, rendu au chantier 3 le 2026-11-02.
+const CHANTIER_1_GROUPS = [
+  // Le gros œuvre (01-06), puis la façade enduite et peinte (07-11).
+  { title: "Pendant les travaux", photos: chantierPhotos(1, ...span(1, 11)) },
+  { title: "La maison livrée", photos: chantierPhotos(1, 28, ...span(40, 43)) },
+  {
+    title: "L'intérieur",
+    // Les pièces à lustre, les autres pièces, les couloirs et les portes, les
+    // salles d'eau, puis l'escalier.
+    photos: chantierPhotos(
+      1,
+      ...[31, 32, 33, 34, ...span(44, 56)],
+      ...[29, 35, 36, ...span(57, 66)],
+      ...[30, ...span(67, 77)],
+      ...[37, 38, 39, ...span(78, 82)],
+      83,
+      84
+    ),
+  },
+];
+
 // Chantiers réels de l'agence — galerie chronologique de photos
 // authentiques (fournies par l'agence), du début du chantier à la
 // finition. Localisation, type et description seront ajoutés par
@@ -19,23 +47,16 @@ export const REALISATIONS: Realisation[] = [
     status: "livre",
     description:
       "2DKR Immo & Construction a accompagné le client de l'achat du terrain jusqu'à la remise des clés : gros œuvre, façade, puis finitions intérieures, en 7 mois de travaux.",
-    // Sélection dans l'ordre du chantier, sans doublons d'angle : gros
-    // œuvre (01-03), élévation (04-05), façade (07-11), salle d'eau (37),
-    // pièces terminées (29-36), puis la façade livrée (28). Il n'y a pas de
-    // photos 12 à 27 : c'était l'intérieur du chantier 3 (mêmes pièces que
-    // ses vidéos de finition), rendu au chantier 3 le 2026-11-02. Les autres
-    // photos restent dans public/realisations/chantier-1 (À propos, services).
     photoFormat: "portrait",
-    photos: chantierPhotos(1, 1, 2, 3, 4, 5, 7, 8, 11, 37, 29, 31, 32, 34, 36, 28),
+    photos: CHANTIER_1_GROUPS.flatMap((group) => group.photos),
+    photoGroups: CHANTIER_1_GROUPS,
     // Les deux seules photos prises en largeur : le R+1 en élévation et le
     // crépissage de la façade.
     widePhotos: chantierPhotos(1, 2, 3),
     cover: "/realisations/chantier-1/photo-28.jpg",
-    // Un film de 2 min 08 (scripts/build-realisation-films.sh) avec les six
-    // vidéos du dossier, dans l'ordre du chantier : fondations (envoyée le
-    // 2026-10-31), début du chantier et son avancement (publiées au chantier
-    // 3 jusqu'au 2026-11-02, mais c'est cette maison), puis la façade, le
-    // séjour et la salle d'eau livrés.
+    // Un film de 2 min 44 (scripts/build-realisation-films.sh), tiré des
+    // vidéos du client : les fondations et le début du chantier, la façade
+    // livrée au crépuscule et de jour, puis la visite de l'intérieur.
     videos: ["/realisations/chantier-1/montage.mp4"],
   },
   {

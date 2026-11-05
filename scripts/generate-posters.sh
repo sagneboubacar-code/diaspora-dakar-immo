@@ -29,7 +29,7 @@ declare -A FIXED_SECONDS=(
   ["public/biens/duplex-camberene-1/video.mp4"]=1
   # Films des réalisations : la maison livrée (chantier 1), le salon et son
   # lustre (chantier 3), plutôt que le gros œuvre du début.
-  ["public/realisations/chantier-1/montage.mp4"]=84
+  ["public/realisations/chantier-1/montage.mp4"]=45
   ["public/realisations/chantier-3/montage.mp4"]=27
 )
 

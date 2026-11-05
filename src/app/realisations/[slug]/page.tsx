@@ -150,6 +150,7 @@ export default function RealisationPage({ params }: { params: { slug: string } }
             <RealisationGallery
               title={r.title}
               photos={r.photos}
+              groups={r.photoGroups}
               widePhotos={r.widePhotos}
               portrait={r.photoFormat === "portrait"}
             />

@@ -9,11 +9,15 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export function RealisationGallery({
   title,
   photos,
+  groups,
   widePhotos = [],
   portrait = false,
 }: {
   title: string;
   photos: string[];
+  // Les mêmes photos en parties titrées ; la photo agrandie passe d'une
+  // partie à l'autre sans s'arrêter.
+  groups?: { title: string; photos: string[] }[];
   widePhotos?: string[];
   portrait?: boolean;
 }) {
@@ -51,45 +55,69 @@ export function RealisationGallery({
 
   const label = (i: number) => `${title} — photo ${i + 1} sur ${photos.length}`;
 
+  // Sans parties, une seule grille sans titre. `start` : la place de la
+  // première photo de la partie dans la liste complète.
+  const sections = (groups ?? [{ title: "", photos }]).map((section, s, all) => ({
+    ...section,
+    start: all.slice(0, s).reduce((n, previous) => n + previous.photos.length, 0),
+  }));
+
   return (
     <>
-      {/* `dense` : une photo en largeur qui ne tient pas au bout d'une ligne
-          laisse la place à la suivante, sans trou dans la grille. */}
-      <div
-        className={`grid gap-2 ${
-          portrait
-            ? "grid-flow-row-dense grid-cols-2 sm:gap-3 lg:grid-cols-3"
-            : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
-        }`}
-      >
-        {photos.map((photo, i) => (
-          <button
-            key={photo}
-            type="button"
-            onClick={(event) => {
-              opener.current = event.currentTarget;
-              setOpen(i);
-            }}
-            aria-label={`Agrandir : ${label(i)}`}
-            className={`group relative w-full cursor-zoom-in overflow-hidden rounded-xl bg-sand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
-              !portrait
-                ? "aspect-[4/3]"
-                : widePhotos.includes(photo)
-                  ? // Sur trois colonnes, 61/40 donne la hauteur de deux
-                    // vignettes 3/4 et de l'espace entre elles : la ligne
-                    // reste alignée.
-                    "col-span-2 aspect-[3/2] lg:aspect-[61/40]"
-                  : "aspect-[3/4]"
-            }`}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={photo}
-              alt=""
-              loading="lazy"
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-            />
-          </button>
+      <div className="space-y-10">
+        {sections.map((section) => (
+          <div key={section.title || "photos"}>
+            {section.title && (
+              <h3 className="mb-4 font-display text-lg font-semibold text-ink">
+                {section.title}
+                <span className="ms-2 text-sm font-normal text-graytext">
+                  {section.photos.length} photo{section.photos.length > 1 ? "s" : ""}
+                </span>
+              </h3>
+            )}
+            {/* `dense` : une photo en largeur qui ne tient pas au bout d'une
+                ligne laisse la place à la suivante, sans trou dans la grille. */}
+            <div
+              className={`grid gap-2 ${
+                portrait
+                  ? "grid-flow-row-dense grid-cols-2 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4"
+                  : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+              }`}
+            >
+              {section.photos.map((photo, j) => {
+                const i = section.start + j;
+                return (
+                  <button
+                    key={photo}
+                    type="button"
+                    onClick={(event) => {
+                      opener.current = event.currentTarget;
+                      setOpen(i);
+                    }}
+                    aria-label={`Agrandir : ${label(i)}`}
+                    className={`group relative w-full cursor-zoom-in overflow-hidden rounded-xl bg-sand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${
+                      !portrait
+                        ? "aspect-[4/3]"
+                        : widePhotos.includes(photo)
+                          ? // Ces rapports donnent la hauteur de deux vignettes
+                            // 3/4 et de l'espace entre elles : 61/40 sur trois
+                            // colonnes, 49/32 sur quatre. La ligne reste alignée.
+                            "col-span-2 aspect-[3/2] lg:aspect-[61/40] xl:aspect-[49/32]"
+                          : "aspect-[3/4]"
+                    }`}
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={photo}
+                      alt=""
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         ))}
       </div>
 

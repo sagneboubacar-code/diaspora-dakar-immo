@@ -36,6 +36,10 @@ export interface Realisation {
   status?: RealisationStatus;
   description?: string;
   photos: string[]; // galerie chronologique : début de chantier → finition
+  // Galerie en parties (« Pendant les travaux », « La maison livrée »…) pour
+  // un chantier aux nombreuses photos. `photos` reste la liste complète, dans
+  // le même ordre : c'est elle que parcourt la photo agrandie.
+  photoGroups?: { title: string; photos: string[] }[];
   // Photo de la carte du chantier et de son partage sur WhatsApp. Par défaut
   // la première de la galerie, souvent le gros œuvre : mieux vaut montrer la
   // maison livrée.
