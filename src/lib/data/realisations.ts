@@ -32,6 +32,29 @@ const CHANTIER_1_GROUPS = [
   },
 ];
 
+// Chantier 3 : toutes les photos, en deux parties. 17 à 24 : l'album que
+// l'agence a renvoyé sur WhatsApp le 2026-11-05 (discussion
+// « @Aboubakrsagne »). Ce sont les anciennes photos 3 à 10 du chantier 2,
+// retirées le 2026-11-02 faute de savoir d'où elles venaient : l'agence les
+// a rendues au chantier 3 le 2026-11-05.
+const CHANTIER_3_GROUPS = [
+  // La façade de l'immeuble R+2 : les deux vues en largeur d'abord, puis la
+  // vue en hauteur. Dans l'autre sens, la photo en hauteur laissait une case
+  // vide à côté d'elle, les deux autres prenant chacune deux colonnes.
+  { title: "L'immeuble", photos: chantierPhotos(3, 18, 19, 17) },
+  {
+    title: "L'intérieur",
+    // Les pièces (lustres, bandeaux de couleur, porte-fenêtre sur le
+    // balcon), les portes, puis les salles d'eau.
+    photos: chantierPhotos(
+      3,
+      ...[7, 8, 9, 10, 11, 20, 21],
+      ...[12, 13, 14, 15, 16],
+      ...[1, 2, 3, 4, 5, 6, 22, 23, 24]
+    ),
+  },
+];
+
 // Chantiers réels de l'agence — galerie chronologique de photos
 // authentiques (fournies par l'agence), du début du chantier à la
 // finition. Localisation, type et description seront ajoutés par
@@ -67,11 +90,10 @@ export const REALISATIONS: Realisation[] = [
     year: 2022,
     surfaceM2: 300,
     status: "livre",
-    // Seules restent les photos sûres : la maison R+1 aux garde-corps orange,
-    // en pleine campagne. Supprimées le 2026-11-02, faute de savoir de quel
-    // chantier elles venaient : 3 à 5, un immeuble de plusieurs étages à
-    // façade carrelée ; 6 à 10, un intérieur dont le balcon donne sur une
-    // ville dense, que rien ne relie à cette maison.
+    // La maison R+1 aux garde-corps orange, en pleine campagne. Les photos
+    // 3 à 10, un immeuble à façade carrelée et son intérieur, retirées le
+    // 2026-11-02, étaient celles du chantier 3 : elles y sont depuis le
+    // 2026-11-05 (photos 17 à 24).
     photos: chantierPhotos(2, 1, 2),
   },
   {
@@ -85,13 +107,17 @@ export const REALISATIONS: Realisation[] = [
     status: "livre-en-location",
     description:
       "Rénovation du rez-de-chaussée puis construction du 1er et du 2e étage. 2DKR Immo & Construction assure également la gestion locative du bien depuis sa livraison.",
-    // L'intérieur livré, filmé dans les vidéos de finition (escalier sous
-    // l'arche, salles d'eau, lustre et bandeaux de couleur). Ces photos
-    // étaient publiées au chantier 1 jusqu'au 2026-11-02. 12 vues sur 16 :
-    // les autres répètent un angle.
+    // L'immeuble, puis l'intérieur livré, filmé dans les vidéos de finition
+    // (escalier sous l'arche, salles d'eau, lustre et bandeaux de couleur).
+    // Les photos 1 à 16 étaient publiées au chantier 1 jusqu'au 2026-11-02.
     photoFormat: "portrait",
-    photos: chantierPhotos(3, 7, 9, 11, 12, 13, 15, 16, 1, 2, 3, 5, 6),
-    cover: "/realisations/chantier-3/photo-09.jpg",
+    photos: CHANTIER_3_GROUPS.flatMap((group) => group.photos),
+    photoGroups: CHANTIER_3_GROUPS,
+    // Les photos prises en largeur : la façade de plus près, une pièce aux
+    // bandeaux bleus et la porte-fenêtre sur le balcon.
+    widePhotos: chantierPhotos(3, 8, 18, 19, 21),
+    // La façade : la carte montre tout l'immeuble.
+    cover: "/realisations/chantier-3/photo-17.jpg",
     // Un film de 1 min 44 (scripts/build-realisation-films.sh), tiré des
     // vidéos de finition : l'entrée, le salon, la cuisine, les chambres et la
     // salle d'eau.
