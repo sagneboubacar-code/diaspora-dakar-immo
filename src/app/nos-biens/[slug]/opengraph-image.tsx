@@ -2,18 +2,11 @@ import { ImageResponse } from "next/og";
 import { OgCard, OG_SIZE, embedPhoto } from "@/lib/og-card";
 import { getPropertyBySlug, getPublishedProperties } from "@/lib/data/properties";
 import { posterFor } from "@/lib/media";
+import { TYPE_LABELS, formatPrice } from "@/lib/property-format";
 
 export const alt = "Bien immobilier — Diaspora Dakar Immo";
 export const size = OG_SIZE;
 export const contentType = "image/png";
-
-const TYPE_LABELS: Record<string, string> = {
-  terrain: "Terrain",
-  maison: "Maison",
-  villa: "Villa",
-  appartement: "Appartement",
-  projet: "Projet",
-};
 
 export function generateStaticParams() {
   return getPublishedProperties().map((p) => ({ slug: p.slug }));
@@ -36,11 +29,7 @@ export default async function Image({ params }: { params: { slug: string } }) {
         eyebrow={`${TYPE_LABELS[property.type]} · ${property.purpose === "vente" ? "À vendre" : "À louer"}`}
         title={property.title}
         meta={property.location}
-        highlight={
-          property.price === null
-            ? "Prix sur demande"
-            : `${new Intl.NumberFormat("fr-FR").format(property.price)} FCFA`
-        }
+        highlight={formatPrice(property)}
       />
     ),
     size

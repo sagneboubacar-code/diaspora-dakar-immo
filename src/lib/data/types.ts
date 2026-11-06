@@ -1,6 +1,6 @@
 export type PropertyPurpose = "vente" | "location";
 export type PropertyStatus = "disponible" | "reserve" | "vendu";
-export type PropertyType = "terrain" | "maison" | "villa" | "appartement" | "projet";
+export type PropertyType = "terrain" | "maison" | "villa" | "appartement" | "magasin" | "projet";
 
 export interface Property {
   slug: string;

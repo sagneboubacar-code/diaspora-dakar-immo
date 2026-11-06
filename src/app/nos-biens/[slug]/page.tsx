@@ -7,19 +7,7 @@ import { WHATSAPP_MESSAGES, whatsappHref } from "@/lib/site-config";
 import { pageMetadata } from "@/lib/metadata";
 import { posterFor } from "@/lib/media";
 import { PinIcon, WhatsAppIcon } from "@/components/Icon";
-
-const TYPE_LABELS: Record<string, string> = {
-  terrain: "Terrain",
-  maison: "Maison",
-  villa: "Villa",
-  appartement: "Appartement",
-  projet: "Projet",
-};
-
-function formatPrice(price: number | null) {
-  if (price === null) return "Prix sur demande";
-  return `${new Intl.NumberFormat("fr-FR").format(price)} FCFA`;
-}
+import { TYPE_LABELS, countLabel, formatPrice } from "@/lib/property-format";
 
 export function generateStaticParams() {
   return getPublishedProperties().map((p) => ({ slug: p.slug }));
@@ -97,8 +85,10 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
 
           <div className="mt-6 flex flex-wrap gap-6 border-y border-ink/10 py-5 text-sm text-graytext">
             {property.surfaceM2 && <span>{property.surfaceM2} m²</span>}
-            {property.bedrooms !== null && <span>{property.bedrooms} chambres</span>}
-            {property.bathrooms !== null && <span>{property.bathrooms} salles de bain</span>}
+            {property.bedrooms !== null && <span>{countLabel(property.bedrooms, "chambre", "chambres")}</span>}
+            {property.bathrooms !== null && (
+              <span>{countLabel(property.bathrooms, "salle de bain", "salles de bain")}</span>
+            )}
           </div>
 
           <p className="mt-6 text-sm leading-relaxed text-graytext">{property.description}</p>
@@ -115,7 +105,7 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
         </div>
 
         <aside className="h-fit rounded-2xl border border-ink/10 bg-white p-6 shadow-card">
-          <p className="font-display text-2xl font-bold text-ink">{formatPrice(property.price)}</p>
+          <p className="font-display text-2xl font-bold text-ink">{formatPrice(property)}</p>
           <ButtonLink
             href={whatsappHref(WHATSAPP_MESSAGES.property(property.title))}
             className="mt-5 w-full"

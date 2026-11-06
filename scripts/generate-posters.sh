@@ -27,6 +27,12 @@ SAMPLES=(0.10 0.25 0.40 0.55 0.70 0.85)
 # de location. La seconde 1 montre le salon et sa porte-fenêtre.
 declare -A FIXED_SECONDS=(
   ["public/biens/duplex-camberene-1/video.mp4"]=1
+  # Immeuble de Keur Massar : le choix automatique retenait des murs carrelés
+  # (douche, cuisine). On montre le magasin et ses portes, le salon du F3 et
+  # sa porte-fenêtre sur le balcon, la pièce du F3 sans balcon et ses fenêtres.
+  ["public/biens/magasin-1-keur-massar/video.mp4"]=2
+  ["public/biens/appartement-f3-balcon-keur-massar/video.mp4"]=5
+  ["public/biens/appartement-f3-sans-balcon-keur-massar/video.mp4"]=70
   # Films des réalisations : la maison livrée (chantier 1), le salon et son
   # lustre (chantier 3), plutôt que le gros œuvre du début.
   ["public/realisations/chantier-1/montage.mp4"]=45

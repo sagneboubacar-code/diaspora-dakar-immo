@@ -107,6 +107,160 @@ export const PROPERTIES: Property[] = [
     photos: [],
     video: "/biens/duplex-camberene-1/video.mp4",
   },
+  // Immeuble R+3 de Keur Massar, dans la rue face à Auchan : magasins et
+  // appartements à louer. Prix et pièces : les deux affiches de l'agence ;
+  // photo de l'immeuble et vidéos : discussion WhatsApp « Issa France » du
+  // 2026-11-06. Une annonce par logement, pour que le prix, le nombre de
+  // chambres et les filtres de recherche disent vrai. Les photo-01 des
+  // annonces filmées sont tirées de leur vidéo.
+  // Deux magasins, une seule vidéo, sans dire lequel elle montre : l'agence
+  // l'a donnée au magasin 1 (2026-11-06). Chaque annonce signale l'autre.
+  {
+    slug: "magasin-1-keur-massar",
+    title: "Magasin 1 avec chambre et salle de bain · Keur Massar",
+    type: "magasin",
+    purpose: "location",
+    status: "disponible",
+    location: "Keur Massar",
+    surfaceM2: null,
+    bedrooms: 1,
+    bathrooms: 1,
+    price: 250000,
+    description:
+      "Magasin avec une chambre et une salle de bain, au rez-de-chaussée d'un immeuble R+3 à Keur Massar, dans la rue face à Auchan. Deux magasins sont disponibles dans l'immeuble : le magasin 2, lui aussi avec chambre et salle de bain, est à 225 000 FCFA.",
+    features: [
+      "Chambre",
+      "Salle de bain",
+      "Rez-de-chaussée, sur la rue",
+      "Rue face à Auchan",
+      "Deux magasins disponibles",
+    ],
+    photos: ["/biens/magasin-1-keur-massar/photo-01.jpg", "/biens/immeuble-keur-massar/photo-01.jpg"],
+    video: "/biens/magasin-1-keur-massar/video.mp4",
+  },
+  {
+    slug: "magasin-2-keur-massar",
+    title: "Magasin 2 avec chambre et salle de bain · Keur Massar",
+    type: "magasin",
+    purpose: "location",
+    status: "disponible",
+    location: "Keur Massar",
+    surfaceM2: null,
+    bedrooms: 1,
+    bathrooms: 1,
+    price: 225000,
+    description:
+      "Magasin avec une chambre et une salle de bain, au rez-de-chaussée d'un immeuble R+3 à Keur Massar, dans la rue face à Auchan. Deux magasins sont disponibles dans l'immeuble : le magasin 1, lui aussi avec chambre et salle de bain, est à 250 000 FCFA.",
+    features: [
+      "Chambre",
+      "Salle de bain",
+      "Rez-de-chaussée, sur la rue",
+      "Rue face à Auchan",
+      "Deux magasins disponibles",
+    ],
+    photos: ["/biens/immeuble-keur-massar/photo-01.jpg"],
+  },
+  {
+    slug: "appartement-f2-keur-massar",
+    title: "Appartement F2 · Keur Massar",
+    type: "appartement",
+    purpose: "location",
+    status: "disponible",
+    location: "Keur Massar",
+    surfaceM2: null,
+    bedrooms: 1,
+    bathrooms: 1,
+    price: 115000,
+    description:
+      "Appartement F2 (chambre salon) au rez-de-chaussée d'un immeuble R+3 à Keur Massar, dans la rue face à Auchan. Salle de bain, cuisine, toilettes et douche visiteurs.",
+    features: [
+      "Chambre salon",
+      "Salle de bain",
+      "Cuisine",
+      "Toilettes et douche visiteurs",
+      "Rez-de-chaussée",
+      "Rue face à Auchan",
+    ],
+    photos: ["/biens/immeuble-keur-massar/photo-01.jpg"],
+  },
+  {
+    slug: "appartement-f3-balcon-keur-massar",
+    title: "Appartement F3 avec balcon · Keur Massar",
+    type: "appartement",
+    purpose: "location",
+    status: "disponible",
+    location: "Keur Massar",
+    surfaceM2: null,
+    bedrooms: 2,
+    bathrooms: 1,
+    price: 165000,
+    description:
+      "Appartement F3 (2 chambres salon) avec balcon, au 1er, 2e ou 3e étage d'un immeuble R+3 à Keur Massar, dans la rue face à Auchan. Salle de bain, cuisine, toilettes et douche visiteurs.",
+    features: [
+      "2 chambres salon",
+      "Balcon",
+      "Salle de bain",
+      "Cuisine",
+      "Toilettes et douche visiteurs",
+      "1er, 2e ou 3e étage",
+      "Rue face à Auchan",
+    ],
+    photos: [
+      "/biens/appartement-f3-balcon-keur-massar/photo-01.jpg",
+      "/biens/immeuble-keur-massar/photo-01.jpg",
+    ],
+    video: "/biens/appartement-f3-balcon-keur-massar/video.mp4",
+  },
+  {
+    slug: "appartement-f3-sans-balcon-keur-massar",
+    title: "Appartement F3 sans balcon · Keur Massar",
+    type: "appartement",
+    purpose: "location",
+    status: "disponible",
+    location: "Keur Massar",
+    surfaceM2: null,
+    bedrooms: 2,
+    bathrooms: 1,
+    price: 155000,
+    description:
+      "Appartement F3 (2 chambres salon) sans balcon, au 1er, 2e ou 3e étage d'un immeuble R+3 à Keur Massar, dans la rue face à Auchan. Salle de bain, cuisine, toilettes et douche visiteurs.",
+    features: [
+      "2 chambres salon",
+      "Salle de bain",
+      "Cuisine",
+      "Toilettes et douche visiteurs",
+      "1er, 2e ou 3e étage",
+      "Rue face à Auchan",
+    ],
+    photos: [
+      "/biens/appartement-f3-sans-balcon-keur-massar/photo-01.jpg",
+      "/biens/immeuble-keur-massar/photo-01.jpg",
+    ],
+    video: "/biens/appartement-f3-sans-balcon-keur-massar/video.mp4",
+  },
+  {
+    slug: "appartement-f4-keur-massar",
+    title: "Appartement F4 · Keur Massar",
+    type: "appartement",
+    purpose: "location",
+    status: "disponible",
+    location: "Keur Massar",
+    surfaceM2: null,
+    bedrooms: 3,
+    bathrooms: 1,
+    price: 200000,
+    description:
+      "Appartement F4 (3 chambres salon) au 1er, 2e ou 3e étage d'un immeuble R+3 à Keur Massar, dans la rue face à Auchan. Salle de bain, cuisine, toilettes et douche visiteurs.",
+    features: [
+      "3 chambres salon",
+      "Salle de bain",
+      "Cuisine",
+      "Toilettes et douche visiteurs",
+      "1er, 2e ou 3e étage",
+      "Rue face à Auchan",
+    ],
+    photos: ["/biens/immeuble-keur-massar/photo-01.jpg"],
+  },
 ];
 
 export function getPublishedProperties() {

@@ -2,14 +2,7 @@ import Link from "next/link";
 import type { Property } from "@/lib/data/types";
 import { posterFor } from "@/lib/media";
 import { PinIcon, PlayIcon } from "@/components/Icon";
-
-const TYPE_LABELS: Record<Property["type"], string> = {
-  terrain: "Terrain",
-  maison: "Maison",
-  villa: "Villa",
-  appartement: "Appartement",
-  projet: "Projet",
-};
+import { TYPE_LABELS, countLabel, formatPrice } from "@/lib/property-format";
 
 const STATUS_LABELS: Record<Property["status"], string> = {
   disponible: "Disponible",
@@ -22,11 +15,6 @@ const STATUS_CLASSES: Record<Property["status"], string> = {
   reserve: "bg-amber-500",
   vendu: "bg-ink/60",
 };
-
-function formatPrice(price: number | null) {
-  if (price === null) return "Prix sur demande";
-  return `${new Intl.NumberFormat("fr-FR").format(price)} FCFA`;
-}
 
 export function PropertyCard({ property }: { property: Property }) {
   // Faute de photo, la vignette de la vidéo fait une couverture autrement
@@ -72,10 +60,10 @@ export function PropertyCard({ property }: { property: Property }) {
         </p>
         <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-graytext">
           {property.surfaceM2 && <span>{property.surfaceM2} m²</span>}
-          {property.bedrooms !== null && <span>{property.bedrooms} chambres</span>}
+          {property.bedrooms !== null && <span>{countLabel(property.bedrooms, "chambre", "chambres")}</span>}
         </div>
         <div className="flex items-center justify-between pt-2">
-          <p className="font-display text-base font-bold text-ink">{formatPrice(property.price)}</p>
+          <p className="font-display text-base font-bold text-ink">{formatPrice(property)}</p>
           <span className="text-sm font-semibold text-primary group-hover:underline">Voir le bien →</span>
         </div>
       </div>

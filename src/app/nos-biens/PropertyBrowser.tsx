@@ -11,6 +11,7 @@ const TYPE_OPTIONS: { value: Property["type"] | "tous"; label: string }[] = [
   { value: "maison", label: "Maisons" },
   { value: "villa", label: "Villas" },
   { value: "appartement", label: "Appartements" },
+  { value: "magasin", label: "Magasins" },
   { value: "projet", label: "Projets immobiliers" },
 ];
 
